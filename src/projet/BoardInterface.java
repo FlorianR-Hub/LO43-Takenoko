@@ -4,16 +4,11 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Vector;
-
-import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 public class BoardInterface extends JPanel {

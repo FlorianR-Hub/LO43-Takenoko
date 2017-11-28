@@ -1,8 +1,6 @@
 package projet;
 
 import java.awt.Color;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 public class Tile extends GameObject{
@@ -12,7 +10,6 @@ public class Tile extends GameObject{
 	private int size; // Taille de la pousse de 0 a 4
 	private boolean isSelected;
 	private boolean isIrrigated;
-	private boolean isMouseOver;
 	
 	public Tile(int type, int bonus){
 		super();
@@ -21,7 +18,6 @@ public class Tile extends GameObject{
 		this.setSize(0);
 		this.setSelected(false);
 		this.setIrrigated(false);
-		this.setMouseOver(false);
 	}
 	
 	public Tile(int x, int y, int type, int bonus, boolean irrigated){
@@ -31,7 +27,6 @@ public class Tile extends GameObject{
 		this.setSize(0);
 		this.setSelected(false);
 		this.setIrrigated(irrigated);
-		this.setMouseOver(false);
 	}
 	
 	public Color getColor() {
@@ -155,13 +150,5 @@ public class Tile extends GameObject{
 
 	public void setIrrigated(boolean isIrrigated) {
 		this.isIrrigated = isIrrigated;
-	}
-
-	public boolean isMouseOver() {
-		return isMouseOver;
-	}
-
-	public void setMouseOver(boolean isMouseOver) {
-		this.isMouseOver = isMouseOver;
 	}
 }

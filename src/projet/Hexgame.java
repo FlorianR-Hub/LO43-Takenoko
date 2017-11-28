@@ -1,10 +1,7 @@
 package projet;
 
 import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.util.Iterator;
-import java.util.Vector; 
+import javax.swing.*; 
 
 /**********************************
   This is the main class of a Java program to play a game based on hexagonal tiles.
