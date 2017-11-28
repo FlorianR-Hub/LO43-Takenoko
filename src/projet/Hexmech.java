@@ -84,21 +84,18 @@ The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 		g2.setColor(COLOURTXT);
 		g2.drawString(p.getX()+","+p.getY(), x+r/2+Hexgame.BORDERS, y+r+Hexgame.BORDERS+4);
 		
-		Vector<Tile> adjTiles = p.getAdjacentTiles();
+		Vector<Tile> adjTiles = p.getValidTiles();
 		
 		for(Tile tile : adjTiles)
 		{
-			if(tile.getType() == 0)
-			{
-				x = tile.getX() * (s+t);
-				y = tile.getY() * h + (tile.getX()%2) * h/2;
-				
-				Polygon poly = hex(x,y);
-				g2.setColor(COLOURCELL);
-				g2.fillPolygon(poly);
-				g2.setColor(COLOURTWO);	
-				g2.drawPolygon(poly);
-			}
+			x = tile.getX() * (s+t);
+			y = tile.getY() * h + (tile.getX()%2) * h/2;
+			
+			Polygon poly = hex(x,y);
+			g2.setColor(COLOURCELL);
+			g2.fillPolygon(poly);
+			g2.setColor(COLOURTWO);	
+			g2.drawPolygon(poly);
 		}
 	}
 

@@ -10,6 +10,7 @@ public class Tile extends GameObject{
 	private int size; // Taille de la pousse de 0 a 4
 	private boolean isSelected;
 	private boolean isIrrigated;
+	private boolean isValid;
 	
 	public Tile(int type, int bonus){
 		super();
@@ -18,6 +19,7 @@ public class Tile extends GameObject{
 		this.setSize(0);
 		this.setSelected(false);
 		this.setIrrigated(false);
+		this.setValid(false);
 	}
 	
 	public Tile(int x, int y, int type, int bonus, boolean irrigated){
@@ -27,6 +29,7 @@ public class Tile extends GameObject{
 		this.setSize(0);
 		this.setSelected(false);
 		this.setIrrigated(irrigated);
+		this.setValid(false);
 	}
 	
 	public Color getColor() {
@@ -95,23 +98,46 @@ public class Tile extends GameObject{
 		else
 			return ((this.getX() == p.getX() && Math.abs(this.getY() - p.getY()) == 1) 
 					|| (Math.abs(this.getX() - p.getX()) == 1 && (this.getY() - p.getY() == -1 || this.getY() - p.getY() == 0)));
-		
-		
 	}
 	
 	public Vector<Tile> getAdjacentTiles()
 	{
 		Vector<Tile> adjTiles = new Vector<Tile>();
 		
-		for (int i=0;i<GameBoard.BSIZE;i++) {
-			for (int j=0;j<GameBoard.BSIZE;j++) {
+		for (int i=0;i<GameBoard.BSIZE;i++) 
+			for (int j=0;j<GameBoard.BSIZE;j++) 
 				if(this.isAdjacent(GameBoard.getBoard()[i][j]))
 					adjTiles.add(GameBoard.getBoard()[i][j]);
-			}
-		}
+
 		return adjTiles;
 	}
 	
+	public Vector<Tile> getValidTiles()
+	{
+		Vector<Tile> validTiles = new Vector<Tile>();
+		
+		for(Tile tile : this.getAdjacentTiles())
+		{
+			if(tile.getType() == 0)
+			{
+				Vector<Tile> adjTiles = tile.getAdjacentTiles();
+				int nbPlacedTiles = 0;
+				
+				for(Tile t : adjTiles)
+					if(t.getType() > 0)
+						nbPlacedTiles++;						
+
+				if(nbPlacedTiles > 1 || this.getType() == 4)
+				{
+					tile.setValid(true);
+					validTiles.add(tile);
+				}		
+			}
+		}
+	
+		return validTiles;
+	}
+		
 	public int getType() {
 		return type;
 	}
@@ -150,5 +176,13 @@ public class Tile extends GameObject{
 
 	public void setIrrigated(boolean isIrrigated) {
 		this.isIrrigated = isIrrigated;
+	}
+
+	public boolean isValid() {
+		return isValid;
+	}
+
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
 	}
 }

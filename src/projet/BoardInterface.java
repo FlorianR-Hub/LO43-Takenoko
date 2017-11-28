@@ -95,7 +95,7 @@ public class BoardInterface extends JPanel {
 			{
 				if(e.getButton() == MouseEvent.BUTTON1)
 				{
-					if(GameBoard.getBoard()[p.x][p.y].getType() == 0)
+					if(GameBoard.getBoard()[p.x][p.y].isValid())
 					{
 						int rand = (int) ((Math.random()*(4-1)) + 1);
 						GameBoard.getBoard()[p.x][p.y].setType(rand);

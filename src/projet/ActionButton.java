@@ -1,7 +1,6 @@
 package projet;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -10,7 +9,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
-public class Bouton extends JButton implements MouseListener {
+public class ActionButton extends JButton implements MouseListener {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -18,7 +17,7 @@ public class Bouton extends JButton implements MouseListener {
 	private String imgName;
 	private boolean isSelected;
 	
-	public Bouton(String imgName, int x, int y, int size) {
+	public ActionButton(String imgName, int x, int y, int height, int width) {
 		this.setBorderPainted(false);
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
@@ -31,15 +30,14 @@ public class Bouton extends JButton implements MouseListener {
 			 e.printStackTrace();
 		}
 		
-		this.setBounds(x, y, size, size);
+		this.setBounds(x, y, width, height);
 		this.addMouseListener(this);
 		
 		this.isSelected = false;
     }
 		
 	public void paintComponent(Graphics g) {
-	    Graphics2D g2d = (Graphics2D)g;
-	    g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+	    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 	}
 		
 	//Méthode appelée lors du clic de souris
