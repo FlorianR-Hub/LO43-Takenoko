@@ -1,6 +1,7 @@
 package projet;
 
 import java.awt.*;
+import java.util.Vector;
 
 /* This is a companion class to hexgame.java. It handles all of the mechanics related to hexagon grids. */
 
@@ -11,6 +12,13 @@ public class Hexmech
 	private static int s=(int) (h / 1.73205);	// length of one side : s = (h/2)/cos(30)= (h/2) / (sqrt(3)/2) = h / sqrt(3)
 	private static int t=(int) (r / 1.73205);	// short side of 30o triangle outside of each hex : t = (h/2) tan30 = (h/2) 1/sqrt(3) = h / (2 sqrt(3)) = r / sqrt(3)
 		
+	//constants and global variables
+	public final static Color COLOURONE  = new Color(255,255,255,50);
+	public final static Color COLOURTWO  = new Color(0,0,0,40);
+	public final static Color COLOURBACK = Color.WHITE;
+	public final static Color COLOURCELL = Color.WHITE;	 
+	public final static Color COLOURGRID = Color.BLACK;	
+	public final static Color COLOURTXT  = Color.BLACK;
 
 /*********************************************************
 Name: hex()
@@ -51,9 +59,9 @@ The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 		int x = i * (s+t);
 		int y = j * h + (i%2) * h/2;
 		Polygon poly = hex(x,y);
-		g2.setColor(Hexgame.COLOURCELL);
+		g2.setColor(COLOURCELL);
 		g2.fillPolygon(poly);
-		g2.setColor(Hexgame.COLOURGRID);
+		g2.setColor(COLOURGRID);
 		g2.drawPolygon(poly);
 	}
 
@@ -66,9 +74,6 @@ The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 * Called from:
 * Calls: hex()
 *Purpose: This draws a filled in polygon based on the coordinates of the hexagon.
-	  The colour depends on whether n is negative or positive.
-	  The colour is set by hexgame.COLOURONE and hexgame.COLOURTWO.
-	  The value of n is converted to letter and drawn in the hexagon.
 *****************************************************************************/
 	public static void fillHex(int i, int j, Tile p, Graphics2D g2) {
 		int x = i * (s+t);
@@ -76,8 +81,25 @@ The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 		
 		g2.setColor(p.getColor());
 		g2.fillPolygon(hex(x,y));
-		g2.setColor(Hexgame.COLOURTXT);
+		g2.setColor(COLOURTXT);
 		g2.drawString(p.getX()+","+p.getY(), x+r/2+Hexgame.BORDERS, y+r+Hexgame.BORDERS+4);
+		
+		Vector<Tile> adjTiles = p.getAdjacentTiles();
+		
+		for(Tile tile : adjTiles)
+		{
+			if(tile.getType() == 0)
+			{
+				x = tile.getX() * (s+t);
+				y = tile.getY() * h + (tile.getX()%2) * h/2;
+				
+				Polygon poly = hex(x,y);
+				g2.setColor(COLOURCELL);
+				g2.fillPolygon(poly);
+				g2.setColor(COLOURTWO);	
+				g2.drawPolygon(poly);
+			}
+		}
 	}
 
 	//This function changes pixel location from a mouse click to a hex grid location
