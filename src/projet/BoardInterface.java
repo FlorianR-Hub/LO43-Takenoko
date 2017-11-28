@@ -97,12 +97,15 @@ public class BoardInterface extends JPanel {
 				{
 					if(GameBoard.getBoard()[p.x][p.y].isValid())
 					{
-						int rand = (int) ((Math.random()*(4-1)) + 1);
-						GameBoard.getBoard()[p.x][p.y].setType(rand);
-						GameBoard.getBoard()[p.x][p.y].setBonus(1);
+						if(GameBoard.getBoard()[p.x][p.y].getType() == 0)
+						{
+							int rand = (int) ((Math.random()*(4-1)) + 1);
+							GameBoard.getBoard()[p.x][p.y].setType(rand);
+							GameBoard.getBoard()[p.x][p.y].setBonus(1);
+						}
+						else
+							GameBoard.getBoard()[p.x][p.y].increase();
 					}
-					else
-						GameBoard.getBoard()[p.x][p.y].increase();
 				}
 				else if(e.getButton() == MouseEvent.BUTTON3)
 				{
