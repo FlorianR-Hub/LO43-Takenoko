@@ -83,6 +83,10 @@ public class Tile extends GameObject{
 		this.setType(0);
 		this.setBonus(0);
 		this.setSize(0);
+		this.setIrrigated(false);
+		this.setPlaced(false);
+		this.setValid(false);
+		this.setSelected(false);
 	}
 	
 	public boolean isSelectionable()
