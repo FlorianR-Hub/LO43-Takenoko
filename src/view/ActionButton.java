@@ -12,73 +12,87 @@ import javax.swing.JButton;
 public class ActionButton extends JButton implements MouseListener {
 	
 	private static final long serialVersionUID = 1L;
+	private static final String path = "img/";
 	
 	private Image img;
 	private String imgName;
 	private boolean isSelected;
 	
 	public ActionButton(String imgName, int x, int y, int height, int width) {
+		
 		this.setBorderPainted(false);
 		this.setFocusPainted(false);
 		this.setContentAreaFilled(false);
-		
 		this.imgName = imgName;
 		
 		try {
-			 img = ImageIO.read(new File(imgName+".png"));
-		}catch (IOException e) {
+			 img = ImageIO.read(new File(path + this.imgName + ".png"));
+		}
+		catch (IOException e) {
 			 e.printStackTrace();
 		}
 		
 		this.setBounds(x, y, width, height);
 		this.addMouseListener(this);
-		
 		this.isSelected = false;
     }
 		
 	public void paintComponent(Graphics g) {
+		
 	    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 	}
-		
-	//M�thode appel�e lors du clic de souris
+	
+	/* -----------------------------------------------------
+	   When a click is performed on a button: 
+	 */
 	public void mouseClicked(MouseEvent event) { 
 		
 	}
 	
-	//M�thode appel�e lors du survol de la souris
+	/* -----------------------------------------------------
+	   When the mouse goes over a button: 
+	 */
 	public void mouseEntered(MouseEvent event) { 
-		if(!this.isSelected)
-		{
+		
+		if(!this.isSelected){
 			try {
-			 img = ImageIO.read(new File(this.imgName+"_mouseover.png"));
-			}catch (IOException e) {
+			 img = ImageIO.read(new File(path + this.imgName + "_over.png"));
+			}
+			catch (IOException e) {
 				 e.printStackTrace();
 			}
 		}
 	}
 	
-	//M�thode appel�e lorsque la souris sort de la zone du bouton
+	/* -----------------------------------------------------
+	   When the mouse goes out of the button area: 
+	 */
 	public void mouseExited(MouseEvent event) { 
 		if(!this.isSelected)
 		{
 			try {
-			 img = ImageIO.read(new File(this.imgName+".png"));
-			}catch (IOException e) {
+			 img = ImageIO.read(new File(path + this.imgName + ".png"));
+			}
+			catch (IOException e) {
 				 e.printStackTrace();
 			}
 		}
 	}
 	
-	//M�thode appel�e lorsque l'on presse le bouton gauche de la souris
+	/* -----------------------------------------------------
+	   When left button is pressed on the mouse:
+	 */
 	public void mousePressed(MouseEvent event) { 
+		
 		if(!this.isSelected)
 		{
 			this.isSelected = true;
 			System.out.println(this.imgName);
 			
 			try {
-			 img = ImageIO.read(new File(this.imgName+"_selected.png"));
-			}catch (IOException e) {
+			 img = ImageIO.read(new File(path + this.imgName + "_selected.png"));
+			}
+			catch (IOException e) {
 				 e.printStackTrace();
 			}
 		}
@@ -87,15 +101,19 @@ public class ActionButton extends JButton implements MouseListener {
 			this.isSelected = false;
 			
 			try {
-			 img = ImageIO.read(new File(this.imgName+".png"));
-			}catch (IOException e) {
+			 img = ImageIO.read(new File(path + this.imgName + ".png"));
+			}
+			catch (IOException e) {
 				 e.printStackTrace();
 			}
 		}
 	}
 	
-	//M�thode appel�e lorsque l'on rel�che le clic de souris
+	/* -----------------------------------------------------
+	   When the click is released:
+	 */
 	public void mouseReleased(MouseEvent event) { 
 		
 	}       
 }
+

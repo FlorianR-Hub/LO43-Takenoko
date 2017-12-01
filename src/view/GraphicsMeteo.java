@@ -10,15 +10,17 @@ import javax.swing.JPanel;
 public class GraphicsMeteo extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
+	private static final String path = "img/";
 	
     private Image img;
 
     public GraphicsMeteo (String imgName, int x, int y)
     {
     	try {
-    		img = ImageIO.read(new File(imgName));
-		}catch (IOException e) {
-			 e.printStackTrace();
+    		img = ImageIO.read(new File(path + imgName));
+		}
+    	catch (IOException e) {
+		 e.printStackTrace();
 		}
         
         this.setBounds(x, y, img.getWidth(this), img.getHeight(this));

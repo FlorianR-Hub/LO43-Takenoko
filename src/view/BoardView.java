@@ -11,19 +11,19 @@ import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.JPanel;
 
-import model.GameBoard;
+import model.Board;
 import model.Tile;
 
-public class BoardInterface extends JPanel {
+public class BoardView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private static Vector<Tile> v = new Vector<Tile>(); 
 	private static boolean actionRoute = false;
 	
-	public BoardInterface()
+	public BoardView()
 	{	
-		this.setBackground(TileInterface.COLOURBACK);
+		this.setBackground(TileView.COLOURBACK);
 
 		MyMouseListener ml = new MyMouseListener();            
 		addMouseListener(ml);
@@ -37,23 +37,23 @@ public class BoardInterface extends JPanel {
 		super.paintComponent(g2);
 		
 		//draw grid
-		for (int i=0;i<GameBoard.BSIZE;i++)
-			for (int j=0;j<GameBoard.BSIZE;j++)
-				if(GameBoard.getBoard()[i][j].getType() > 0)
-					TileInterface.drawHex(i,j,g2);
+		for (int i=0;i<Board.BSIZE;i++)
+			for (int j=0;j<Board.BSIZE;j++)
+				if(Board.getBoard()[i][j].getType() > 0)
+					TileView.drawHex(i,j,g2);
 		
 		//fill in hexes
-		for (int i=0;i<GameBoard.BSIZE;i++)
-			for (int j=0;j<GameBoard.BSIZE;j++)	
-				if(GameBoard.getBoard()[i][j].getType() > 0)
-					TileInterface.fillHex(i,j,GameBoard.getBoard()[i][j],g2);
+		for (int i=0;i<Board.BSIZE;i++)
+			for (int j=0;j<Board.BSIZE;j++)	
+				if(Board.getBoard()[i][j].getType() > 0)
+					TileView.fillHex(i,j,Board.getBoard()[i][j],g2);
 		
 	}
 
 	class MyMouseListener extends MouseAdapter	{	//inner class inside DrawingPanel 
 		public void mouseClicked(MouseEvent e) { 
-			Point p = new Point( TileInterface.pxtoHex(e.getX(),e.getY()) );
-			if (p.x < 0 || p.y < 0 || p.x >= GameBoard.BSIZE || p.y >= GameBoard.BSIZE) return;
+			Point p = new Point( TileView.pxtoHex(e.getX(),e.getY()) );
+			if (p.x < 0 || p.y < 0 || p.x >= Board.BSIZE || p.y >= Board.BSIZE) return;
 
 			if(actionRoute)
 			{
@@ -61,8 +61,8 @@ public class BoardInterface extends JPanel {
 				{
 					if(v.size() < 2)
 					{
-						v.add(GameBoard.getBoard()[p.x][p.y]);
-						GameBoard.getBoard()[p.x][p.y].setSelected(true);
+						v.add(Board.getBoard()[p.x][p.y]);
+						Board.getBoard()[p.x][p.y].setSelected(true);
 					}
 					
 					if(v.size() == 2)
@@ -98,22 +98,22 @@ public class BoardInterface extends JPanel {
 			{
 				if(e.getButton() == MouseEvent.BUTTON1)
 				{
-					if(GameBoard.getBoard()[p.x][p.y].isValid())
+					if(Board.getBoard()[p.x][p.y].isValid())
 					{
-						if(GameBoard.getBoard()[p.x][p.y].getType() == 0)
+						if(Board.getBoard()[p.x][p.y].getType() == 0)
 						{
 							int rand = (int) ((Math.random()*(4-1)) + 1);
-							GameBoard.getBoard()[p.x][p.y].setType(rand);
-							GameBoard.getBoard()[p.x][p.y].setBonus(1);
+							Board.getBoard()[p.x][p.y].setType(rand);
+							Board.getBoard()[p.x][p.y].setBonus(1);
 						}
 						else
-							GameBoard.getBoard()[p.x][p.y].increase();
+							Board.getBoard()[p.x][p.y].increase();
 					}
 				}
 				else if(e.getButton() == MouseEvent.BUTTON3)
 				{
-					if(GameBoard.getBoard()[p.x][p.y].getType() != 4)
-						GameBoard.getBoard()[p.x][p.y].reinitialiser();
+					if(Board.getBoard()[p.x][p.y].getType() != 4)
+						Board.getBoard()[p.x][p.y].reinitialize();
 				}
 			}
 			

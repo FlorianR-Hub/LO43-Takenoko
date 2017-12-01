@@ -4,11 +4,16 @@ import java.util.List;
 
 public class Player {
 
+	/**
+	 * nbBamboos: Array with amount of bamboos of each type;
+	 * nbBonus: Array with amount of bonus of each type;
+	 * weather: 1=sun / 2=rain / 3=wind / 4=storm / 5=cloudy / 6=? / 0=1st round;
+	 */
 	private int score;
 	private int nbBamboos[] = new int[3];
 	private int nbBonus[] = new int[3];
-	private int irrigations;
-	private int meteo; // 1=soleil / 2=pluie / 3=vent / 4=orage / 5=nuages / 6=? / 0=1er tour
+	private int nbIrrig;
+	private int weather;
 	private List<Integer> actions;
 	
 	
@@ -20,8 +25,8 @@ public class Player {
 			this.setNbBonus(i, 0);
 		}
 			
-		this.setIrrigations(0);
-		this.setMeteo(0);
+		this.setnbIrrig(0);
+		this.setWeather(0);
 	}
 	
 	public Player(int score, int bambousVert, int bambousJaune, int bambousRose, int effetMeteo)
@@ -30,23 +35,23 @@ public class Player {
 		this.nbBamboos[0] = bambousVert;
 		this.nbBamboos[1] = bambousJaune;
 		this.nbBamboos[2] = bambousRose;
-		this.setMeteo(effetMeteo);
+		this.setWeather(effetMeteo);
 	}
 
-	public int getMeteo() {
-		return meteo;
+	public int getWeather() {
+		return weather;
 	}
 
-	public void setMeteo(int meteo) {
-		this.meteo = meteo;
+	public void setWeather(int weather) {
+		this.weather = weather;
 	}
 
-	public int getIrrigations() {
-		return irrigations;
+	public int getnbIrrig() {
+		return nbIrrig;
 	}
 
-	public void setIrrigations(int irrigations) {
-		this.irrigations = irrigations;
+	public void setnbIrrig(int nbIrrig) {
+		this.nbIrrig = nbIrrig;
 	}
 
 	public int getScore() {
@@ -79,18 +84,12 @@ public class Player {
 	
 	public void applyBonus(Tile t, int type)
 	{
-		if(this.nbBonus[type] > 0)
-		{
+		if(this.nbBonus[type] > 0){
 			t.setBonus(type);
 			this.setNbBonus(type, this.getNbBonus(type) - 1);
 		}
-		else
-		{
+		else{
 			System.out.println("Action Impossible ! Vous n'avez pas de bonus de ce type.\n");
 		}
-		
-		
 	}
-	
-	
 }

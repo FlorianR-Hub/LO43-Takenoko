@@ -3,43 +3,29 @@ package controller;
 import java.awt.*;
 import javax.swing.*;
 
-import model.GameBoard;
-import view.BoardInterface;
-import view.TrayInterface; 
+import model.Board;
+import view.BoardView;
+import view.TrayView; 
 
-/**********************************
-  This is the main class of a Java program to play a game based on hexagonal tiles.
-  The mechanism of handling hexes is in the file hexmech.java.
-  
- ***********************************/
-
-public class Hexgame extends JFrame
+public class Frame extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 
-	private Hexgame() {
-    	GameBoard.initBoard();
+	public Frame(){
+		
+		Board.initBoard();
 		createAndShowGUI();
-	}
-
-	public static void main(String[] args)
-	{
-		SwingUtilities.invokeLater(new Runnable() {
-				public void run() {
-				new Hexgame();
-				}
-				});
 	}
 
 	//constants and global variables
 	public final static int HEXSIZE = 60;	//hex size in pixels
 	public final static int BORDERS = 15;  
-	public final static int SCRSIZE = HEXSIZE * (GameBoard.BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
+	public final static int SCRSIZE = HEXSIZE * (Board.BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
 	
 	private void createAndShowGUI()
 	{
-		BoardInterface board = new BoardInterface();
-		TrayInterface tray = new TrayInterface();
+		BoardView board = new BoardView();
+		TrayView tray = new TrayView();
 
 		this.setTitle("LO43 Projet");
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );

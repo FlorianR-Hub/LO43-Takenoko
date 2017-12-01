@@ -1,19 +1,30 @@
 package model;
 
 import java.awt.Color;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
-import view.TileInterface;
+import view.TileView;
 
 public class Tile extends GameObject{
 
-	private int type; // 1=vert / 2=jaune / 3=rose / 4=etang / 0=vide
-	private int bonus; // 1=enclos / 2=engrais / 3=bassin / 0=aucun
-	private int size; // Taille de la pousse de 0 a 4
+	/**
+	 * type: 1=green / 2=yellow / 3=pink / 4=pond / 0=void
+	 * bonus: 1=enclosure / 2=fertilizer / 3=pool / 0=void
+	 * size: size of the bamboo placed on the tile
+	 */
+	private int type;
+	private int bonus;
+	private int size;
 	private boolean isSelected;
 	private boolean isIrrigated;
 	private boolean isValid;
 	
+	// CONSTRUCTORS -------------------------
+	
+	/* Constructor without positions: 
+	 * used for Tiles not used by the player.
+	 */
 	public Tile(int type, int bonus){
 		super();
 		this.type = type;
@@ -24,6 +35,9 @@ public class Tile extends GameObject{
 		this.setValid(false);
 	}
 	
+	/* Constructor with positions: 
+	 * the Tile is placed on the Board.
+	 */
 	public Tile(int x, int y, int type, int bonus, boolean irrigated){
 		super(x, y);
 		this.setType(type);
@@ -34,17 +48,15 @@ public class Tile extends GameObject{
 		this.setValid(false);
 	}
 	
+
 	public Color getColor() {
-		Color c = TileInterface.COLOURONE;
+		Color c = TileView.COLOURONE;
 		
-		if(this.isSelected)
-		{
+		if(this.isSelected){
 			c = new Color(80,80,80,100);
 		}
-		else
-		{
-			switch(this.type)
-			{
+		else{
+			switch(this.type){
 				case 1:
 					c = Color.GREEN;
 					break;
@@ -59,9 +71,9 @@ public class Tile extends GameObject{
 					break;
 			}
 		}
-		
 		return c;
 	}
+	
 	
 	public void increase()
 	{
@@ -75,12 +87,14 @@ public class Tile extends GameObject{
 		}
 	}
 	
+	
 	public void decrease()
 	{
 		this.setSize(this.getSize() - 1);
 	}
 
-	public void reinitialiser()
+	
+	public void reinitialize()
 	{
 		this.setType(0);
 		this.setBonus(0);
@@ -91,10 +105,12 @@ public class Tile extends GameObject{
 		this.setSelected(false);
 	}
 	
+	
 	public boolean isSelectionable()
 	{
 		return this.getType() > 0 && this.getType() < 4;
 	}
+	
 	
 	public boolean isAdjacent(Tile p)
 	{	
@@ -106,27 +122,28 @@ public class Tile extends GameObject{
 					|| (Math.abs(this.getX() - p.getX()) == 1 && (this.getY() - p.getY() == -1 || this.getY() - p.getY() == 0)));
 	}
 	
-	public Vector<Tile> getAdjacentTiles()
+	
+	public List<Tile> getAdjacentTiles()
 	{
-		Vector<Tile> adjTiles = new Vector<Tile>();
+		List<Tile> adjTiles = new ArrayList<Tile>();
 		
-		for (int i=0;i<GameBoard.BSIZE;i++) 
-			for (int j=0;j<GameBoard.BSIZE;j++) 
-				if(this.isAdjacent(GameBoard.getBoard()[i][j]))
-					adjTiles.add(GameBoard.getBoard()[i][j]);
+		for (int i=0;i<Board.BSIZE;i++) 
+			for (int j=0;j<Board.BSIZE;j++) 
+				if(this.isAdjacent(Board.getBoard()[i][j]))
+					adjTiles.add(Board.getBoard()[i][j]);
 
 		return adjTiles;
 	}
 	
-	public Vector<Tile> getValidTiles()
+	public List<Tile> getValidTiles()
 	{
-		Vector<Tile> validTiles = new Vector<Tile>();
+		List<Tile> validTiles = new ArrayList<Tile>();
 		
 		for(Tile tile : this.getAdjacentTiles())
 		{
 			if(tile.getType() == 0)
 			{
-				Vector<Tile> adjTiles = tile.getAdjacentTiles();
+				List<Tile> adjTiles = tile.getAdjacentTiles();
 				int nbPlacedTiles = 0;
 				
 				for(Tile t : adjTiles)
@@ -143,49 +160,54 @@ public class Tile extends GameObject{
 	
 		return validTiles;
 	}
-		
+
+	// GETTERS ------------------------------
+	
 	public int getType() {
 		return type;
-	}
-
-	public void setType(int type) {
-		this.type = type;
 	}
 	
 	public int getBonus() {
 		return bonus;
 	}
 
-	public void setBonus(int bonus) {
-		this.bonus = bonus;
-	}
-
 	public int getSize() {
 		return size;
+	}
+	
+	public boolean isSelected() {
+		return isSelected;
+	}
+	
+	public boolean isIrrigated() {
+		return isIrrigated;
+	}
+	
+	public boolean isValid() {
+		return isValid;
+	}
+	
+	
+	// SETTERS ------------------------------
+	
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	public void setBonus(int bonus) {
+		this.bonus = bonus;
 	}
 
 	public void setSize(int size) {
 		this.size = size;
 	}
 
-	public boolean isSelected() {
-		return isSelected;
-	}
-
 	public void setSelected(boolean isSelected) {
 		this.isSelected = isSelected;
 	}
 
-	public boolean isIrrigated() {
-		return isIrrigated;
-	}
-
 	public void setIrrigated(boolean isIrrigated) {
 		this.isIrrigated = isIrrigated;
-	}
-
-	public boolean isValid() {
-		return isValid;
 	}
 
 	public void setValid(boolean isValid) {

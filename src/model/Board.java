@@ -1,6 +1,6 @@
 package model;
 
-public class GameBoard {
+public class Board {
 	
 	public final static int BSIZE = 11;
 	

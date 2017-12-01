@@ -1,16 +1,17 @@
 package view;
 
 import java.awt.*;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
-import controller.Hexgame;
+import controller.Frame;
 import model.Tile;
 
 /* This is a companion class to hexgame.java. It handles all of the mechanics related to hexagon grids. */
 
-public class TileInterface
+public class TileView
 {
-	private static int h=Hexgame.HEXSIZE;	// height. Distance between centres of two adjacent hexes. Distance between two opposite sides in a hex.
+	private static int h=Frame.HEXSIZE;	// height. Distance between centres of two adjacent hexes. Distance between two opposite sides in a hex.
 	private static int r=h/2;	// radius of inscribed circle (centre to middle of each side). r= h/2
 	private static int s=(int) (h / 1.73205);	// length of one side : s = (h/2)/cos(30)= (h/2) / (sqrt(3)/2) = h / sqrt(3)
 	private static int t=(int) (r / 1.73205);	// short side of 30o triangle outside of each hex : t = (h/2) tan30 = (h/2) 1/sqrt(3) = h / (2 sqrt(3)) = r / sqrt(3)
@@ -34,8 +35,8 @@ and calculates all six of the points in the hexagon.
 *********************************************************/
 	public static Polygon hex (int x0, int y0) {
 
-		int y = y0 + Hexgame.BORDERS;
-		int x = x0 + Hexgame.BORDERS;
+		int y = y0 + Frame.BORDERS;
+		int x = x0 + Frame.BORDERS;
 		if (s == 0  || h == 0) {
 			System.out.println("ERROR: size of hex has not been set");
 			return new Polygon();
@@ -85,9 +86,10 @@ The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 		g2.setColor(p.getColor());
 		g2.fillPolygon(hex(x,y));
 		g2.setColor(COLOURTXT);
-		g2.drawString(p.getX()+","+p.getY(), x+r/2+Hexgame.BORDERS, y+r+Hexgame.BORDERS+4);
+		g2.drawString(p.getX()+","+p.getY(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+4);
 		
-		Vector<Tile> adjTiles = p.getValidTiles();
+		List<Tile> adjTiles = new ArrayList<Tile>();
+		adjTiles = p.getValidTiles();
 		
 		for(Tile tile : adjTiles)
 		{
@@ -116,8 +118,8 @@ The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 		Point p = new Point(-1,-1);
 
 		//correction for BORDERS
-		mx -= Hexgame.BORDERS;
-		my -= Hexgame.BORDERS;
+		mx -= Frame.BORDERS;
+		my -= Frame.BORDERS;
 
 		int x = (int) (mx / (s+t)); //this gives a quick value for x. It works only on odd cols and doesn't handle the triangle sections. It assumes that the hexagon is a rectangle with width s+t (=1.5*s).
 		int y = (int) ((my - (x%2)*r)/h); //this gives the row easily. It needs to be offset by h/2 (=r)if it is in an even column

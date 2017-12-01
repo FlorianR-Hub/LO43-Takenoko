@@ -3,7 +3,7 @@ package view;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-public class TrayInterface extends JPanel {
+public class TrayView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -22,7 +22,7 @@ public class TrayInterface extends JPanel {
 	private ActionButton bouton5 = new ActionButton("button", 400, 50, 65, 65);
 	private ActionButton bouton6 = new ActionButton("button", 480, 50, 65, 65);
 	
-	public TrayInterface() {
+	public TrayView() {
 		this.setLayout(null);
 			
 		this.add(soleil);
@@ -40,7 +40,7 @@ public class TrayInterface extends JPanel {
 		this.add(bouton6);
 		
 		this.add(tray);
-		this.setBackground(TileInterface.COLOURBACK);
+		this.setBackground(TileView.COLOURBACK);
 	}
 	
 	public void paintComponent(Graphics g) {

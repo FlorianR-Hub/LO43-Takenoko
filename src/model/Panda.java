@@ -7,8 +7,8 @@ public class Panda extends Character {
 	}
 	
 	public void move(Tile p) {
-		this.x = p.getX();
-		this.y = p.getY();
+		this.posX = p.getX();
+		this.posY = p.getY();
 		eat(p);
 	}
 	

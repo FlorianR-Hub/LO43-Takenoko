@@ -2,8 +2,8 @@ package model;
 
 public class Irrigation extends GameObject{
 
-	private int x2;
-	private int y2;
+	private int posX2;
+	private int posY2;
 	
 	public Irrigation() {
 		super();
@@ -18,22 +18,21 @@ public class Irrigation extends GameObject{
 	}
 		
 	public void place() {
-		
 	}
 
-	public int getX2() {
-		return x2;
+	public int getPosX2() {
+		return posX2;
 	}
 
 	public void setX2(int x2) {
-		this.x2 = x2;
+		this.posX2 = x2;
 	}
 
 	public int getY2() {
-		return y2;
+		return posY2;
 	}
 
 	public void setY2(int y2) {
-		this.y2 = y2;
+		this.posY2 = y2;
 	}
 }
