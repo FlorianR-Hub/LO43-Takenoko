@@ -1,6 +1,6 @@
-package projet;
+package model;
 
-import java.util.Vector;
+import java.util.List;
 
 public class Player {
 
@@ -9,7 +9,7 @@ public class Player {
 	private int nbBonus[] = new int[3];
 	private int irrigations;
 	private int meteo; // 1=soleil / 2=pluie / 3=vent / 4=orage / 5=nuages / 6=? / 0=1er tour
-	private Vector<Integer> actions;
+	private List<Integer> actions;
 	
 	
 	public Player() {

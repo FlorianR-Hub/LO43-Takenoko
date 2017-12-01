@@ -1,7 +1,9 @@
-package projet;
+package model;
 
 import java.awt.Color;
 import java.util.Vector;
+
+import view.TileInterface;
 
 public class Tile extends GameObject{
 
@@ -33,7 +35,7 @@ public class Tile extends GameObject{
 	}
 	
 	public Color getColor() {
-		Color c = Hexmech.COLOURONE;
+		Color c = TileInterface.COLOURONE;
 		
 		if(this.isSelected)
 		{

@@ -1,7 +1,11 @@
-package projet;
+package controller;
 
 import java.awt.*;
-import javax.swing.*; 
+import javax.swing.*;
+
+import model.GameBoard;
+import view.BoardInterface;
+import view.TrayInterface; 
 
 /**********************************
   This is the main class of a Java program to play a game based on hexagonal tiles.

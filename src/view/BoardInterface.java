@@ -1,4 +1,4 @@
-package projet;
+package view;
 
 import java.awt.Font;
 import java.awt.Graphics;
@@ -11,6 +11,9 @@ import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.JPanel;
 
+import model.GameBoard;
+import model.Tile;
+
 public class BoardInterface extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -20,7 +23,7 @@ public class BoardInterface extends JPanel {
 	
 	public BoardInterface()
 	{	
-		this.setBackground(Hexmech.COLOURBACK);
+		this.setBackground(TileInterface.COLOURBACK);
 
 		MyMouseListener ml = new MyMouseListener();            
 		addMouseListener(ml);
@@ -37,19 +40,19 @@ public class BoardInterface extends JPanel {
 		for (int i=0;i<GameBoard.BSIZE;i++)
 			for (int j=0;j<GameBoard.BSIZE;j++)
 				if(GameBoard.getBoard()[i][j].getType() > 0)
-					Hexmech.drawHex(i,j,g2);
+					TileInterface.drawHex(i,j,g2);
 		
 		//fill in hexes
 		for (int i=0;i<GameBoard.BSIZE;i++)
 			for (int j=0;j<GameBoard.BSIZE;j++)	
 				if(GameBoard.getBoard()[i][j].getType() > 0)
-					Hexmech.fillHex(i,j,GameBoard.getBoard()[i][j],g2);
+					TileInterface.fillHex(i,j,GameBoard.getBoard()[i][j],g2);
 		
 	}
 
 	class MyMouseListener extends MouseAdapter	{	//inner class inside DrawingPanel 
 		public void mouseClicked(MouseEvent e) { 
-			Point p = new Point( Hexmech.pxtoHex(e.getX(),e.getY()) );
+			Point p = new Point( TileInterface.pxtoHex(e.getX(),e.getY()) );
 			if (p.x < 0 || p.y < 0 || p.x >= GameBoard.BSIZE || p.y >= GameBoard.BSIZE) return;
 
 			if(actionRoute)

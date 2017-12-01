@@ -1,4 +1,4 @@
-package projet;
+package view;
 
 import java.awt.Graphics;
 import javax.swing.JPanel;
@@ -40,7 +40,7 @@ public class TrayInterface extends JPanel {
 		this.add(bouton6);
 		
 		this.add(tray);
-		this.setBackground(Hexmech.COLOURBACK);
+		this.setBackground(TileInterface.COLOURBACK);
 	}
 	
 	public void paintComponent(Graphics g) {

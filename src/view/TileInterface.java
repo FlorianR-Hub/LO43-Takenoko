@@ -1,11 +1,14 @@
-package projet;
+package view;
 
 import java.awt.*;
 import java.util.Vector;
 
+import controller.Hexgame;
+import model.Tile;
+
 /* This is a companion class to hexgame.java. It handles all of the mechanics related to hexagon grids. */
 
-public class Hexmech
+public class TileInterface
 {
 	private static int h=Hexgame.HEXSIZE;	// height. Distance between centres of two adjacent hexes. Distance between two opposite sides in a hex.
 	private static int r=h/2;	// radius of inscribed circle (centre to middle of each side). r= h/2

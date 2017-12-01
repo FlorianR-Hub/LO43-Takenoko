@@ -1,4 +1,4 @@
-package projet;
+package model;
 
 public class Irrigation extends GameObject{
 

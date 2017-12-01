@@ -1,4 +1,4 @@
-package projet;
+package view;
 
 import java.awt.Graphics;
 import java.awt.Image;
@@ -40,12 +40,12 @@ public class ActionButton extends JButton implements MouseListener {
 	    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
 	}
 		
-	//Méthode appelée lors du clic de souris
+	//Mï¿½thode appelï¿½e lors du clic de souris
 	public void mouseClicked(MouseEvent event) { 
 		
 	}
 	
-	//Méthode appelée lors du survol de la souris
+	//Mï¿½thode appelï¿½e lors du survol de la souris
 	public void mouseEntered(MouseEvent event) { 
 		if(!this.isSelected)
 		{
@@ -57,7 +57,7 @@ public class ActionButton extends JButton implements MouseListener {
 		}
 	}
 	
-	//Méthode appelée lorsque la souris sort de la zone du bouton
+	//Mï¿½thode appelï¿½e lorsque la souris sort de la zone du bouton
 	public void mouseExited(MouseEvent event) { 
 		if(!this.isSelected)
 		{
@@ -69,7 +69,7 @@ public class ActionButton extends JButton implements MouseListener {
 		}
 	}
 	
-	//Méthode appelée lorsque l'on presse le bouton gauche de la souris
+	//Mï¿½thode appelï¿½e lorsque l'on presse le bouton gauche de la souris
 	public void mousePressed(MouseEvent event) { 
 		if(!this.isSelected)
 		{
@@ -94,7 +94,7 @@ public class ActionButton extends JButton implements MouseListener {
 		}
 	}
 	
-	//Méthode appelée lorsque l'on relâche le clic de souris
+	//Mï¿½thode appelï¿½e lorsque l'on relï¿½che le clic de souris
 	public void mouseReleased(MouseEvent event) { 
 		
 	}       
