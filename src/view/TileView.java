@@ -7,8 +7,6 @@ import java.util.List;
 import controller.Frame;
 import model.Tile;
 
-/* This is a companion class to hexgame.java. It handles all of the mechanics related to hexagon grids. */
-
 public class TileView
 {
 	private static int h=Frame.HEXSIZE;	// height. Distance between centres of two adjacent hexes. Distance between two opposite sides in a hex.
@@ -86,7 +84,7 @@ The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 		g2.setColor(p.getColor());
 		g2.fillPolygon(hex(x,y));
 		g2.setColor(COLOURTXT);
-		g2.drawString(p.getX()+","+p.getY(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+4);
+		g2.drawString(""+p.getSize(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+4);
 		
 		List<Tile> adjTiles = new ArrayList<Tile>();
 		adjTiles = p.getValidTiles();
