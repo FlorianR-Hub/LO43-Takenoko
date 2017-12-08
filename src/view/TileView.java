@@ -4,7 +4,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.Frame;
 import model.Tile;
 
 public class TileView

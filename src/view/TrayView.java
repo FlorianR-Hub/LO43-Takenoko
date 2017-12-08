@@ -1,7 +1,12 @@
 package view;
 
+import java.awt.Font;
 import java.awt.Graphics;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import model.Player;
 
 public class TrayView extends JPanel {
 
@@ -22,9 +27,18 @@ public class TrayView extends JPanel {
 	private ActionButton bouton5 = new ActionButton("button", 400, 50, 65, 65);
 	private ActionButton bouton6 = new ActionButton("button", 480, 50, 65, 65);
 	
+	private ActionButton endTurn = new ActionButton("endTurn", 220, 670, 54, 194);
+	
+	private JLabel text = new JLabel("Player ");
+	
 	public TrayView() {
 		this.setLayout(null);
-			
+					
+		
+		text.setBounds(275, 10, 100, 20);
+		text.setFont(new Font("Arial", Font.BOLD, 20));
+		this.add(text);
+		
 		this.add(soleil);
 		this.add(pluie);
 		this.add(vent);
@@ -39,11 +53,50 @@ public class TrayView extends JPanel {
 		this.add(bouton5);
 		this.add(bouton6);
 		
+		this.add(endTurn);
+		
 		this.add(tray);
 		this.setBackground(TileView.COLOURBACK);
 	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+	}
+	
+	public void updateTray(Player p) {
+		this.text.setText("Player "+ p.getNumPlayer());
+		
+		this.soleil.setBounds(32, 325, 80, 111);
+		this.pluie.setBounds(128, 326, 80, 111);
+		this.vent.setBounds(224, 328, 80, 111);
+		this.orage.setBounds(320, 326, 80, 111);
+		this.nuages.setBounds(419, 326, 80, 111);
+		this.choix.setBounds(517, 326, 80, 111);
+		
+		switch(p.getWeather())
+		{
+			case 1:
+				this.soleil.setBounds(29, 322, 87, 121);
+				break;
+			case 2:
+				this.pluie.setBounds(125, 323, 87, 121);
+				break;
+			case 3:
+				this.vent.setBounds(221, 325, 87, 121);
+				break;
+			case 4:
+				this.orage.setBounds(317, 323, 87, 121);
+				break;
+			case 5:
+				this.nuages.setBounds(416, 323, 87, 121);
+				break;
+			case 6:
+				this.choix.setBounds(514, 323, 87, 121);
+				break;
+			default:
+				break;
+		}
+		
+		this.repaint();
 	}
 }

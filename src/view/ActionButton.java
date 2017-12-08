@@ -9,6 +9,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
+import controller.GUI;
+
 public class ActionButton extends JButton implements MouseListener {
 	
 	private static final long serialVersionUID = 1L;
@@ -83,30 +85,37 @@ public class ActionButton extends JButton implements MouseListener {
 	   When left button is pressed on the mouse:
 	 */
 	public void mousePressed(MouseEvent event) { 
-		
-		if(!this.isSelected)
+		if(imgName == "endTurn")
 		{
-			this.isSelected = true;
-			System.out.println(this.imgName);
-			
-			try {
-			 img = ImageIO.read(new File(path + this.imgName + "_selected.png"));
-			}
-			catch (IOException e) {
-				 e.printStackTrace();
-			}
-		}
+			GUI.getPlayer().setRoundCompleted(true);
+		}		
 		else
 		{
-			this.isSelected = false;
-			
-			try {
-			 img = ImageIO.read(new File(path + this.imgName + ".png"));
+			if(!this.isSelected)
+			{
+				this.isSelected = true;
+				System.out.println(this.imgName);
+				
+				try {
+				 img = ImageIO.read(new File(path + this.imgName + "_selected.png"));
+				}
+				catch (IOException e) {
+					 e.printStackTrace();
+				}
 			}
-			catch (IOException e) {
-				 e.printStackTrace();
+			else
+			{
+				this.isSelected = false;
+				
+				try {
+				 img = ImageIO.read(new File(path + this.imgName + ".png"));
+				}
+				catch (IOException e) {
+					 e.printStackTrace();
+				}
 			}
 		}
+		
 	}
 	
 	/* -----------------------------------------------------

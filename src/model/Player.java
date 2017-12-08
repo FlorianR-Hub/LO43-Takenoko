@@ -14,10 +14,11 @@ public class Player {
 	private int nbBonus[] = new int[3];
 	private int nbIrrig;
 	private int weather;
-	private List<Integer> actions;
+	private int numPlayer;
+	private List<Integer> actions;	
+	private boolean roundCompleted;
 	
-	
-	public Player() {
+	public Player(int numPlayer) {
 		this.setScore(0);
 		for(int i=0; i<3; i++)
 		{
@@ -27,15 +28,19 @@ public class Player {
 			
 		this.setnbIrrig(0);
 		this.setWeather(0);
+		this.setNumPlayer(numPlayer);
+		this.setRoundCompleted(false);
 	}
 	
-	public Player(int score, int bambousVert, int bambousJaune, int bambousRose, int effetMeteo)
+	public Player(int score, int bambousVert, int bambousJaune, int bambousRose, int effetMeteo, int numPlayer)
 	{
 		this.setScore(score);
 		this.nbBamboos[0] = bambousVert;
 		this.nbBamboos[1] = bambousJaune;
 		this.nbBamboos[2] = bambousRose;
 		this.setWeather(effetMeteo);
+		this.setNumPlayer(numPlayer);
+		this.setRoundCompleted(false);
 	}
 
 	public int getWeather() {
@@ -44,6 +49,10 @@ public class Player {
 
 	public void setWeather(int weather) {
 		this.weather = weather;
+	}
+	
+	public void randWeather() {
+		this.weather = 1 + (int)(Math.random() * 6);
 	}
 
 	public int getnbIrrig() {
@@ -91,5 +100,21 @@ public class Player {
 		else{
 			System.out.println("Action Impossible ! Vous n'avez pas de bonus de ce type.\n");
 		}
+	}
+
+	public int getNumPlayer() {
+		return numPlayer;
+	}
+
+	public void setNumPlayer(int numPlayer) {
+		this.numPlayer = numPlayer;
+	}
+
+	public boolean isRoundCompleted() {
+		return roundCompleted;
+	}
+
+	public void setRoundCompleted(boolean roundCompleted) {
+		this.roundCompleted = roundCompleted;
 	}
 }

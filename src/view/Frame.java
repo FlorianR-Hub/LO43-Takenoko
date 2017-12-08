@@ -1,18 +1,16 @@
-package controller;
+package view;
 
 import java.awt.*;
 import javax.swing.*;
 
-import model.Board;
-import view.BoardView;
-import view.TrayView; 
+import model.Board; 
 
-public class Frame extends JFrame
-{
+public class Frame extends JFrame {
 	private static final long serialVersionUID = 1L;
+	private BoardView board;
+	private TrayView tray;
 
 	public Frame(){
-		
 		Board.initBoard();
 		createAndShowGUI();
 	}
@@ -24,8 +22,8 @@ public class Frame extends JFrame
 	
 	private void createAndShowGUI()
 	{
-		BoardView board = new BoardView();
-		TrayView tray = new TrayView();
+		board = new BoardView();
+		tray = new TrayView();
 
 		this.setTitle("LO43 Projet");
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
@@ -35,12 +33,15 @@ public class Frame extends JFrame
 		this.setLocationRelativeTo(null);
 		
 		GridLayout gl = new GridLayout(1,2);
-		//gl.setHgap(-100);
 		this.setLayout(gl);
 		
 		Container content = this.getContentPane();
 		content.add(board);
 		content.add(tray);
 		this.setVisible(true);
+	}
+	
+	public TrayView getTray() {
+		return this.tray;
 	}
 }

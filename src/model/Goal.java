@@ -3,7 +3,7 @@ package model;
 public class Goal {
 
 	private boolean isValid;
-	private int type;
+	private int type; // 1:Tile / 2:Panda / 3:Gardener
 	private int points;
 	
 	public Goal() {
@@ -18,7 +18,20 @@ public class Goal {
 		this.points = points;
 	}
 
-	public boolean isValid() {
+	public boolean isValid(Player p) {
+		
+		switch(this.type)
+		{
+			case 1:
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+			default:
+				break;
+		}
+		
 		return isValid;
 	}
 
