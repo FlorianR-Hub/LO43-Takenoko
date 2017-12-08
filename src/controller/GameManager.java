@@ -10,12 +10,10 @@ public class GameManager extends Thread {
 	public static List<Player> players = new ArrayList<Player>();
 	private int nbPlayers;
 	private static boolean gameOver;
-	private static boolean canUpdate;
 	private static GUI gui;
 
 	public GameManager() {
 		GameManager.setGameOver(false);
-		GameManager.setCanUpdate(false);
 		game();
 	}
 	
@@ -74,14 +72,6 @@ public class GameManager extends Thread {
 
 	public static void setGameOver(boolean gameOver) {
 		GameManager.gameOver = gameOver;
-	}
-	
-	public static boolean isCanUpdate() {
-		return canUpdate;
-	}
-
-	public static void setCanUpdate(boolean canUpdate) {
-		GameManager.canUpdate = canUpdate;
 	}
 	
 	public int getNbPlayers() {
