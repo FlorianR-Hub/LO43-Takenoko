@@ -28,7 +28,6 @@ public class TrayView extends JPanel {
 	private ActionButton bouton6 = new ActionButton("button", 480, 50, 65, 65);
 	
 	private ActionButton irrigation = new ActionButton("irrigation", 500, 500, 81, 65);
-	
 	private ActionButton endTurn = new ActionButton("endTurn", 220, 670, 54, 194);
 	
 	private JLabel text = new JLabel("Player ");
