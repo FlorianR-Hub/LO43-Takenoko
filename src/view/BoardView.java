@@ -40,16 +40,18 @@ public class BoardView extends JPanel {
 		for (int i=0;i<Board.BSIZE;i++)
 			for (int j=0;j<Board.BSIZE;j++)
 				if(Board.getBoard()[i][j].getType() > 0)
-					TileView.drawHex(i,j,g2);
-		
-		//fill in hexes
-		for (int i=0;i<Board.BSIZE;i++)
-			for (int j=0;j<Board.BSIZE;j++)	
-				if(Board.getBoard()[i][j].getType() > 0)
-					TileView.fillHex(i,j,Board.getBoard()[i][j],g2);
-		
+					TileView.drawTile(i, j, Board.getBoard()[i][j], g2);
 	}
 
+	public void clearVector(Vector<Tile> v) 
+	{
+		Iterator<Tile> itr = v.iterator();
+        while(itr.hasNext()){
+			itr.next().setSelected(false);
+        }
+		v.clear();
+	}
+	
 	class MyMouseListener extends MouseAdapter	{	//inner class inside DrawingPanel 
 		public void mouseClicked(MouseEvent e) { 
 			Point p = new Point( TileView.pxtoHex(e.getX(),e.getY()) );
@@ -57,41 +59,23 @@ public class BoardView extends JPanel {
 
 			if(actionRoute)
 			{
-				if(e.getButton() == MouseEvent.BUTTON1 /*&& board[p.x][p.y].isSelectionable()*/)
-				{
-					if(v.size() < 2)
-					{
+				if(e.getButton() == MouseEvent.BUTTON1){
+					if(v.size() < 2) {
 						v.add(Board.getBoard()[p.x][p.y]);
 						Board.getBoard()[p.x][p.y].setSelected(true);
 					}
-					
-					if(v.size() == 2)
-					{
-						if(v.firstElement().isAdjacent(v.lastElement()))
-							System.out.println("adjacent !\n");
-						else
-						{
-							System.out.println("non adjacent !\n");
-							Iterator<Tile> itr = v.iterator();
-					        while(itr.hasNext())
-					        {
-								itr.next().setSelected(false);
-					        }
-					        
-					        v.clear();
+					if(v.size() == 2) {	
+						if( v.firstElement().isAdjacent(v.lastElement()) && ( v.firstElement().isIrrigated() ^ v.lastElement().isIrrigated() )) {
+							v.firstElement().setIrrigated(true);
+							v.lastElement().setIrrigated(true);
+						}
+						else {
+							clearVector(v);
 						}
 					}
 				}
-				else if(e.getButton() == MouseEvent.BUTTON3)
-				{
-					//actionRoute = false;
-					Iterator<Tile> itr = v.iterator();
-			        while(itr.hasNext())
-			        {
-						itr.next().setSelected(false);
-			        }
-			        
-			        v.clear();
+				else if(e.getButton() == MouseEvent.BUTTON3) {
+					clearVector(v);
 				}
 			}
 			else

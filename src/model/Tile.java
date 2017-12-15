@@ -48,7 +48,6 @@ public class Tile extends GameObject{
 		this.setValid(false);
 	}
 	
-
 	public Color getColor() {
 		Color c = TileView.COLOURONE;
 		
@@ -74,7 +73,6 @@ public class Tile extends GameObject{
 		return c;
 	}
 	
-	
 	public void increase()
 	{
 		int i = this.getType() == 2 ? 2 : 1;
@@ -87,12 +85,10 @@ public class Tile extends GameObject{
 		}
 	}
 	
-	
 	public void decrease()
 	{
 		this.setSize(this.getSize() - 1);
 	}
-
 	
 	public void reinitialize()
 	{
@@ -108,18 +104,18 @@ public class Tile extends GameObject{
 	
 	public boolean isSelectionable()
 	{
-		return this.getType() > 0 && this.getType() < 4;
+		return (this.type > 0 && this.type < 4);
 	}
 	
 	
-	public boolean isAdjacent(Tile p)
-	{	
-		if(this.getX()%2 == 0)
-			return ((this.getX() == p.getX() && Math.abs(this.getY() - p.getY()) == 1) 
-					|| (Math.abs(this.getX() - p.getX()) == 1 && (this.getY() - p.getY() == 1 || this.getY() - p.getY() == 0)));
+	public boolean isAdjacent(Tile adj)
+	{
+		if(this.posX%2 == 0)
+			return (this.posX == adj.posX && Math.abs(this.posY - adj.posY) == 1) 
+					|| (Math.abs(this.posX - adj.posX) == 1 && (this.posY - adj.posY == 1 || this.posY - adj.posY == 0));
 		else
-			return ((this.getX() == p.getX() && Math.abs(this.getY() - p.getY()) == 1) 
-					|| (Math.abs(this.getX() - p.getX()) == 1 && (this.getY() - p.getY() == -1 || this.getY() - p.getY() == 0)));
+			return (this.posX == adj.posX && Math.abs(this.posY - adj.posY) == 1) 
+					|| (Math.abs(this.posX - adj.posX) == 1 && (this.posY - adj.posY == -1 || this.posY - adj.posY == 0));
 	}
 	
 	
@@ -134,6 +130,28 @@ public class Tile extends GameObject{
 
 		return adjTiles;
 	}
+	/*
+	public List<Case> getAdjacentCases() 
+	{
+		List<Case> adjCases = new ArrayList<Case>();
+		if(this.posX%2 == 0) {
+			adjCases.add(Board.getBoard()[this.posX-1][this.posY-1]);
+			adjCases.add(Board.getBoard()[this.posX][this.posY-1]);
+			adjCases.add(Board.getBoard()[this.posX+1][this.posY-1]);
+			adjCases.add(Board.getBoard()[this.posX+1][this.posY]);
+			adjCases.add(Board.getBoard()[this.posX][this.posY+1]);
+			adjCases.add(Board.getBoard()[this.posX-1][this.posY]);
+		}
+		else if(this.posX%2 == 1) {
+			adjCases.add(Board.getBoard()[this.posX-1][this.posY]);
+			adjCases.add(Board.getBoard()[this.posX][this.posY-1]);
+			adjCases.add(Board.getBoard()[this.posX+1][this.posY]);
+			adjCases.add(Board.getBoard()[this.posX+1][this.posY+1]);
+			adjCases.add(Board.getBoard()[this.posX][this.posY+1]);
+			adjCases.add(Board.getBoard()[this.posX-1][this.posY+1]);
+		}
+		return adjCases;
+	}*/
 	
 	public List<Tile> getValidTiles()
 	{

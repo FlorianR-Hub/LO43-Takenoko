@@ -21,15 +21,7 @@ public class TileView
 	public final static Color COLOURGRID = Color.BLACK;	
 	public final static Color COLOURTXT  = Color.BLACK;
 
-/*********************************************************
-Name: hex()
-Parameters: (x0,y0) This point is the top left corner 
-    of the rectangle enclosing the hexagon. 
-Returns: a polygon containing the six points.
-Called from: drawHex(), fillhex()
-Purpose: This function takes two points that describe a hexagon
-and calculates all six of the points in the hexagon.
-*********************************************************/
+
 	public static Polygon hex (int x0, int y0) {
 
 		int y = y0 + Frame.BORDERS;
@@ -39,51 +31,35 @@ and calculates all six of the points in the hexagon.
 			return new Polygon();
 		}
 
-		int[] cx,cy;
-
-		cx = new int[] {x+t,x+s+t,x+s+t+t,x+s+t,x+t,x};
-		cy = new int[] {y,y,y+r,y+r+r,y+r+r,y+r};
+		int[] xHex, yHex;
+		xHex = new int[] {x,		x+t,		x+t+s,	x+t+s+t,	x+t+s,	x+t		};
+		yHex = new int[] {y+r,	y,		y,		y+r,		y+r+r,	y+r+r	};
 		
-		return new Polygon(cx,cy,6);
+		return new Polygon(xHex, yHex, 6);
 	}
 
-/********************************************************************
-Name: drawHex()
-Parameters: (i,j) : the x,y coordinates of the inital point of the hexagon
-	    g2: the Graphics2D object to draw on.
-Returns: void
-Calls: hex() 
-Purpose: This function draws a hexagon based on the initial point (x,y).
-The hexagon is drawn in the colour specified in hexgame.COLOURELL.
-*********************************************************************/
-	public static void drawHex(int i, int j, Graphics2D g2) {
+
+	public static void drawTile(int i, int j, Tile p, Graphics2D g2) {
 		int x = i * (s+t);
 		int y = j * h + (i%2) * h/2;
 		Polygon poly = hex(x,y);
-		g2.setColor(COLOURCELL);
-		g2.fillPolygon(poly);
-		g2.setColor(COLOURGRID);
-		g2.drawPolygon(poly);
-	}
-
-/***************************************************************************
-* Name: fillHex()
-* Parameters: (i,j) : the x,y coordinates of the initial point of the hexagon
-		n   : an integer number to indicate a letter to draw in the hex
-		g2  : the graphics context to draw on
-* Return: void
-* Called from:
-* Calls: hex()
-*Purpose: This draws a filled in polygon based on the coordinates of the hexagon.
-*****************************************************************************/
-	public static void fillHex(int i, int j, Tile p, Graphics2D g2) {
-		int x = i * (s+t);
-		int y = j * h + (i%2) * h/2;
 		
 		g2.setColor(p.getColor());
-		g2.fillPolygon(hex(x,y));
-		g2.setColor(COLOURTXT);
+		g2.fillPolygon(poly);
+		
+		if(p.isIrrigated()) {
+			g2.setStroke(new BasicStroke(3));
+			g2.setColor(Color.BLUE);
+		}
+		else {
+			g2.setStroke(new BasicStroke(1));
+			g2.setColor(Color.BLACK);
+		}
+		g2.drawPolygon(poly);
+		
+		g2.setColor(Color.BLACK);
 		g2.drawString(""+p.getSize(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+4);
+		g2.setStroke(new BasicStroke(1));
 		
 		List<Tile> adjTiles = new ArrayList<Tile>();
 		adjTiles = p.getValidTiles();
@@ -93,7 +69,7 @@ The hexagon is drawn in the colour specified in hexgame.COLOURELL.
 			x = tile.getX() * (s+t);
 			y = tile.getY() * h + (tile.getX()%2) * h/2;
 			
-			Polygon poly = hex(x,y);
+			poly = hex(x,y);
 			g2.setColor(COLOURCELL);
 			g2.fillPolygon(poly);
 			g2.setColor(COLOURTWO);	

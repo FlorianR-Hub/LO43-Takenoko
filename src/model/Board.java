@@ -1,5 +1,9 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class Board {
 	
 	public final static int BSIZE = 11;
@@ -15,12 +19,14 @@ public class Board {
 		}
 
 		board[5][5] = new Tile(5,5,4,0, true); // Pond : starting tile
-		board[5][4].setIrrigated(true);
-		board[4][5].setIrrigated(true);
-		board[4][6].setIrrigated(true);
-		board[5][6].setIrrigated(true);
-		board[6][6].setIrrigated(true);
-		board[6][5].setIrrigated(true);
+		
+		List<Tile> adjCases = new ArrayList<Tile>();
+		adjCases = board[5][5].getAdjacentTiles();
+		
+		Iterator<Tile> itr = adjCases.iterator();
+        while(itr.hasNext()){
+			itr.next().setIrrigated(true);
+        }
 	}
 	
 	public static Tile[][] getBoard(){
