@@ -89,12 +89,11 @@ public class ActionButton extends JButton implements MouseListener {
 		{
 			GUI.getPlayer().setRoundCompleted(true);
 		}		
-		else if(imgName == "button")
-		{
-			BoardView.actionRoute = !BoardView.actionRoute;
-		}
 		else
 		{
+			if(imgName == "irrigation")
+				BoardView.actionRoute = !BoardView.actionRoute;
+			
 			if(!this.isSelected)
 			{
 				this.isSelected = true;
