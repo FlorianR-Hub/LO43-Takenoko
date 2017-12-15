@@ -15,9 +15,7 @@ public class TileView
 		
 	//constants and global variables
 	public final static Color COLOURONE  = new Color(255,255,255,50);
-	public final static Color COLOURTWO  = new Color(0,0,0,40);
 	public final static Color COLOURBACK = Color.WHITE;
-	public final static Color COLOURCELL = Color.WHITE;	 
 	public final static Color COLOURGRID = Color.BLACK;	
 	public final static Color COLOURTXT  = Color.BLACK;
 
@@ -38,7 +36,6 @@ public class TileView
 		return new Polygon(xHex, yHex, 6);
 	}
 
-
 	public static void drawTile(int i, int j, Tile p, Graphics2D g2) {
 		int x = i * (s+t);
 		int y = j * h + (i%2) * h/2;
@@ -50,17 +47,32 @@ public class TileView
 		if(p.isIrrigated()) {
 			g2.setStroke(new BasicStroke(3));
 			g2.setColor(Color.BLUE);
+			
+			switch(p.getIrrigPosition()) {
+			case 1:
+				g2.drawLine(x, y+r, x+t, y);
+				break;
+			case 2:
+				g2.drawLine(x+t, y, x+t+s, y);
+				break;
+			case 3:
+				g2.drawLine(x+t+s, y, x+t+s+t, y+r);
+				break;
+			case 4:
+				g2.drawLine(x+t+s+t, y+r, x+t+s, y+r+r);
+				break;
+			case 5:
+				g2.drawLine(x+t+s, y+r+r, x+t, y+r+r);
+				break;
+			case 6:
+				g2.drawLine(x+t, y+r+r, x, y+r);
+				break;
+			}
 		}
-		else {
-			g2.setStroke(new BasicStroke(1));
-			g2.setColor(Color.BLACK);
-		}
-		g2.drawPolygon(poly);
-		
 		g2.setColor(Color.BLACK);
-		g2.drawString(""+p.getSize(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+4);
 		g2.setStroke(new BasicStroke(1));
-		
+		g2.drawString(""+p.getSize(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+4);
+
 		List<Tile> adjTiles = new ArrayList<Tile>();
 		adjTiles = p.getValidTiles();
 		
@@ -70,23 +82,13 @@ public class TileView
 			y = tile.getY() * h + (tile.getX()%2) * h/2;
 			
 			poly = hex(x,y);
-			g2.setColor(COLOURCELL);
+			g2.setColor(Color.WHITE);
 			g2.fillPolygon(poly);
-			g2.setColor(COLOURTWO);	
+			g2.setColor(Color.LIGHT_GRAY);
 			g2.drawPolygon(poly);
 		}
 	}
 
-	//This function changes pixel location from a mouse click to a hex grid location
-/*****************************************************************************
-* Name: pxtoHex (pixel to hex)
-* Parameters: mx, my. These are the co-ordinates of mouse click.
-* Returns: point. A point containing the coordinates of the hex that is clicked in.
-           If the point clicked is not a valid hex (ie. on the borders of the board, (-1,-1) is returned.
-* Function: This only works for hexes in the FLAT orientation. The POINTY orientation would require
-            a whole other function (different math).
-            It takes into account the size of borders.
-*****************************************************************************/
 	public static Point pxtoHex(int mx, int my) {
 		Point p = new Point(-1,-1);
 

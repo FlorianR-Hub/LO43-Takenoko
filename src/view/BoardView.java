@@ -19,7 +19,7 @@ public class BoardView extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private static Vector<Tile> v = new Vector<Tile>(); 
-	private static boolean actionRoute = false;
+	protected static boolean actionRoute = false;
 	
 	public BoardView()
 	{	
@@ -65,9 +65,9 @@ public class BoardView extends JPanel {
 						Board.getBoard()[p.x][p.y].setSelected(true);
 					}
 					if(v.size() == 2) {	
-						if( v.firstElement().isAdjacent(v.lastElement()) && ( v.firstElement().isIrrigated() ^ v.lastElement().isIrrigated() )) {
-							v.firstElement().setIrrigated(true);
-							v.lastElement().setIrrigated(true);
+						if( v.firstElement().isAdjacent(v.lastElement()) && ( v.firstElement().isIrrigated() || v.lastElement().isIrrigated() )) {
+							v.firstElement().setIrrigPosition(v.lastElement());
+							v.lastElement().setIrrigPosition(v.firstElement());
 						}
 						else {
 							clearVector(v);
