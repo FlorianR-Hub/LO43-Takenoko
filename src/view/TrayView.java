@@ -21,16 +21,18 @@ public class TrayView extends JPanel {
 	private GraphicsMeteo choix = new GraphicsMeteo("bouton_choix.png", 517, 326);
 	
 	private ActionButton bouton1 = new ActionButton("button", 80, 50, 65, 65);
-	private ActionButton bouton2 = new ActionButton("button", 160, 50, 65, 65);
-	private ActionButton bouton3 = new ActionButton("button", 240, 50, 65, 65);
+	private ActionButton actionRoad = new ActionButton("road", 160, 50, 65, 65);
+	private ActionButton actionGardener = new ActionButton("gardener", 240, 50, 65, 65);
 	private ActionButton bouton4 = new ActionButton("button", 320, 50, 65, 65);
 	private ActionButton bouton5 = new ActionButton("button", 400, 50, 65, 65);
 	private ActionButton bouton6 = new ActionButton("button", 480, 50, 65, 65);
 	
 	private ActionButton irrigation = new ActionButton("irrigation", 500, 500, 81, 65);
+	
 	private ActionButton endTurn = new ActionButton("endTurn", 220, 670, 54, 194);
 	
 	private JLabel text = new JLabel("Player ");
+	private JLabel nbIrrigations = new JLabel("Routes : 0");
 	
 	public TrayView() {
 		this.setLayout(null);
@@ -40,6 +42,11 @@ public class TrayView extends JPanel {
 		text.setFont(new Font("Arial", Font.BOLD, 20));
 		this.add(text);
 		
+		
+		nbIrrigations.setBounds(495, 470, 120, 20);
+		nbIrrigations.setFont(new Font("Arial", Font.BOLD, 16));
+		this.add(nbIrrigations);
+		
 		this.add(soleil);
 		this.add(pluie);
 		this.add(vent);
@@ -48,8 +55,8 @@ public class TrayView extends JPanel {
 		this.add(choix);
 		
 		this.add(bouton1);
-		this.add(bouton2);
-		this.add(bouton3);
+		this.add(actionRoad);
+		this.add(actionGardener);
 		this.add(bouton4);
 		this.add(bouton5);
 		this.add(bouton6);
@@ -67,6 +74,7 @@ public class TrayView extends JPanel {
 	
 	public void updateTray(Player p) {
 		this.text.setText("Player "+ p.getNumPlayer());
+		this.nbIrrigations.setText("Routes : "+ p.getnbIrrig());
 		
 		this.soleil.setBounds(32, 325, 80, 111);
 		this.pluie.setBounds(128, 326, 80, 111);

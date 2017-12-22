@@ -56,7 +56,7 @@ public class BoardView extends JPanel {
 		public void mouseClicked(MouseEvent e) { 
 			Point p = new Point( TileView.pxtoHex(e.getX(),e.getY()) );
 			if (p.x < 0 || p.y < 0 || p.x >= Board.BSIZE || p.y >= Board.BSIZE) return;
-
+			
 			if(actionRoute)
 			{
 				if(e.getButton() == MouseEvent.BUTTON1){

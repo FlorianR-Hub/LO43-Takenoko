@@ -96,6 +96,18 @@ public class ActionButton extends JButton implements MouseListener {
 			
 			if(!this.isSelected)
 			{
+				switch(imgName)
+				{
+					case "road":
+						GUI.getPlayer().setnbIrrig(GUI.getPlayer().getnbIrrig() + 1);
+						break;
+					case "gardener":
+						
+						break;
+					default:
+						break;
+				}
+				
 				this.isSelected = true;
 				System.out.println(this.imgName);
 				
