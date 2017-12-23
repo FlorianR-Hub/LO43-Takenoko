@@ -61,7 +61,6 @@ public class TrayView extends JPanel {
 		this.add(actionRoad);
 		this.add(actionPanda);
 		this.add(actionGardener);
-		this.add(bouton4);
 		this.add(bouton5);
 		this.add(bouton6);
 		
