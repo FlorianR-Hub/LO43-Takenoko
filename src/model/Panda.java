@@ -2,18 +2,20 @@ package model;
 
 public class Panda extends Character {
 
-	public Panda(int x, int y) {
-		super(x,y);
+	public Panda(int x, int y, String name) {
+		super(x,y, name);
 	}
 	
 	public void move(Tile p) {
 		this.posX = p.getX();
 		this.posY = p.getY();
-		eat(p);
+		p.decrease(); //eat
 	}
 	
-	public void eat(Tile p) // useless ?
-	{
-		p.decrease();
+	public boolean isMoveAllowed(Tile p) {
+		if(p.getType() == 0)
+			return false;
+		
+		return true;
 	}
 }

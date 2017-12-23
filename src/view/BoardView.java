@@ -12,6 +12,8 @@ import java.util.Vector;
 import javax.swing.JPanel;
 
 import model.Board;
+import model.Gardener;
+import model.Panda;
 import model.Tile;
 
 public class BoardView extends JPanel {
@@ -20,7 +22,11 @@ public class BoardView extends JPanel {
 
 	private static Vector<Tile> v = new Vector<Tile>(); 
 	protected static boolean actionRoute = false;
+	protected static int action = 0;
 	
+	private static Panda panda = new Panda(5,5,"P");
+	private static Gardener gardener = new Gardener(5,5,"G");
+
 	public BoardView()
 	{	
 		this.setBackground(TileView.COLOURBACK);
@@ -41,6 +47,9 @@ public class BoardView extends JPanel {
 			for (int j=0;j<Board.BSIZE;j++)
 				if(Board.getBoard()[i][j].getType() > 0)
 					TileView.drawTile(i, j, Board.getBoard()[i][j], g2);
+		
+		TileView.drawCharacter(panda, g2);
+		TileView.drawCharacter(gardener, g2);
 	}
 
 	public void clearVector(Vector<Tile> v) 
@@ -57,7 +66,23 @@ public class BoardView extends JPanel {
 			Point p = new Point( TileView.pxtoHex(e.getX(),e.getY()) );
 			if (p.x < 0 || p.y < 0 || p.x >= Board.BSIZE || p.y >= Board.BSIZE) return;
 
-			if(actionRoute)
+			if(action == 1)
+			{
+				if(panda.isMoveAllowed(Board.getBoard()[p.x][p.y]))
+				{
+					panda.move(Board.getBoard()[p.x][p.y]);
+					action = 0;
+				}
+			}
+			else if(action == 2)
+			{
+				if(gardener.isMoveAllowed(Board.getBoard()[p.x][p.y]))
+				{
+					gardener.move(Board.getBoard()[p.x][p.y]);
+					action = 0;
+				}
+			}
+			else if(actionRoute)
 			{
 				if(e.getButton() == MouseEvent.BUTTON1){
 					if(v.size() < 2) {
@@ -103,5 +128,21 @@ public class BoardView extends JPanel {
 			
 			repaint();
 		}	
+	}
+	
+	public static Panda getPanda() {
+		return panda;
+	}
+
+	public static void setPanda(Panda panda) {
+		BoardView.panda = panda;
+	}
+
+	public static Gardener getGardener() {
+		return gardener;
+	}
+
+	public static void setGardener(Gardener gardener) {
+		BoardView.gardener = gardener;
 	}
 }

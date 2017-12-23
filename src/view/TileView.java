@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Tile;
+import model.Character;
 
 public class TileView
 {
@@ -41,6 +42,7 @@ public class TileView
 		int y = j * h + (i%2) * h/2;
 		Polygon poly = hex(x,y);
 		
+		g2.setFont(new Font("Arial", Font.PLAIN, 20));
 		g2.setColor(p.getColor());
 		g2.fillPolygon(poly);
 		
@@ -71,7 +73,8 @@ public class TileView
 		}
 		g2.setColor(Color.BLACK);
 		g2.setStroke(new BasicStroke(1));
-		g2.drawString(""+p.getSize(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+4);
+		if(p.getType() != 4)
+			g2.drawString(""+p.getSize(), x+r/2+Frame.BORDERS+12, y+r+Frame.BORDERS+4);			
 
 		List<Tile> adjTiles = new ArrayList<Tile>();
 		adjTiles = p.getValidTiles();
@@ -87,6 +90,19 @@ public class TileView
 			g2.setColor(Color.LIGHT_GRAY);
 			g2.drawPolygon(poly);
 		}
+	}
+	
+	public static void drawCharacter(Character c, Graphics2D g2) {
+		
+		int x = c.getPosX() * (s+t);
+		int y = c.getPosY() * h + (c.getPosX()%2) * h/2;
+		
+		g2.setColor(Color.BLACK);
+		
+		if(c.getName() == "P")
+			g2.drawString(""+c.getName(), x+r/2+Frame.BORDERS + 25, y+r+Frame.BORDERS+20);
+		else
+			g2.drawString(""+c.getName(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+20);
 	}
 
 	public static Point pxtoHex(int mx, int my) {

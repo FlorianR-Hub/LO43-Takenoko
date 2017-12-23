@@ -96,36 +96,64 @@ public class ActionButton extends JButton implements MouseListener {
 			
 			if(!this.isSelected)
 			{
-				this.isSelected = true;
-				System.out.println(this.imgName);
-				
-				try {
-				 img = ImageIO.read(new File(path + this.imgName + "_selected.png"));
+				switch(imgName)
+				{
+					case "road":
+						GUI.getPlayer().setnbIrrig(GUI.getPlayer().getnbIrrig() + 1);
+						break;
+					case "panda":
+						BoardView.action = 1;
+						break;
+					case "gardener":
+						BoardView.action = 2;
+						break;
+					default:
+						break;
 				}
-				catch (IOException e) {
-					 e.printStackTrace();
-				}
+				this.setSelected(true);				
 			}
 			else
-			{
-				this.isSelected = false;
-				
-				try {
-				 img = ImageIO.read(new File(path + this.imgName + ".png"));
-				}
-				catch (IOException e) {
-					 e.printStackTrace();
-				}
-			}
+				this.setSelected(false);;
 		}
 		
 	}
-	
+
 	/* -----------------------------------------------------
 	   When the click is released:
 	 */
 	public void mouseReleased(MouseEvent event) { 
 		
-	}       
+	}      
+	
+	public boolean isSelected() {
+		return isSelected;
+	}
+
+	public void setSelected(boolean isSelected) {
+		
+		this.isSelected = isSelected;
+		
+		if(this.isSelected)
+		{
+			try {
+			 img = ImageIO.read(new File(path + this.imgName + "_selected.png"));
+			}
+			catch (IOException e) {
+				 e.printStackTrace();
+			}
+		}
+		else
+		{
+			try {
+			 img = ImageIO.read(new File(path + this.imgName + ".png"));
+			}
+			catch (IOException e) {
+				 e.printStackTrace();
+			}
+			
+			BoardView.action = 0;
+		}
+		
+	}
 }
 

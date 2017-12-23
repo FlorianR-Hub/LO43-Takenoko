@@ -2,8 +2,8 @@ package model;
 
 public class Gardener extends Character{
 
-	public Gardener(int x, int y) {
-		super(x,y);
+	public Gardener(int x, int y, String name) {
+		super(x,y, name);
 	}
 	
 	public void move(Tile p) {
@@ -13,13 +13,14 @@ public class Gardener extends Character{
 	}
 	
 	public void grow(Tile p) {
-		Tile[][] board = Board.getBoard();
 		p.increase();
 		
-		for (int i=0;i<Board.BSIZE;i++)
-			for (int j=0;j<Board.BSIZE;j++)
-				if(board[i][j].isAdjacent(p) && board[i][j].getType() == p.getType())
-					board[i][j].increase();
-					
+		for(Tile tile : p.getAdjacentTiles())
+			if(tile.getType() == p.getType())
+				tile.increase();					
+	}
+
+	public boolean isMoveAllowed(Tile p) {		
+		return true;
 	}
 }

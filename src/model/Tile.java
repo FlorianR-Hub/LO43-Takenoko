@@ -75,7 +75,7 @@ public class Tile extends GameObject{
 	}
 	
 	public void increase(){
-		int i = this.getType() == 2 ? 2 : 1;
+		int i = this.getBonus() == 2 ? 2 : 1;
 		if(this.getType() != 4){
 			if(this.getSize() + i < 4)
 				this.setSize(this.getSize()+i);
@@ -85,7 +85,10 @@ public class Tile extends GameObject{
 	}
 	
 	public void decrease(){
-		this.setSize(this.getSize() - 1);
+		if(this.getSize() - 1 <= 0)
+			this.setSize(0);
+		else
+			this.setSize(this.getSize() - 1);
 	}
 	
 	public void reinitialize(){
