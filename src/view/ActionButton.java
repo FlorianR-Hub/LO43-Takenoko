@@ -96,6 +96,8 @@ public class ActionButton extends JButton implements MouseListener {
 			
 			if(!this.isSelected)
 			{
+				this.setSelected(true);	
+				
 				switch(imgName)
 				{
 					case "road":
@@ -110,7 +112,6 @@ public class ActionButton extends JButton implements MouseListener {
 					default:
 						break;
 				}
-				this.setSelected(true);				
 			}
 			else
 				this.setSelected(false);;

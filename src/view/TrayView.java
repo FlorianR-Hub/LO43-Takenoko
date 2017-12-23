@@ -28,6 +28,7 @@ public class TrayView extends JPanel {
 	private ActionButton bouton6 = new ActionButton("button", 480, 50, 65, 65);
 	
 	private ActionButton irrigation = new ActionButton("irrigation", 500, 500, 81, 65);
+	
 	private ActionButton endTurn = new ActionButton("endTurn", 220, 670, 54, 194);
 	
 	private JLabel text = new JLabel("Player ");
@@ -44,6 +45,11 @@ public class TrayView extends JPanel {
 		text.setFont(new Font("Arial", Font.BOLD, 20));
 		this.add(text);
 		
+		
+		nbIrrigations.setBounds(495, 470, 120, 20);
+		nbIrrigations.setFont(new Font("Arial", Font.BOLD, 16));
+		this.add(nbIrrigations);
+		
 		this.add(soleil);
 		this.add(pluie);
 		this.add(vent);
@@ -55,6 +61,7 @@ public class TrayView extends JPanel {
 		this.add(actionRoad);
 		this.add(actionPanda);
 		this.add(actionGardener);
+		this.add(bouton4);
 		this.add(bouton5);
 		this.add(bouton6);
 		

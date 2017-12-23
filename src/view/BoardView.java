@@ -64,7 +64,8 @@ public class BoardView extends JPanel {
 	class MyMouseListener extends MouseAdapter	{	//inner class inside DrawingPanel 
 		public void mouseClicked(MouseEvent e) { 
 			Point p = new Point( TileView.pxtoHex(e.getX(),e.getY()) );
-			if (p.x < 0 || p.y < 0 || p.x >= Board.BSIZE || p.y >= Board.BSIZE) return;
+			if (p.x < 0 || p.y < 0 || p.x >= Board.BSIZE || p.y >= Board.BSIZE) 
+				return;
 
 			if(action == 1)
 			{
