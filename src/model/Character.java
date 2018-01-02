@@ -12,9 +12,9 @@ public abstract class Character {
 		this.name = name;
 	}
 	
-	public abstract void move(Tile p);
+	public abstract void move(Tile t);
 
-	public abstract boolean isMoveAllowed(Tile p);
+	public abstract boolean isMoveAllowed(Tile t);
 	
 	public int getPosX() {
 		return posX;

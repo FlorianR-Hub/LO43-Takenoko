@@ -3,6 +3,8 @@ package controller;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import model.Goal;
 //import java.util.Scanner;
 import model.Player;
 import model.Tile;
@@ -12,6 +14,9 @@ public class GameManager extends Thread {
 	
 	private List<Player> players = new ArrayList<Player>();
 	private static List<Tile> draw = new ArrayList<Tile>();
+	private static List<Goal> goalsTile = new ArrayList<Goal>();
+	private static List<Goal> goalsPanda = new ArrayList<Goal>();
+	private static List<Goal> goalsGardener = new ArrayList<Goal>();
 	private int nbPlayers;
 	private static boolean gameOver;
 	private static GUI gui;
@@ -24,7 +29,7 @@ public class GameManager extends Thread {
 	// MAIN METHOD
 	public static void main(String[] args) {
 		GameManager gm = new GameManager();
-		gui = new GUI(draw);
+		gui = new GUI();
 
 		gm.start();
 		gui.start();
@@ -47,6 +52,13 @@ public class GameManager extends Thread {
 			draw.add(new Tile(3,0));
 		
 		Collections.shuffle(draw);
+		
+		for(int i=0; i<15; i++)
+		{
+			goalsTile.add(new Goal(1, 10));
+			goalsPanda.add(new Goal(2, 10));
+			goalsGardener.add(new Goal(3, 10));
+		}
 		
 		this.setNbPlayers(4);
 		

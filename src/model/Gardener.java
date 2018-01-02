@@ -6,21 +6,21 @@ public class Gardener extends Character{
 		super(x,y, name);
 	}
 	
-	public void move(Tile p) {
-		this.posX = p.getX();
-		this.posY = p.getY();
-		grow(p);
+	public void move(Tile t) {
+		this.posX = t.getX();
+		this.posY = t.getY();
+		grow(t);
 	}
 	
-	public void grow(Tile p) {
-		p.increase();
+	public void grow(Tile t) {
+		t.increase();
 		
-		for(Tile tile : p.getAdjacentTiles())
-			if(tile.getType() == p.getType())
+		for(Tile tile : t.getAdjacentTiles())
+			if(tile.getType() == t.getType())
 				tile.increase();					
 	}
 
-	public boolean isMoveAllowed(Tile p) {		
+	public boolean isMoveAllowed(Tile t) {		
 		return true;
 	}
 }

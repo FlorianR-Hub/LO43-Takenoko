@@ -1,10 +1,8 @@
 package controller;
 
-import java.util.List;
-
 import model.Player;
-import model.Tile;
-import view.DrawView;
+import view.DrawGoalView;
+import view.DrawTileView;
 import view.Frame;
 
 public class GUI extends Thread {
@@ -12,11 +10,13 @@ public class GUI extends Thread {
 	private boolean gameOver;
 	private static Player player;
 	private static Frame frame;
-	private static DrawView drawView;
+	private static DrawTileView drawTileView;
+	private static DrawGoalView drawGoalView;
 
-	public GUI(List<Tile> draw) {
+	public GUI() {
 		this.gameOver = false;
-		setDrawView(new DrawView(draw));
+		drawTileView = new DrawTileView("Draw Tile", 512, 200);
+		drawGoalView = new DrawGoalView("Draw Goal", 680, 360);
 	}
 	
 	public void run() {
@@ -57,11 +57,19 @@ public class GUI extends Thread {
 		return frame;
 	}
 
-	public static DrawView getDrawView() {
-		return drawView;
+	public static DrawTileView getDrawTileView() {
+		return drawTileView;
 	}
 
-	public static void setDrawView(DrawView drawView) {
-		GUI.drawView = drawView;
+	public static void setDrawTileView(DrawTileView drawTileView) {
+		GUI.drawTileView = drawTileView;
+	}
+
+	public static DrawGoalView getDrawGoalView() {
+		return drawGoalView;
+	}
+
+	public static void setDrawGoalView(DrawGoalView drawGoalView) {
+		GUI.drawGoalView = drawGoalView;
 	}
 }

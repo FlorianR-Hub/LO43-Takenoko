@@ -16,23 +16,23 @@ public class TrayView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private static List<ActionButton> actionButton = new ArrayList<ActionButton>();
-	private List<GraphicsMeteo> images = new ArrayList<GraphicsMeteo>();
+	private List<Picture> images = new ArrayList<Picture>();
 	
-	private GraphicsMeteo tray = new GraphicsMeteo("tray.jpg", 20, 0);
-	private GraphicsMeteo draw = new GraphicsMeteo("draw.png", 30, 500);
+	private Picture tray = new Picture("tray.jpg", 20, 0);
+	private Picture draw = new Picture("draw.png", 30, 500);
 	
-	private GraphicsMeteo soleil = new GraphicsMeteo("bouton_soleil.png", 32, 325);
-	private GraphicsMeteo pluie = new GraphicsMeteo("bouton_pluie.png", 128, 326);
-	private GraphicsMeteo vent = new GraphicsMeteo("bouton_vent.png", 224, 328);
-	private GraphicsMeteo orage = new GraphicsMeteo("bouton_orage.png", 320, 326);
-	private GraphicsMeteo nuages = new GraphicsMeteo("bouton_nuages.png", 419, 326);
-	private GraphicsMeteo choix = new GraphicsMeteo("bouton_choix.png", 517, 326);
+	private Picture sun = new Picture("weather_sun.png", 32, 325);
+	private Picture rain = new Picture("weather_rain.png", 128, 326);
+	private Picture wind = new Picture("weather_wind.png", 224, 328);
+	private Picture storm = new Picture("weather_storm.png", 320, 326);
+	private Picture cloudy = new Picture("weather_cloudy.png", 419, 326);
+	private Picture choice = new Picture("weather_choice.png", 517, 326);
 	
 	private ActionButton actionTiles = new ActionButton("tile", 120, 50, 65, 65);
 	private ActionButton actionRoad = new ActionButton("road", 200, 50, 65, 65);
 	private ActionButton actionPanda = new ActionButton("panda", 280, 50, 65, 65);
 	private ActionButton actionGardener = new ActionButton("gardener", 360, 50, 65, 65);
-	private ActionButton actionGoals = new ActionButton("button", 440, 50, 65, 65);
+	private ActionButton actionGoals = new ActionButton("goal", 440, 50, 65, 65);
 	
 	private ActionButton irrigation = new ActionButton("irrigation", 500, 500, 81, 65);
 	
@@ -58,12 +58,12 @@ public class TrayView extends JPanel {
 		nbCardsLeft.setFont(new Font("Arial", Font.BOLD, 16));
 		this.add(nbCardsLeft);
 		
-		images.add(soleil);
-		images.add(pluie);
-		images.add(vent);
-		images.add(orage);
-		images.add(nuages);
-		images.add(choix);
+		images.add(sun);
+		images.add(rain);
+		images.add(wind);
+		images.add(storm);
+		images.add(cloudy);
+		images.add(choice);
 		
 		actionButton.add(actionTiles);
 		actionButton.add(actionRoad);
@@ -80,7 +80,7 @@ public class TrayView extends JPanel {
 		for(ActionButton action : actionButton)
 			this.add(action);
 		
-		for(GraphicsMeteo w : images)
+		for(Picture w : images)
 			this.add(w);
 		
 		
@@ -96,32 +96,32 @@ public class TrayView extends JPanel {
 		this.nbIrrigations.setText("Routes : "+ p.getnbIrrig());
 		this.nbCardsLeft.setText(""+GameManager.getDraw().size());
 		
-		this.soleil.setBounds(32, 325, 80, 111);
-		this.pluie.setBounds(128, 326, 80, 111);
-		this.vent.setBounds(224, 328, 80, 111);
-		this.orage.setBounds(320, 326, 80, 111);
-		this.nuages.setBounds(419, 326, 80, 111);
-		this.choix.setBounds(517, 326, 80, 111);
+		this.sun.setBounds(32, 325, 80, 111);
+		this.rain.setBounds(128, 326, 80, 111);
+		this.wind.setBounds(224, 328, 80, 111);
+		this.storm.setBounds(320, 326, 80, 111);
+		this.cloudy.setBounds(419, 326, 80, 111);
+		this.choice.setBounds(517, 326, 80, 111);
 		
 		switch(p.getWeather())
 		{
 			case 1:
-				this.soleil.setBounds(29, 322, 87, 121);
+				this.sun.setBounds(29, 322, 87, 121);
 				break;
 			case 2:
-				this.pluie.setBounds(125, 323, 87, 121);
+				this.rain.setBounds(125, 323, 87, 121);
 				break;
 			case 3:
-				this.vent.setBounds(221, 325, 87, 121);
+				this.wind.setBounds(221, 325, 87, 121);
 				break;
 			case 4:
-				this.orage.setBounds(317, 323, 87, 121);
+				this.storm.setBounds(317, 323, 87, 121);
 				break;
 			case 5:
-				this.nuages.setBounds(416, 323, 87, 121);
+				this.cloudy.setBounds(416, 323, 87, 121);
 				break;
 			case 6:
-				this.choix.setBounds(514, 323, 87, 121);
+				this.choice.setBounds(514, 323, 87, 121);
 				break;
 			default:
 				break;

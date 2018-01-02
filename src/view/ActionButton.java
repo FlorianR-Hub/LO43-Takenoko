@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException; 
 import javax.imageio.ImageIO;
 import controller.GUI;
-import controller.GameManager;
 
 public class ActionButton extends Button {
 	
@@ -109,8 +108,7 @@ public class ActionButton extends Button {
 				switch(imgName)
 				{
 					case "tile":
-						GUI.getFrame().setEnabled(false);
-						GUI.getDrawView().display(GameManager.getDraw());
+						GUI.getDrawTileView().display();
 						BoardView.setAction(1);
 						GUI.getPlayer().addAction(1);
 						break;
@@ -127,6 +125,7 @@ public class ActionButton extends Button {
 						GUI.getPlayer().addAction(4);
 						break;
 					case "goal":
+						GUI.getDrawGoalView().display();
 						GUI.getPlayer().addAction(5);
 						break;
 					default:

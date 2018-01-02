@@ -6,14 +6,14 @@ public class Panda extends Character {
 		super(x,y, name);
 	}
 	
-	public void move(Tile p) {
-		this.posX = p.getX();
-		this.posY = p.getY();
-		p.decrease(); //eat
+	public void move(Tile t) {
+		this.posX = t.getX();
+		this.posY = t.getY();
+		t.decrease(); //eat
 	}
 	
-	public boolean isMoveAllowed(Tile p) {
-		if(p.getType() == 0)
+	public boolean isMoveAllowed(Tile t) {
+		if(t.getType() == 0)
 			return false;
 		
 		return true;

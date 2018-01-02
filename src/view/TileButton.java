@@ -16,11 +16,10 @@ public class TileButton extends Button {
 	private static final long serialVersionUID = 1L;
 	
 	private Tile tile;
-	
+
 	public TileButton(Tile t, int x, int y, int height, int width) {
 		super(x,y,height,width);
-		
-		this.tile = t;
+		this.setTile(t);
 		
 		try {
 			this.img = ImageIO.read(new File(path + "tile" + this.tile.getType() + ".png"));
@@ -36,7 +35,6 @@ public class TileButton extends Button {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -68,14 +66,21 @@ public class TileButton extends Button {
 			Collections.rotate(GameManager.getDraw(), -1);
 			Collections.rotate(GameManager.getDraw(), -1);
 			GUI.getFrame().setEnabled(true);
-			GUI.getDrawView().setVisible(false);
+			GUI.getDrawTileView().setVisible(false);
 		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		
-		
+	}
+	
+	public Tile getTile() {
+		return tile;
+	}
+
+	public void setTile(Tile tile) {
+		this.tile = tile;
 	}
 
 }
