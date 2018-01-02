@@ -5,24 +5,24 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.JPanel;
 
+import controller.GUI;
 import model.Board;
 import model.Gardener;
 import model.Panda;
 import model.Tile;
 
-public class BoardView extends JPanel {
+public class BoardView extends JPanel implements MouseListener {
 
 	private static final long serialVersionUID = 1L;
 
 	private static Vector<Tile> v = new Vector<Tile>(); 
-	protected static boolean actionRoute = false;
-	protected static int action = 0;
+	private static int action = 0;
 	
 	private static Panda panda = new Panda(5,5,"P");
 	private static Gardener gardener = new Gardener(5,5,"G");
@@ -31,8 +31,7 @@ public class BoardView extends JPanel {
 	{	
 		this.setBackground(TileView.COLOURBACK);
 
-		MyMouseListener ml = new MyMouseListener();            
-		addMouseListener(ml);
+		this.addMouseListener(this);
 	}
 
 	public void paintComponent(Graphics g)
@@ -60,40 +59,124 @@ public class BoardView extends JPanel {
         }
 		v.clear();
 	}
+		
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Point p = new Point( TileView.pxtoHex(e.getX(),e.getY()) );
+		if (p.x < 0 || p.y < 0 || p.x >= Board.BSIZE || p.y >= Board.BSIZE) 
+			return;
+		
+		applyWeather(e, Board.getBoard()[p.x][p.y]);
+		
+		applyAction(e, Board.getBoard()[p.x][p.y]);
 	
-	class MyMouseListener extends MouseAdapter	{	//inner class inside DrawingPanel 
-		public void mouseClicked(MouseEvent e) { 
-			Point p = new Point( TileView.pxtoHex(e.getX(),e.getY()) );
-			if (p.x < 0 || p.y < 0 || p.x >= Board.BSIZE || p.y >= Board.BSIZE) 
-				return;
+		repaint();
+	}
 
-			if(action == 1)
-			{
-				if(panda.isMoveAllowed(Board.getBoard()[p.x][p.y]))
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void applyWeather(MouseEvent e, Tile t) {
+		switch(GUI.getPlayer().getWeather())
+		{
+			case 2: // rain
+				if(e.getButton() == MouseEvent.BUTTON1)
 				{
-					panda.move(Board.getBoard()[p.x][p.y]);
+					if(t.isValid() && t.isIrrigated() && t.getType() != 0)
+					{
+						t.increase();
+						GUI.getPlayer().setWeather(0);
+					}
+				}
+				break;
+			case 4: // storm
+				if(e.getButton() == MouseEvent.BUTTON1)
+				{
+					if(panda.isMoveAllowed(t))
+					{
+						panda.move(t);
+						GUI.getPlayer().setWeather(0);
+					}
+				}
+				break;
+			default:
+				break;
+		}
+	}
+	
+	public void applyAction(MouseEvent e, Tile t) {
+		
+		switch(action)
+		{
+			case 1: // Action Tile
+				if(e.getButton() == MouseEvent.BUTTON1)
+				{
+					if(t.isValid())
+					{
+						if(t.getType() == 0)
+						{
+							if(GUI.getPlayer().getTile().getType() != 0)
+							{
+								t.setType(GUI.getPlayer().getTile().getType());
+								t.setBonus(GUI.getPlayer().getTile().getBonus());
+								action = 0;
+							}
+						}
+					}
+				}
+				break;
+			case 3: // Action Panda
+				if(panda.isMoveAllowed(t))
+				{
+					panda.move(t);
 					action = 0;
 				}
-			}
-			else if(action == 2)
-			{
-				if(gardener.isMoveAllowed(Board.getBoard()[p.x][p.y]))
+				break;
+			case 4: // Action Gardener
+				if(gardener.isMoveAllowed(t))
 				{
-					gardener.move(Board.getBoard()[p.x][p.y]);
+					gardener.move(t);
 					action = 0;
 				}
-			}
-			else if(actionRoute)
-			{
+				break;
+			case 6: // Action Irrigation
 				if(e.getButton() == MouseEvent.BUTTON1){
 					if(v.size() < 2) {
-						v.add(Board.getBoard()[p.x][p.y]);
-						Board.getBoard()[p.x][p.y].setSelected(true);
+						v.add(t);
+						t.setSelected(true);
 					}
 					if(v.size() == 2) {	
-						if( v.firstElement().isAdjacent(v.lastElement()) && ( v.firstElement().isIrrigated() || v.lastElement().isIrrigated() )) {
-							v.firstElement().setIrrigPosition(v.lastElement());
-							v.lastElement().setIrrigPosition(v.firstElement());
+						if(GUI.getPlayer().getnbIrrig() > 0)
+						{
+							if( v.firstElement().isAdjacent(v.lastElement()) && ( v.firstElement().isIrrigated() || v.lastElement().isIrrigated() )) {
+								v.firstElement().setIrrigPosition(v.lastElement());
+								v.lastElement().setIrrigPosition(v.firstElement());
+								GUI.getPlayer().setnbIrrig(GUI.getPlayer().getnbIrrig() - 1);
+								clearVector(v);
+								TrayView.deselectAction("irrigation");
+								action = 0;
+							}
 						}
 						else {
 							clearVector(v);
@@ -102,34 +185,33 @@ public class BoardView extends JPanel {
 				}
 				else if(e.getButton() == MouseEvent.BUTTON3) {
 					clearVector(v);
+					TrayView.deselectAction("irrigation");
+					action = 0;
 				}
-			}
-			else
-			{
-				if(e.getButton() == MouseEvent.BUTTON1)
+				break;
+			default: // Dev Tool
+				if(e.getButton() == MouseEvent.BUTTON2) // middle click to add a Tile
 				{
-					if(Board.getBoard()[p.x][p.y].isValid())
+					if(t.isValid())
 					{
-						if(Board.getBoard()[p.x][p.y].getType() == 0)
+						if(t.getType() == 0)
 						{
 							int rand = (int) ((Math.random()*(4-1)) + 1);
-							Board.getBoard()[p.x][p.y].setType(rand);
-							Board.getBoard()[p.x][p.y].setBonus(1);
+							t.setType(rand);
 						}
 						else
-							Board.getBoard()[p.x][p.y].increase();
+							t.increase();
 					}
 				}
-				else if(e.getButton() == MouseEvent.BUTTON3)
+				else if(e.getButton() == MouseEvent.BUTTON3) // right click to remove a Tile
 				{
-					if(Board.getBoard()[p.x][p.y].getType() != 4)
-						Board.getBoard()[p.x][p.y].reinitialize();
+					if(t.getType() != 4)
+						t.reinitialize();
 				}
-			}
-			
-			repaint();
-		}	
+				break;
+		}
 	}
+	
 	
 	public static Panda getPanda() {
 		return panda;
@@ -145,5 +227,13 @@ public class BoardView extends JPanel {
 
 	public static void setGardener(Gardener gardener) {
 		BoardView.gardener = gardener;
+	}
+	
+	public static int getAction() {
+		return action;
+	}
+
+	public static void setAction(int action) {
+		BoardView.action = action;
 	}
 }

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -16,6 +17,8 @@ public class Player {
 	private int weather;
 	private int numPlayer;
 	private List<Integer> actions;	
+	private List<Goal> goals;
+	private Tile tile;
 	private boolean roundCompleted;
 	
 	public Player(int numPlayer) {
@@ -30,17 +33,29 @@ public class Player {
 		this.setWeather(0);
 		this.setNumPlayer(numPlayer);
 		this.setRoundCompleted(false);
+		
+		this.actions = new ArrayList<Integer>();
+		this.goals = new ArrayList<Goal>();
+		
+		this.tile = new Tile(0,0);
 	}
 	
-	public Player(int score, int bambousVert, int bambousJaune, int bambousRose, int effetMeteo, int numPlayer)
+	public Player(int score, int bambousVert, int bambousJaune, int bambousRose, int nbIrrig, int effetMeteo, int numPlayer)
 	{
 		this.setScore(score);
 		this.nbBamboos[0] = bambousVert;
 		this.nbBamboos[1] = bambousJaune;
 		this.nbBamboos[2] = bambousRose;
+		
+		this.setnbIrrig(nbIrrig);
 		this.setWeather(effetMeteo);
 		this.setNumPlayer(numPlayer);
 		this.setRoundCompleted(false);
+		
+		this.actions = new ArrayList<Integer>();
+		this.goals = new ArrayList<Goal>();
+		
+		this.tile = new Tile(0,0);
 	}
 
 	public int getWeather() {
@@ -91,6 +106,18 @@ public class Player {
 		this.actions.add(type);
 	}
 	
+	public void clearActions() {
+		this.actions.clear();
+	}
+	
+	public List<Integer> getActions() {
+		return actions;
+	}
+	
+	public int getNbActionsAllowed() {
+		return this.weather == 1 ? 3 : 2;
+	}
+
 	public void applyBonus(Tile t, int type)
 	{
 		if(this.nbBonus[type] > 0){
@@ -116,5 +143,13 @@ public class Player {
 
 	public void setRoundCompleted(boolean roundCompleted) {
 		this.roundCompleted = roundCompleted;
+	}
+
+	public Tile getTile() {
+		return tile;
+	}
+
+	public void setTile(Tile tile) {
+		this.tile = tile;
 	}
 }

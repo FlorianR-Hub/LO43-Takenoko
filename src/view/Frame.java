@@ -10,7 +10,7 @@ public class Frame extends JFrame {
 	private BoardView board;
 	private TrayView tray;
 
-	public Frame(){
+	public Frame() {
 		Board.initBoard();
 		createAndShowGUI();
 	}

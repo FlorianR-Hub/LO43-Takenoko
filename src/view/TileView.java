@@ -17,9 +17,6 @@ public class TileView
 	//constants and global variables
 	public final static Color COLOURONE  = new Color(255,255,255,50);
 	public final static Color COLOURBACK = Color.WHITE;
-	public final static Color COLOURGRID = Color.BLACK;	
-	public final static Color COLOURTXT  = Color.BLACK;
-
 
 	public static Polygon hex (int x0, int y0) {
 
@@ -50,24 +47,27 @@ public class TileView
 			g2.setStroke(new BasicStroke(3));
 			g2.setColor(Color.BLUE);
 			
+			int x2 = x + Frame.BORDERS;
+			int y2 = y + Frame.BORDERS;
+			
 			switch(p.getIrrigPosition()) {
 			case 1:
-				g2.drawLine(x, y+r, x+t, y);
+				g2.drawLine(x2, y2+r, x2+t, y2);
 				break;
 			case 2:
-				g2.drawLine(x+t, y, x+t+s, y);
+				g2.drawLine(x2+t, y2, x2+t+s, y2);
 				break;
 			case 3:
-				g2.drawLine(x+t+s, y, x+t+s+t, y+r);
+				g2.drawLine(x2+t+s, y2, x2+t+s+t, y2+r);
 				break;
 			case 4:
-				g2.drawLine(x+t+s+t, y+r, x+t+s, y+r+r);
+				g2.drawLine(x2+t+s+t, y2+r, x2+t+s, y2+r+r);
 				break;
 			case 5:
-				g2.drawLine(x+t+s, y+r+r, x+t, y+r+r);
+				g2.drawLine(x2+t+s, y2+r+r, x2+t, y2+r+r);
 				break;
 			case 6:
-				g2.drawLine(x+t, y+r+r, x, y+r);
+				g2.drawLine(x2+t, y2+r+r, x2, y2+r);
 				break;
 			}
 		}

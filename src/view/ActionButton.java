@@ -10,6 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 
 import controller.GUI;
+import controller.GameManager;
 
 public class ActionButton extends JButton implements MouseListener {
 	
@@ -85,14 +86,31 @@ public class ActionButton extends JButton implements MouseListener {
 	   When left button is pressed on the mouse:
 	 */
 	public void mousePressed(MouseEvent event) { 
+				
 		if(imgName == "endTurn")
 		{
 			GUI.getPlayer().setRoundCompleted(true);
 		}		
-		else
+		else if(imgName == "irrigation")
 		{
-			if(imgName == "irrigation")
-				BoardView.actionRoute = !BoardView.actionRoute;
+			if(GUI.getPlayer().getnbIrrig() > 0)
+			{
+				if(!this.isSelected) 
+				{
+					this.setSelected(true);	
+					BoardView.setAction(6);
+				}
+				else
+				{
+					this.setSelected(false);	
+					BoardView.setAction(0);
+				}
+			}
+		}
+		else
+		{				
+			if(GUI.getPlayer().getActions().size() >= GUI.getPlayer().getNbActionsAllowed())
+				return;
 			
 			if(!this.isSelected)
 			{
@@ -100,21 +118,39 @@ public class ActionButton extends JButton implements MouseListener {
 				
 				switch(imgName)
 				{
+					case "tile":
+						GUI.getFrame().setEnabled(false);
+						GUI.getDrawView().display(GameManager.getDraw());
+						BoardView.setAction(1);
+						GUI.getPlayer().addAction(1);
+						break;
 					case "road":
 						GUI.getPlayer().setnbIrrig(GUI.getPlayer().getnbIrrig() + 1);
+						GUI.getPlayer().addAction(2);
 						break;
 					case "panda":
-						BoardView.action = 1;
+						BoardView.setAction(3);
+						GUI.getPlayer().addAction(3);
 						break;
 					case "gardener":
-						BoardView.action = 2;
+						BoardView.setAction(4);
+						GUI.getPlayer().addAction(4);
+						break;
+					case "goal":
+						GUI.getPlayer().addAction(5);
 						break;
 					default:
 						break;
 				}
+				
+				if(GUI.getPlayer().getWeather() != 3)
+					this.setVisible(false);
+				else
+					if(GUI.getPlayer().getActions().size() > 1)
+						this.setVisible(false);
 			}
 			else
-				this.setSelected(false);;
+				this.setSelected(false);
 		}
 		
 	}
@@ -152,9 +188,13 @@ public class ActionButton extends JButton implements MouseListener {
 				 e.printStackTrace();
 			}
 			
-			BoardView.action = 0;
+			this.setVisible(true);
 		}
 		
+	}
+	
+	public String getImgName() {
+		return imgName;
 	}
 }
 

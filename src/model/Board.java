@@ -22,7 +22,7 @@ public class Board {
 		
 		List<Tile> adjCases = new ArrayList<Tile>();
 		adjCases = board[5][5].getAdjacentTiles();
-		
+			
 		Iterator<Tile> itr = adjCases.iterator();
         while(itr.hasNext()){
 			itr.next().setIrrigated(true);
