@@ -1,34 +1,26 @@
 package view;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-
 import controller.GUI;
 import controller.GameManager;
 import model.Tile;
 
-public class TileButton extends JButton implements MouseListener {
+public class TileButton extends Button {
 
 	private static final long serialVersionUID = 1L;
-	private static final String path = "img/";
 	
-	private Image img;
 	private Tile tile;
 	
 	public TileButton(Tile t, int x, int y, int height, int width) {
-		this.tile = t;
+		super(x,y,height,width);
 		
-		this.setBorderPainted(false);
-		this.setFocusPainted(false);
-		this.setContentAreaFilled(false);
+		this.tile = t;
 		
 		try {
 			 img = ImageIO.read(new File(path + "tile" + this.tile.getType() + ".png"));
@@ -36,9 +28,6 @@ public class TileButton extends JButton implements MouseListener {
 		catch (IOException e) {
 			 e.printStackTrace();
 		}
-		
-		this.setBounds(x, y, width, height);
-		this.addMouseListener(this);
 	}
 	
 	public void paintComponent(Graphics g) {

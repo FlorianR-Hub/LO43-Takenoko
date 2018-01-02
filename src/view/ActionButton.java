@@ -1,48 +1,38 @@
 package view;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException; 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-
 import controller.GUI;
 import controller.GameManager;
 
-public class ActionButton extends JButton implements MouseListener {
+public class ActionButton extends Button {
 	
 	private static final long serialVersionUID = 1L;
-	private static final String path = "img/";
 	
-	private Image img;
 	private String imgName;
 	private boolean isSelected;
 	
 	public ActionButton(String imgName, int x, int y, int height, int width) {
 		
-		this.setBorderPainted(false);
-		this.setFocusPainted(false);
-		this.setContentAreaFilled(false);
+		super(x, y, height, width);
+
 		this.imgName = imgName;
+		this.isSelected = false;
 		
 		try {
-			 img = ImageIO.read(new File(path + this.imgName + ".png"));
+			this.img = ImageIO.read(new File(path + this.imgName + ".png"));
 		}
 		catch (IOException e) {
 			 e.printStackTrace();
 		}
-		
-		this.setBounds(x, y, width, height);
-		this.addMouseListener(this);
-		this.isSelected = false;
     }
 		
 	public void paintComponent(Graphics g) {
 		
-	    g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+	    g.drawImage(this.img, 0, 0, this.getWidth(), this.getHeight(), this);
 	}
 	
 	/* -----------------------------------------------------
@@ -59,7 +49,7 @@ public class ActionButton extends JButton implements MouseListener {
 		
 		if(!this.isSelected){
 			try {
-			 img = ImageIO.read(new File(path + this.imgName + "_over.png"));
+				this.img = ImageIO.read(new File(path + this.imgName + "_over.png"));
 			}
 			catch (IOException e) {
 				 e.printStackTrace();
@@ -74,7 +64,7 @@ public class ActionButton extends JButton implements MouseListener {
 		if(!this.isSelected)
 		{
 			try {
-			 img = ImageIO.read(new File(path + this.imgName + ".png"));
+				this.img = ImageIO.read(new File(path + this.imgName + ".png"));
 			}
 			catch (IOException e) {
 				 e.printStackTrace();
@@ -173,7 +163,7 @@ public class ActionButton extends JButton implements MouseListener {
 		if(this.isSelected)
 		{
 			try {
-			 img = ImageIO.read(new File(path + this.imgName + "_selected.png"));
+				this.img = ImageIO.read(new File(path + this.imgName + "_selected.png"));
 			}
 			catch (IOException e) {
 				 e.printStackTrace();
@@ -182,7 +172,7 @@ public class ActionButton extends JButton implements MouseListener {
 		else
 		{
 			try {
-			 img = ImageIO.read(new File(path + this.imgName + ".png"));
+				this.img = ImageIO.read(new File(path + this.imgName + ".png"));
 			}
 			catch (IOException e) {
 				 e.printStackTrace();

@@ -38,7 +38,6 @@ public class DrawView extends JFrame {
 		content.add(tile2);
 		content.add(tile3);
 		
-		repaint();
 		this.setVisible(true);
 	}
 }
