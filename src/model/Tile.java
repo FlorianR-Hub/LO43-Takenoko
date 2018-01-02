@@ -6,13 +6,15 @@ import java.util.List;
 
 import view.TileView;
 
-public class Tile extends GameObject{
+public class Tile {
 
 	/**
 	 * type: 1=green / 2=yellow / 3=pink / 4=pond / 0=void
 	 * bonus: 1=enclosure / 2=fertilizer / 3=pool / 0=void
 	 * size: size of the bamboo placed on the tile
 	 */
+	private int posX;
+	private int posY;
 	private int type;
 	private int bonus;
 	private int size;
@@ -27,7 +29,8 @@ public class Tile extends GameObject{
 	 * used for Tiles not used by the player.
 	 */
 	public Tile(int type, int bonus){
-		super();
+		this.posX = 0;
+		this.posY = 0;
 		this.type = type;
 		this.setBonus(bonus);
 		this.setSize(0);
@@ -41,7 +44,8 @@ public class Tile extends GameObject{
 	 * the Tile is placed on the Board.
 	 */
 	public Tile(int x, int y, int type, int bonus, boolean irrigated){
-		super(x, y);
+		this.posX = x;
+		this.posY = y;
 		this.setType(type);
 		this.setBonus(bonus);
 		this.setSize(0);
@@ -96,7 +100,6 @@ public class Tile extends GameObject{
 		this.setBonus(0);
 		this.setSize(0);
 		this.setIrrigated(false);
-		this.setPlaced(false);
 		this.setValid(false);
 		this.setSelected(false);
 	}
@@ -184,6 +187,14 @@ public class Tile extends GameObject{
 		return irrigPosition;
 	}
 	
+	public int getX() {
+		return posX;
+	}
+
+	public int getY() {
+		return posY;
+	}
+
 	// SETTERS ------------------------------
 	
 	public void setType(int type) {
@@ -224,4 +235,13 @@ public class Tile extends GameObject{
 			}
 		}
 	}
+	
+	public void setX(int posX) {
+		this.posX = posX;
+	}
+	
+	public void setY(int posY) {
+		this.posY = posY;
+	}
+
 }

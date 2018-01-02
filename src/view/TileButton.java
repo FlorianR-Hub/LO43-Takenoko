@@ -23,7 +23,7 @@ public class TileButton extends Button {
 		this.tile = t;
 		
 		try {
-			 img = ImageIO.read(new File(path + "tile" + this.tile.getType() + ".png"));
+			this.img = ImageIO.read(new File(path + "tile" + this.tile.getType() + ".png"));
 		}
 		catch (IOException e) {
 			 e.printStackTrace();
@@ -31,7 +31,7 @@ public class TileButton extends Button {
 	}
 	
 	public void paintComponent(Graphics g) {
-		g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+		g.drawImage(this.img, 0, 0, this.getWidth(), this.getHeight(), this);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class TileButton extends Button {
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		try {
-		 img = ImageIO.read(new File(path + "tile" + this.tile.getType() + "_over.png"));
+			this.img = ImageIO.read(new File(path + "tile" + this.tile.getType() + "_over.png"));
 		}
 		catch (IOException e) {
 			 e.printStackTrace();
@@ -53,7 +53,7 @@ public class TileButton extends Button {
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		try {
-		 img = ImageIO.read(new File(path + "tile" + this.tile.getType() + ".png"));
+			this.img = ImageIO.read(new File(path + "tile" + this.tile.getType() + ".png"));
 		}
 		catch (IOException e) {
 			 e.printStackTrace();
