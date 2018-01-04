@@ -169,9 +169,9 @@ public class BoardView extends JPanel implements MouseListener {
 					if(v.size() == 2) {	
 						if(GUI.getPlayer().getnbIrrig() > 0)
 						{
-							if( v.firstElement().isAdjacent(v.lastElement()) && ( v.firstElement().isIrrigated() || v.lastElement().isIrrigated() )) {
-								v.firstElement().setIrrigPosition(v.lastElement());
-								v.lastElement().setIrrigPosition(v.firstElement());
+							if( v.firstElement().isAdjacent(v.lastElement()) ) {
+								v.firstElement().setIrrigations(v.lastElement());
+								v.lastElement().setIrrigations(v.firstElement());
 								GUI.getPlayer().setnbIrrig(GUI.getPlayer().getnbIrrig() - 1);
 								clearVector(v);
 								TrayView.deselectAction("irrigation");

@@ -20,7 +20,7 @@ public class Tile {
 	private int size;
 	private boolean isSelected;
 	private boolean isIrrigated;
-	private int irrigPosition;
+	private List<Boolean> irrigations;
 	private boolean isValid;
 	
 	// CONSTRUCTORS -------------------------
@@ -37,7 +37,10 @@ public class Tile {
 		this.setSelected(false);
 		this.setIrrigated(false);
 		this.setValid(false);
-		this.irrigPosition = 0;
+		irrigations = new ArrayList<Boolean>();
+		for(int i=0; i<6; i++) {
+			irrigations.add(false);
+		}
 	}
 	
 	/* Constructor with positions: 
@@ -52,6 +55,10 @@ public class Tile {
 		this.setSelected(false);
 		this.setIrrigated(irrigated);
 		this.setValid(false);
+		irrigations = new ArrayList<Boolean>();
+		for(int i=0; i<6; i++) {
+			irrigations.add(false);
+		}
 	}
 	
 	public Color getColor() {
@@ -102,6 +109,9 @@ public class Tile {
 		this.setIrrigated(false);
 		this.setValid(false);
 		this.setSelected(false);
+		for(int i=0; i<6; i++) {
+			irrigations.set(i, false);
+		}
 	}
 	
 	public boolean isSelectionable(){
@@ -183,8 +193,8 @@ public class Tile {
 		return isValid;
 	}
 	
-	public int getIrrigPosition() {
-		return irrigPosition;
+	public List<Boolean> getIrrigations() {
+		return irrigations;
 	}
 	
 	public int getX() {
@@ -221,7 +231,7 @@ public class Tile {
 		this.isValid = isValid;
 	}
 	
-	public void setIrrigPosition(Tile adj) {
+	public void setIrrigations(Tile adj) {
 		
 		this.setIrrigated(true);
 		List<Tile> adjTiles = new ArrayList<Tile>();
@@ -229,10 +239,10 @@ public class Tile {
 		int position = 0;
 		
 		for(Tile t : adjTiles) {
-			position++;
 			if(t.posX == adj.posX && t.posY == adj.posY) {
-				this.irrigPosition = position;
+				this.irrigations.set(position, true);
 			}
+			position++;
 		}
 	}
 	
