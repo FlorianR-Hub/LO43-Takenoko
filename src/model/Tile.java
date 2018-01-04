@@ -127,7 +127,7 @@ public class Tile {
 					|| (Math.abs(this.posX - adj.posX) == 1 && (this.posY - adj.posY == -1 || this.posY - adj.posY == 0));
 	}
 	
-	public List<Tile> getAdjacentTiles() {
+	/*public List<Tile> getAdjacentTiles() {
 		List<Tile> adjTiles = new ArrayList<Tile>();
 		if(this.posX%2 == 0) {
 			adjTiles.add(Board.getBoard()[this.posX-1][this.posY-1]);
@@ -146,7 +146,19 @@ public class Tile {
 			adjTiles.add(Board.getBoard()[this.posX-1][this.posY+1]);
 		}
 		return adjTiles;
-	}
+	}*/
+	
+	public List<Tile> getAdjacentTiles()
+	{
+		List<Tile> adjTiles = new ArrayList<Tile>();
+		
+		for (int i=0;i<Board.BSIZE;i++) 
+			for (int j=0;j<Board.BSIZE;j++) 
+				if(this.isAdjacent(Board.getBoard()[i][j]))
+					adjTiles.add(Board.getBoard()[i][j]);
+
+		return adjTiles;
+}
 	
 	public List<Tile> getValidTiles(){
 		List<Tile> validTiles = new ArrayList<Tile>();

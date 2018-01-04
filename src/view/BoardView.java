@@ -47,6 +47,11 @@ public class BoardView extends JPanel implements MouseListener {
 				if(Board.getBoard()[i][j].getType() > 0)
 					TileView.drawTile(i, j, Board.getBoard()[i][j], g2);
 		
+		for (int i=0;i<Board.BSIZE;i++)
+			for (int j=0;j<Board.BSIZE;j++)
+				if(Board.getBoard()[i][j].getType() > 0)
+					TileView.drawIrrigations(i, j, Board.getBoard()[i][j], g2);
+		
 		TileView.drawCharacter(panda, g2);
 		TileView.drawCharacter(gardener, g2);
 	}

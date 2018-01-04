@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 import model.Tile;
@@ -33,6 +32,42 @@ public class TileView
 		
 		return new Polygon(xHex, yHex, 6);
 	}
+	
+	public static void drawIrrigations(int i, int j, Tile p, Graphics2D g2) {
+		int x = i * (s+t) + Frame.BORDERS;
+		int y = j * h + (i%2) * h/2 + Frame.BORDERS;
+		
+		if(p.isIrrigated()) {
+			g2.setStroke(new BasicStroke(3));
+			g2.setColor(Color.BLUE);
+			List<Boolean> irrigations = p.getIrrigations();
+			
+			for(int a=0; a<irrigations.size(); a++) {
+				if(irrigations.get(a)) {
+					switch(a) {
+						case 1:
+							g2.drawLine(x, y+r, x+t, y);
+							break;
+						case 2:
+							g2.drawLine(x+t, y, x+t+s, y);
+							break;
+						case 3:
+							g2.drawLine(x+t+s, y, x+t+s+t, y+r);
+							break;
+						case 4:
+							g2.drawLine(x+t+s+t, y+r, x+t+s, y+r+r);
+							break;
+						case 5:
+							g2.drawLine(x+t+s, y+r+r, x+t, y+r+r);
+							break;
+						case 6:
+							g2.drawLine(x+t, y+r+r, x, y+r);
+							break;
+					}
+				}
+			}
+		}
+	}
 
 	public static void drawTile(int i, int j, Tile p, Graphics2D g2) {
 		int x = i * (s+t);
@@ -43,49 +78,12 @@ public class TileView
 		g2.setColor(p.getColor());
 		g2.fillPolygon(poly);
 		
-		if(p.isIrrigated()) {
-			int x2 = x + Frame.BORDERS;
-			int y2 = y + Frame.BORDERS;
-			
-			g2.setStroke(new BasicStroke(3));
-			g2.setColor(Color.BLUE);
-			List<Boolean> irrigations = new ArrayList<Boolean>();
-			irrigations = p.getIrrigations();
-			
-			for(int a=0; a<irrigations.size(); a++) {
-				if(irrigations.get(a) == true) {
-					switch(a) {
-						case 1:
-							g2.drawLine(x2, y2+r, x2+t, y2);
-							break;
-						case 2:
-							g2.drawLine(x2+t, y2, x2+t+s, y2);
-							break;
-						case 3:
-							g2.drawLine(x2+t+s, y2, x2+t+s+t, y2+r);
-							break;
-						case 4:
-							g2.drawLine(x2+t+s+t, y2+r, x2+t+s, y2+r+r);
-							break;
-						case 5:
-							g2.drawLine(x2+t+s, y2+r+r, x2+t, y2+r+r);
-							break;
-						case 6:
-							g2.drawLine(x2+t, y2+r+r, x2, y2+r);
-							break;
-					}
-				}
-			}
-		}
 		g2.setColor(Color.BLACK);
 		g2.setStroke(new BasicStroke(1));
 		if(p.getType() != 4)
 			g2.drawString(""+p.getSize(), x+r/2+Frame.BORDERS+12, y+r+Frame.BORDERS+4);			
-
-		List<Tile> adjTiles = new ArrayList<Tile>();
-		adjTiles = p.getValidTiles();
 		
-		for(Tile tile : adjTiles)
+		for(Tile tile : p.getValidTiles())
 		{
 			x = tile.getX() * (s+t);
 			y = tile.getY() * h + (tile.getX()%2) * h/2;
