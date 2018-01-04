@@ -20,6 +20,8 @@ public class GameManager extends Thread {
 	private int nbPlayers;
 	private static boolean gameOver;
 	private static GUI gui;
+	
+	public static boolean devMode = true;
 
 	public GameManager() {
 		GameManager.setGameOver(false);

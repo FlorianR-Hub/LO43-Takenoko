@@ -12,6 +12,7 @@ import java.util.Vector;
 import javax.swing.JPanel;
 
 import controller.GUI;
+import controller.GameManager;
 import model.Board;
 import model.Gardener;
 import model.Panda;
@@ -196,24 +197,28 @@ public class BoardView extends JPanel implements MouseListener {
 				}
 				break;
 			default: // Dev Tool
-				if(e.getButton() == MouseEvent.BUTTON2) // middle click to add a Tile
+				if(GameManager.devMode)
 				{
-					if(t.isValid())
+					if(e.getButton() == MouseEvent.BUTTON2) // middle click to add a Tile
 					{
-						if(t.getType() == 0)
+						if(t.isValid())
 						{
-							int rand = (int) ((Math.random()*(4-1)) + 1);
-							t.setType(rand);
+							if(t.getType() == 0)
+							{
+								int rand = (int) ((Math.random()*(4-1)) + 1);
+								t.setType(rand);
+							}
+							else
+								t.increase();
 						}
-						else
-							t.increase();
+					}
+					else if(e.getButton() == MouseEvent.BUTTON3) // right click to remove a Tile
+					{
+						if(t.getType() != 4)
+							t.reinitialize();
 					}
 				}
-				else if(e.getButton() == MouseEvent.BUTTON3) // right click to remove a Tile
-				{
-					if(t.getType() != 4)
-						t.reinitialize();
-				}
+				
 				break;
 		}
 	}

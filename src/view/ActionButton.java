@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException; 
 import javax.imageio.ImageIO;
 import controller.GUI;
+import controller.GameManager;
 
 public class ActionButton extends Button {
 	
@@ -98,7 +99,7 @@ public class ActionButton extends Button {
 		}
 		else
 		{				
-			if(GUI.getPlayer().getActions().size() >= GUI.getPlayer().getNbActionsAllowed())
+			if(GUI.getPlayer().getActions().size() >= GUI.getPlayer().getNbActionsAllowed() && !GameManager.devMode)
 				return;
 			
 			if(!this.isSelected)
@@ -132,11 +133,15 @@ public class ActionButton extends Button {
 						break;
 				}
 				
-				if(GUI.getPlayer().getWeather() != 3)
-					this.setVisible(false);
-				else
+				if(!GameManager.devMode)
+				{
+					if(GUI.getPlayer().getWeather() != 3)
+						this.setVisible(false);
+					else
 					if(GUI.getPlayer().getActions().size() > 1)
 						this.setVisible(false);
+				}
+				
 			}
 			else
 				this.setSelected(false);
