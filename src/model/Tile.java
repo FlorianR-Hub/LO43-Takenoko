@@ -118,7 +118,7 @@ public class Tile {
 		return (this.type > 0 && this.type < 4);
 	}
 	
-	public boolean isAdjacent(Tile adj){
+	public boolean isAdjacent(Tile adj) {
 		if(this.posX%2 == 0)
 			return (this.posX == adj.posX && Math.abs(this.posY - adj.posY) == 1) 
 					|| (Math.abs(this.posX - adj.posX) == 1 && (this.posY - adj.posY == 1 || this.posY - adj.posY == 0));
@@ -127,49 +127,75 @@ public class Tile {
 					|| (Math.abs(this.posX - adj.posX) == 1 && (this.posY - adj.posY == -1 || this.posY - adj.posY == 0));
 	}
 	
-	/*public List<Tile> getAdjacentTiles() {
-		List<Tile> adjTiles = new ArrayList<Tile>();
+	public Tile[] getAdjacentTiles() {
+		Tile[] adjTiles = new Tile[6];
+		
 		if(this.posX%2 == 0) {
-			adjTiles.add(Board.getBoard()[this.posX-1][this.posY-1]);
-			adjTiles.add(Board.getBoard()[this.posX][this.posY-1]);
-			adjTiles.add(Board.getBoard()[this.posX+1][this.posY-1]);
-			adjTiles.add(Board.getBoard()[this.posX+1][this.posY]);
-			adjTiles.add(Board.getBoard()[this.posX][this.posY+1]);
-			adjTiles.add(Board.getBoard()[this.posX-1][this.posY]);
+			if(this.posY - 1 >= 0)
+			{
+				if(this.posX - 1 >= 0)
+					adjTiles[0] = Board.getBoard()[this.posX-1][this.posY-1];
+				
+				adjTiles[1] = Board.getBoard()[this.posX][this.posY-1];
+			}
+			
+			if(this.posX + 1 <= 10)
+			{
+				if(this.posY - 1 >= 0)
+					adjTiles[2] = Board.getBoard()[this.posX+1][this.posY-1];
+				
+				adjTiles[3] = Board.getBoard()[this.posX+1][this.posY];
+			}
+			
+			if(this.posY + 1 <= 10)
+				adjTiles[4] = Board.getBoard()[this.posX][this.posY+1];
+			
+			if(this.posX - 1 >= 0)
+				adjTiles[5] = Board.getBoard()[this.posX-1][this.posY];
 		}
 		else if(this.posX%2 == 1) {
-			adjTiles.add(Board.getBoard()[this.posX-1][this.posY]);
-			adjTiles.add(Board.getBoard()[this.posX][this.posY-1]);
-			adjTiles.add(Board.getBoard()[this.posX+1][this.posY]);
-			adjTiles.add(Board.getBoard()[this.posX+1][this.posY+1]);
-			adjTiles.add(Board.getBoard()[this.posX][this.posY+1]);
-			adjTiles.add(Board.getBoard()[this.posX-1][this.posY+1]);
+			
+			if(this.posX - 1 >= 0)
+				adjTiles[0] = Board.getBoard()[this.posX-1][this.posY];
+			
+			if(this.posY - 1 >= 0)
+				adjTiles[1] = Board.getBoard()[this.posX][this.posY-1];
+			
+			if(this.posX + 1 <= 10)
+				adjTiles[2] = Board.getBoard()[this.posX+1][this.posY];
+			
+			if(this.posY + 1 <= 10)
+			{
+				if(this.posX + 1 <= 10)
+					adjTiles[3] = Board.getBoard()[this.posX+1][this.posY+1];
+				
+				adjTiles[4] = Board.getBoard()[this.posX][this.posY+1];
+				
+				if(this.posX - 1 >= 0)
+					adjTiles[5] = Board.getBoard()[this.posX-1][this.posY+1];
+			}
 		}
-		return adjTiles;
-	}*/
-	
-	public List<Tile> getAdjacentTiles()
-	{
-		List<Tile> adjTiles = new ArrayList<Tile>();
 		
-		for (int i=0;i<Board.BSIZE;i++) 
-			for (int j=0;j<Board.BSIZE;j++) 
-				if(this.isAdjacent(Board.getBoard()[i][j]))
-					adjTiles.add(Board.getBoard()[i][j]);
-
+		for (int i = 0; i < adjTiles.length; i++) {
+			if(adjTiles[i] == null)
+				adjTiles[i] = new Tile(0,0);
+		}
+		
 		return adjTiles;
-}
+	}
 	
-	public List<Tile> getValidTiles(){
+	public List<Tile> getValidTiles() {
 		List<Tile> validTiles = new ArrayList<Tile>();
-		for(Tile tile : this.getAdjacentTiles()){
-			if(tile.getType() == 0){
-				List<Tile> adjTiles = tile.getAdjacentTiles();
+		
+		for(Tile tile : this.getAdjacentTiles()) {
+			if(tile.getType() == 0) {
 				int nbPlacedTiles = 0;
-				for(Tile t : adjTiles)
+				
+				for(Tile t : tile.getAdjacentTiles())
 					if(t.getType() > 0)
-						nbPlacedTiles++;						
-				if(nbPlacedTiles > 1 || this.getType() == 4){
+						nbPlacedTiles++;
+				
+				if(nbPlacedTiles > 1 || this.getType() == 4) {
 					tile.setValid(true);
 					validTiles.add(tile);
 				}		
@@ -246,12 +272,12 @@ public class Tile {
 	public void setIrrigations(Tile adj) {
 		
 		this.setIrrigated(true);
-		List<Tile> adjTiles = new ArrayList<Tile>();
-		adjTiles = this.getAdjacentTiles();
 		int position = 0;
 		
-		for(Tile t : adjTiles) {
-			if(t.posX == adj.posX && t.posY == adj.posY) {
+		for(Tile t : this.getAdjacentTiles()) 
+		{
+			if(t.posX == adj.posX && t.posY == adj.posY) 
+			{
 				this.irrigations.set(position, true);
 			}
 			position++;

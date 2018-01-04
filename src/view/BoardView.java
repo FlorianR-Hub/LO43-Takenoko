@@ -166,11 +166,12 @@ public class BoardView extends JPanel implements MouseListener {
 				}
 				break;
 			case 6: // Action Irrigation
-				if(e.getButton() == MouseEvent.BUTTON1){
+				if(e.getButton() == MouseEvent.BUTTON1) {
 					if(v.size() < 2) {
 						v.add(t);
 						t.setSelected(true);
 					}
+					
 					if(v.size() == 2) {	
 						if(GUI.getPlayer().getnbIrrig() > 0)
 						{

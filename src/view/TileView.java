@@ -44,7 +44,7 @@ public class TileView
 			
 			for(int a=0; a<irrigations.size(); a++) {
 				if(irrigations.get(a)) {
-					switch(a) {
+					switch(a + 1) {
 						case 1:
 							g2.drawLine(x, y+r, x+t, y);
 							break;
