@@ -26,8 +26,20 @@ public class Picture extends JPanel {
         this.setBounds(x, y, img.getWidth(this), img.getHeight(this));
     }
     
+    public Picture (String imgName, int x, int y, int height, int width)
+    {
+    	try {
+    		img = ImageIO.read(new File(path + imgName));
+		}
+    	catch (IOException e) {
+		 e.printStackTrace();
+		}
+        
+        this.setBounds(x, y, width, height);
+    }
+    
     public void paintComponent(Graphics g)
     {
-    	 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+    	g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
     }
 }

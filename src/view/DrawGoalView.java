@@ -1,6 +1,5 @@
 package view;
 
-import javax.swing.JFrame;
 import controller.GUI;
 
 public class DrawGoalView extends DrawView {
@@ -13,7 +12,6 @@ public class DrawGoalView extends DrawView {
 	
 	public DrawGoalView(String name, int width, int height) {
 		super(name, width, height);
-		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 	}
 
 	public void display() {

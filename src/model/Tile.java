@@ -143,7 +143,7 @@ public class Tile {
 				adjTiles[1] = Board.getBoard()[this.posX][this.posY-1];
 			}
 			
-			if(this.posX + 1 <= 10)
+			if(this.posX + 1 <= Board.BSIZE -1)
 			{
 				if(this.posY - 1 >= 0)
 					adjTiles[2] = Board.getBoard()[this.posX+1][this.posY-1];
@@ -151,7 +151,7 @@ public class Tile {
 				adjTiles[3] = Board.getBoard()[this.posX+1][this.posY];
 			}
 			
-			if(this.posY + 1 <= 10)
+			if(this.posY + 1 <= Board.BSIZE -1)
 				adjTiles[4] = Board.getBoard()[this.posX][this.posY+1];
 			
 			if(this.posX - 1 >= 0)
@@ -165,12 +165,12 @@ public class Tile {
 			if(this.posY - 1 >= 0)
 				adjTiles[1] = Board.getBoard()[this.posX][this.posY-1];
 			
-			if(this.posX + 1 <= 10)
+			if(this.posX + 1 <= Board.BSIZE -1)
 				adjTiles[2] = Board.getBoard()[this.posX+1][this.posY];
 			
-			if(this.posY + 1 <= 10)
+			if(this.posY + 1 <= Board.BSIZE -1)
 			{
-				if(this.posX + 1 <= 10)
+				if(this.posX + 1 <= Board.BSIZE -1)
 					adjTiles[3] = Board.getBoard()[this.posX+1][this.posY+1];
 				
 				adjTiles[4] = Board.getBoard()[this.posX][this.posY+1];

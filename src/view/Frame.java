@@ -16,7 +16,7 @@ public class Frame extends JFrame {
 	}
 
 	//constants and global variables
-	public final static int HEXSIZE = 60;	//hex size in pixels
+	public final static int HEXSIZE = 90;	//hex size in pixels
 	public final static int BORDERS = 15;  
 	public final static int SCRSIZE = HEXSIZE * (Board.BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
 	

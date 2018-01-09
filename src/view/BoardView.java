@@ -25,8 +25,8 @@ public class BoardView extends JPanel implements MouseListener {
 	private static Vector<Tile> v = new Vector<Tile>(); 
 	private static int action = 0;
 	
-	private static Panda panda = new Panda(5,5,"P");
-	private static Gardener gardener = new Gardener(5,5,"G");
+	private static Panda panda = new Panda(3,3,"P");
+	private static Gardener gardener = new Gardener(3,3,"G");
 
 	public BoardView()
 	{	
@@ -41,20 +41,21 @@ public class BoardView extends JPanel implements MouseListener {
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setFont(new Font("Arial", Font.PLAIN, 17));
 		super.paintComponent(g2);
-		
+			
 		//draw grid
 		for (int i=0;i<Board.BSIZE;i++)
 			for (int j=0;j<Board.BSIZE;j++)
 				if(Board.getBoard()[i][j].getType() > 0)
-					TileView.drawTile(i, j, Board.getBoard()[i][j], g2);
+					TileView.drawTile(i, j, Board.getBoard()[i][j], g2, this);
+				
 		
 		for (int i=0;i<Board.BSIZE;i++)
 			for (int j=0;j<Board.BSIZE;j++)
 				if(Board.getBoard()[i][j].getType() > 0)
 					TileView.drawIrrigations(i, j, Board.getBoard()[i][j], g2);
 		
-		TileView.drawCharacter(panda, g2);
-		TileView.drawCharacter(gardener, g2);
+		TileView.drawCharacter(panda, g2, this);
+		TileView.drawCharacter(gardener, g2, this);
 	}
 
 	public void clearVector(Vector<Tile> v) 
@@ -218,7 +219,6 @@ public class BoardView extends JPanel implements MouseListener {
 							t.reinitialize();
 					}
 				}
-				
 				break;
 		}
 	}

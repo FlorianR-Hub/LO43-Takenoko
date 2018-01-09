@@ -13,6 +13,7 @@ public abstract class DrawView extends JFrame {
 	public DrawView(String name, int width, int height) {	
 		
 		this.setTitle(name);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.setSize(width,height);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);

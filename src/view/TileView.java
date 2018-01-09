@@ -1,13 +1,19 @@
 package view;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import model.Tile;
 import model.Character;
 
 public class TileView
 {
+	private static final String path = "img/";
+	
 	private static int h=Frame.HEXSIZE;	// height. Distance between centres of two adjacent hexes. Distance between two opposite sides in a hex.
 	private static int r=h/2;	// radius of inscribed circle (centre to middle of each side). r= h/2
 	private static int s=(int) (h / 1.73205);	// length of one side : s = (h/2)/cos(30)= (h/2) / (sqrt(3)/2) = h / sqrt(3)
@@ -38,7 +44,7 @@ public class TileView
 		int y = j * h + (i%2) * h/2 + Frame.BORDERS;
 		
 		if(p.isIrrigated()) {
-			g2.setStroke(new BasicStroke(3));
+			g2.setStroke(new BasicStroke(4));
 			g2.setColor(Color.BLUE);
 			List<Boolean> irrigations = p.getIrrigations();
 			
@@ -69,19 +75,31 @@ public class TileView
 		}
 	}
 
-	public static void drawTile(int i, int j, Tile p, Graphics2D g2) {
+	public static void drawTile(int i, int j, Tile p, Graphics2D g2, BoardView bv) {
+		
+		Image img = null;
 		int x = i * (s+t);
 		int y = j * h + (i%2) * h/2;
+		
 		Polygon poly = hex(x,y);
-		
-		g2.setFont(new Font("Arial", Font.PLAIN, 20));
 		g2.setColor(p.getColor());
-		g2.fillPolygon(poly);
 		
-		g2.setColor(Color.BLACK);
-		g2.setStroke(new BasicStroke(1));
-		if(p.getType() != 4)
-			g2.drawString(""+p.getSize(), x+r/2+Frame.BORDERS+12, y+r+Frame.BORDERS+4);			
+		try {
+			
+			if(p.getType() != 4)
+				img = ImageIO.read(new File(path+"tile_S"+p.getSize()+"_C"+p.getType()+".png"));
+			else
+				img = ImageIO.read(new File(path+"tile_start.png"));
+		}
+    	catch (IOException e) {
+    		e.printStackTrace();
+		}
+		
+		if(p.isSelected())
+			g2.fillPolygon(poly);
+		else
+			g2.drawImage(img, x+Frame.BORDERS, y+Frame.BORDERS, 102, 90, bv);
+		
 		
 		for(Tile tile : p.getValidTiles())
 		{
@@ -96,17 +114,26 @@ public class TileView
 		}
 	}
 	
-	public static void drawCharacter(Character c, Graphics2D g2) {
-		
+	public static void drawCharacter(Character c, Graphics2D g2, BoardView bv) {
+		Image img = null;
 		int x = c.getPosX() * (s+t);
 		int y = c.getPosY() * h + (c.getPosX()%2) * h/2;
 		
-		g2.setColor(Color.BLACK);
-		
-		if(c.getName() == "P")
-			g2.drawString(""+c.getName(), x+r/2+Frame.BORDERS + 25, y+r+Frame.BORDERS+20);
-		else
-			g2.drawString(""+c.getName(), x+r/2+Frame.BORDERS, y+r+Frame.BORDERS+20);
+		try {
+			if(c.getName() == "P")
+			{
+				img = ImageIO.read(new File(path+"Onix.png"));
+				g2.drawImage(img, x+Frame.BORDERS + 50, y+Frame.BORDERS + 5, 50, 80, bv);
+			}
+			else
+			{
+				img = ImageIO.read(new File(path+"architecte.png"));
+				g2.drawImage(img, x+Frame.BORDERS + 10, y+Frame.BORDERS + 10, 35, 75, bv);
+			}
+		}
+    	catch (IOException e) {
+    		e.printStackTrace();
+		}
 	}
 
 	public static Point pxtoHex(int mx, int my) {

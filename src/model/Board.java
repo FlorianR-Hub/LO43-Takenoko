@@ -2,7 +2,7 @@ package model;
 
 public class Board {
 	
-	public final static int BSIZE = 11;
+	public final static int BSIZE = 7;
 	
 	private static Tile[][] board = new Tile[BSIZE][BSIZE];
 	
@@ -14,19 +14,13 @@ public class Board {
 			}
 		}
 
-		board[5][5] = new Tile(5,5,4,0, true); // Pond : starting tile
-		Tile[] adjTiles = new Tile[6];
-		adjTiles = board[5][5].getAdjacentTiles();
+		board[3][3] = new Tile(3,3,4,0, true); // Pond : starting tile
+		Tile[] adjTiles = board[3][3].getAdjacentTiles();
 		
 		for(Tile t : adjTiles) {
 			board[5][5].setIrrigations(t);
-		}
-		
-		Tile[] adjCases = board[5][5].getAdjacentTiles();
-			
-		for(Tile t : adjCases)
-			if(t != null)
-				t.setIrrigated(true);
+			t.setIrrigated(true);
+		};
 	}
 	
 	public static Tile[][] getBoard(){
