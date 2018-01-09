@@ -1,7 +1,6 @@
 package view;
 
 import javax.swing.JFrame;
-
 import controller.GUI;
 import controller.GameManager;
 
