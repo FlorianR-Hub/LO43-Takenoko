@@ -152,4 +152,12 @@ public class Player {
 	public void setTile(Tile tile) {
 		this.tile = tile;
 	}
+	
+	public List<Goal> getGoals(){
+		return goals;
+	}
+	
+	public void addGoal(Goal g) {
+		goals.add(g);
+	}
 }

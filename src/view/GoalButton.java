@@ -8,10 +8,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import controller.GUI;
+import controller.GameManager;
+import model.Goal;
 
 public class GoalButton extends Button{
 
 	private static final long serialVersionUID = 1L;
+	
+	private Goal goal;
 
 	public GoalButton(int type, int x, int y, int height, int width) {
 		super(x,y,height,width);
@@ -49,8 +53,12 @@ public class GoalButton extends Button{
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
-		GUI.getFrame().setEnabled(true);
-		GUI.getDrawGoalView().setVisible(false);
+		if(GameManager.getGoalsGardener().remove(goal)) {
+			GUI.getPlayer().addGoal(goal);;
+			goal.setOwner(GUI.getPlayer().getNumPlayer());
+			GUI.getFrame().setEnabled(true);
+			GUI.getDrawGoalView().setVisible(false);
+		}		
 	}
 
 	@Override

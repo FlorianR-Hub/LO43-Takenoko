@@ -22,6 +22,7 @@ public class Tile {
 	private boolean isIrrigated;
 	private List<Boolean> irrigations;
 	private boolean isValid;
+	private int owner; //0: no one
 	
 	// CONSTRUCTORS -------------------------
 	
@@ -41,6 +42,7 @@ public class Tile {
 		for(int i=0; i<6; i++) {
 			irrigations.add(false);
 		}
+		this.owner = 0;
 	}
 	
 	/* Constructor with positions: 
@@ -59,6 +61,7 @@ public class Tile {
 		for(int i=0; i<6; i++) {
 			irrigations.add(false);
 		}
+		this.owner = 0;
 	}
 	
 	public Color getColor() {
@@ -112,6 +115,7 @@ public class Tile {
 		for(int i=0; i<6; i++) {
 			irrigations.set(i, false);
 		}
+		this.owner = 0;
 	}
 	
 	public boolean isSelectionable(){
@@ -242,7 +246,10 @@ public class Tile {
 	public int getY() {
 		return posY;
 	}
-
+	public int getOwner() {
+		return owner;
+	}
+	
 	// SETTERS ------------------------------
 	
 	public void setType(int type) {
@@ -290,6 +297,10 @@ public class Tile {
 	
 	public void setY(int posY) {
 		this.posY = posY;
+	}
+	
+	public void setOwner(int owner) {
+		this.owner = owner;
 	}
 
 }

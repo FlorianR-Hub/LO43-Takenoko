@@ -1,39 +1,31 @@
 package model;
 
-public class Goal {
+public abstract class Goal {
 
-	private boolean isValid;
-	private int type; // 1:Tile / 2:Panda / 3:Gardener
-	private int points;
+	/**
+	 * isValid: goal valid or not
+	 * type   : 	1=tile / 2=panda / 3=gardener
+	 * points : points given if goal validated  
+	 * owner  : 	player who takes goal
+	 */
+	protected boolean isValid;
+	protected int type;
+	protected int points;
+	protected int owner;
 	
 	public Goal() {
 		this.setValid(false);
 		this.type = 0;
 		this.points = 0;
+		this.owner = 0;
 	}
 	
-	public Goal(int type, int points) {
+	public Goal(int type) {
 		this.setValid(false);
 		this.type = type;
-		this.points = points;
 	}
 
-	public boolean isValid(Player p) {
-		
-		switch(this.type)
-		{
-			case 1:
-				break;
-			case 2:
-				break;
-			case 3:
-				break;
-			default:
-				break;
-		}
-		
-		return isValid;
-	}
+	public abstract boolean isValid(Player p);
 
 	public void setValid(boolean isValid) {
 		this.isValid = isValid;
@@ -53,5 +45,9 @@ public class Goal {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+	
+	public void setOwner(int owner) {
+		this.owner = owner;
 	}
 }

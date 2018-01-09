@@ -1,6 +1,5 @@
 package model;
 
-
 public class Board {
 	
 	public final static int BSIZE = 11;
@@ -16,6 +15,12 @@ public class Board {
 		}
 
 		board[5][5] = new Tile(5,5,4,0, true); // Pond : starting tile
+		Tile[] adjTiles = new Tile[6];
+		adjTiles = board[5][5].getAdjacentTiles();
+		
+		for(Tile t : adjTiles) {
+			board[5][5].setIrrigations(t);
+		}
 		
 		Tile[] adjCases = board[5][5].getAdjacentTiles();
 			

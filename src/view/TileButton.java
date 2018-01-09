@@ -62,7 +62,8 @@ public class TileButton extends Button {
 	public void mousePressed(MouseEvent arg0) {
 		if(GameManager.getDraw().remove(tile))
 		{
-			GUI.getPlayer().setTile(tile);			
+			GUI.getPlayer().setTile(tile);
+			tile.setOwner(GUI.getPlayer().getNumPlayer());
 			Collections.rotate(GameManager.getDraw(), -1);
 			Collections.rotate(GameManager.getDraw(), -1);
 			GUI.getFrame().setEnabled(true);

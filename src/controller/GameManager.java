@@ -57,9 +57,9 @@ public class GameManager extends Thread {
 		
 		for(int i=0; i<15; i++)
 		{
-			goalsTile.add(new Goal(1, 10));
-			goalsPanda.add(new Goal(2, 10));
-			goalsGardener.add(new Goal(3, 10));
+			//goalsTile.add(new Goal(1, 10));
+			//goalsPanda.add(new Goal(2, 10));
+			//goalsGardener.add(new Goal(3, 10));
 		}
 		
 		this.setNbPlayers(4);
@@ -127,5 +127,29 @@ public class GameManager extends Thread {
 
 	public static void setDraw(List<Tile> draw) {
 		GameManager.draw = draw;
+	}
+	
+	public static List<Goal> getGoalsPanda(){
+		return goalsPanda;
+	}
+	
+	public static List<Goal> getGoalsGardener(){
+		return goalsGardener;
+	}
+	
+	public static List<Goal> getGoalsTile(){
+		return goalsTile;
+	}
+	
+	public static void setGoalsTile(List<Goal> goals) {
+		GameManager.goalsTile = goals;
+	}
+	
+	public static void setGoalsGardener(List<Goal> goals) {
+		GameManager.goalsGardener = goals;
+	}
+	
+	public static void setGoalsPanda(List<Goal> goals) {
+		GameManager.goalsPanda = goals;
 	}
 }
