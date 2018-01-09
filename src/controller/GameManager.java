@@ -55,12 +55,10 @@ public class GameManager extends Thread {
 		
 		Collections.shuffle(draw);
 		
-		for(int i=0; i<15; i++)
-		{
-			//goalsTile.add(new Goal(1, 10));
-			//goalsPanda.add(new Goal(2, 10));
-			//goalsGardener.add(new Goal(3, 10));
-		}
+		// Initialize Goals' Lists
+		goalsPanda.addAll(Goal.initGoalsPanda());
+		goalsGardener.addAll(Goal.initGoalsGardener());
+		goalsTile.addAll(Goal.initGoalsTile());
 		
 		this.setNbPlayers(4);
 		

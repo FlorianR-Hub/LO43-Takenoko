@@ -13,11 +13,11 @@ public class GoalsGardener extends Goal{
 	private int size;
 	private int bonus;
 	
-	public GoalsGardener(int n, int c, int s, int b, int p) {
+	public GoalsGardener(int n, int s, int c, int b, int p) {
 		super(3);
 		this.number = n;
-		this.color = c;
 		this.size = s;
+		this.color = c;
 		this.bonus = b;
 		this.points = p;
 	}

@@ -14,7 +14,6 @@ public class GoalsPanda extends Goal{
 		super(2);
 		this.color = c;
 		this.points = p;
-		
 	}
 
 	public boolean isValid(Player p) {
