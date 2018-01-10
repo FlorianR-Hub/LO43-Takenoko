@@ -19,7 +19,7 @@ public class Board {
 		
 		for(Tile t : adjTiles) {
 			board[3][3].setRoads(t);
-			t.setRoaded(true);
+			t.setRoads(board[3][3]);
 		};
 	}
 	

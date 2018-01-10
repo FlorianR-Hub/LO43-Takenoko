@@ -34,8 +34,6 @@ public class TrayView extends JPanel {
 	private ActionButton actionArchitect = new ActionButton("architect", 385, 408, 90, 90);
 	private ActionButton actionGoals = new ActionButton("goal", 485, 408, 90, 90);
 	
-	
-	
 	private Picture stoneGreen = new Picture("stoneGreen.png", 50, 565, 55, 55);
 	private Picture stoneBlue = new Picture("stoneBlue.png", 95, 565, 55, 55);
 	private Picture stoneOrange = new Picture("stoneOrange.png", 140, 565, 55, 55);

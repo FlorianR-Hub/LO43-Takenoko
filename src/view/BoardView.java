@@ -82,26 +82,22 @@ public class BoardView extends JPanel implements MouseListener {
 
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub	
 	}
 	
 	public void applyWeather(MouseEvent e, Tile t) {
@@ -128,7 +124,6 @@ public class BoardView extends JPanel implements MouseListener {
 				}
 				break;
 			default:
-				break;
 		}
 	}
 	
@@ -140,17 +135,13 @@ public class BoardView extends JPanel implements MouseListener {
 				if(e.getButton() == MouseEvent.BUTTON1)
 				{
 					if(t.isValid())
-					{
 						if(t.getType() == 0)
-						{
 							if(GUI.getPlayer().getTile().getType() != 0)
 							{
 								t.setType(GUI.getPlayer().getTile().getType());
 								t.setBonus(GUI.getPlayer().getTile().getBonus());
 								action = 0;
 							}
-						}
-					}
 				}
 				break;
 			case 3: // Action Monster
@@ -173,17 +164,53 @@ public class BoardView extends JPanel implements MouseListener {
 						v.add(t);
 						t.setSelected(true);
 					}
-					
 					if(v.size() == 2) {	
-						if(GUI.getPlayer().getNbRoad() > 0)
+						int position = 0;
+						int older1, older2;
+						
+						if(GUI.getPlayer().getNbRoad() > 0 && v.firstElement().isAdjacent(v.lastElement()))
 						{
-							if( v.firstElement().isAdjacent(v.lastElement()) ) {
+							Tile[] adjTiles = new Tile[6];
+							adjTiles = v.firstElement().getAdjacentTiles();
+							
+							for(int i=0; i<6; i++)
+								if(adjTiles[i] == v.lastElement())
+									position = i;
+							
+							switch(position) {
+							case 0:
+								older1 = 1; older2 = 5; 
+								break;
+							case 1:
+								older1 = 0; older2 = 2; 
+								break;
+							case 2:
+								older1 = 1; older2 = 3; 
+								break;
+							case 3:
+								older1 = 2; older2 = 4; 
+								break;
+							case 4:
+								older1 = 3; older2 = 5; 
+								break;
+							case 5:
+								older1 = 4; older2 = 0;
+								break;
+							default:
+								older1 = 0; older2 = 0;
+							}
+							if( (v.firstElement().getRoads().get(older1) || v.firstElement().getRoads().get(older2)) 
+							&&  !v.firstElement().getRoads().get(position) ) 
+							{
 								v.firstElement().setRoads(v.lastElement());
 								v.lastElement().setRoads(v.firstElement());
 								GUI.getPlayer().setNbRoad(GUI.getPlayer().getNbRoad() - 1);
 								clearVector(v);
 								TrayView.deselectAction("roads");
 								action = 0;
+							}
+							else {
+								clearVector(v);
 							}
 						}
 						else {
