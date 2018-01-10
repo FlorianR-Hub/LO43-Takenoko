@@ -19,10 +19,10 @@ public class GoalsPanda extends Goal{
 	public boolean isValid(Player p) {
 		
 		if(this.color < 4)
-			if(p.getNbBamboos(color) == 2)
+			if(p.getNbStones(color) == 2)
 				isValid = true;
 		else
-			if(p.getNbBamboos(0) == 1 && p.getNbBamboos(1) == 1 && p.getNbBamboos(2) == 1)
+			if(p.getNbStones(0) == 1 && p.getNbStones(1) == 1 && p.getNbStones(2) == 1)
 				isValid = true;
 		
 		return isValid;

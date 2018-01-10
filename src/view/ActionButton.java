@@ -77,76 +77,103 @@ public class ActionButton extends Button {
 	 */
 	public void mousePressed(MouseEvent event) { 
 				
-		if(imgName == "endTurn")
+		
+		switch(imgName)
 		{
-			GUI.getPlayer().setRoundCompleted(true);
-		}		
-		else if(imgName == "irrigation")
-		{
-			if(GUI.getPlayer().getnbIrrig() > 0)
-			{
-				if(!this.isSelected) 
+			case "endTurn":
+				GUI.getPlayer().setRoundCompleted(true);
+				break;
+			case "roads":
+				if(GUI.getPlayer().getNbRoad() > 0)
+				{
+					if(!this.isSelected) 
+					{
+						this.setSelected(true);	
+						BoardView.setAction(6);
+					}
+					else
+					{
+						this.setSelected(false);	
+						BoardView.setAction(0);
+					}
+				}
+				break;
+			case "bonusTools":
+			case "bonusDefense":
+				if(GUI.getPlayer().getWeather() == 5)
+				{
+					if(imgName == "bonusTools")
+						GUI.getPlayer().setNbBonus(0, GUI.getPlayer().getNbBonus(0) + 1);
+					else
+						GUI.getPlayer().setNbBonus(1, GUI.getPlayer().getNbBonus(1) + 1);
+					GUI.getPlayer().setWeather(0);
+				}
+				else if(GUI.getPlayer().getNbBonus((imgName == "bonusTools") ? 0 : 1) > 0)
+				{
+					if(!this.isSelected) 
+					{
+						this.setSelected(true);
+						if(imgName == "bonusTools")
+							BoardView.setAction(7);
+						else
+							BoardView.setAction(8);
+					}
+					else
+					{
+						this.setSelected(false);	
+						BoardView.setAction(0);
+					}
+				}
+				break;
+			default:
+				if(GUI.getPlayer().getActions().size() >= GUI.getPlayer().getNbActionsAllowed() && !GameManager.devMode)
+					return;
+				
+				if(!this.isSelected)
 				{
 					this.setSelected(true);	
-					BoardView.setAction(6);
+					
+					switch(imgName)
+					{
+						case "tile":
+							GUI.getDrawTileView().display();
+							BoardView.setAction(1);
+							GUI.getPlayer().addAction(1);
+							break;
+						case "road":
+							GUI.getPlayer().setNbRoad(GUI.getPlayer().getNbRoad() + 1);
+							GUI.getPlayer().addAction(2);
+							break;
+						case "monster":
+							BoardView.setAction(3);
+							GUI.getPlayer().addAction(3);
+							break;
+						case "architect":
+							BoardView.setAction(4);
+							GUI.getPlayer().addAction(4);
+							break;
+						case "goal":
+							GUI.getDrawGoalView().display();
+							GUI.getPlayer().addAction(5);
+							break;
+						default:
+							break;
+					}
+					
+					if(!GameManager.devMode)
+					{
+						if(GUI.getPlayer().getWeather() != 3)
+							this.setVisible(false);
+						else
+						if(GUI.getPlayer().getActions().size() > 1)
+							this.setVisible(false);
+					}
+					
 				}
 				else
-				{
-					this.setSelected(false);	
-					BoardView.setAction(0);
-				}
-			}
+					this.setSelected(false);
+				break;
 		}
-		else
-		{				
-			if(GUI.getPlayer().getActions().size() >= GUI.getPlayer().getNbActionsAllowed() && !GameManager.devMode)
-				return;
-			
-			if(!this.isSelected)
-			{
-				this.setSelected(true);	
-				
-				switch(imgName)
-				{
-					case "tile":
-						GUI.getDrawTileView().display();
-						BoardView.setAction(1);
-						GUI.getPlayer().addAction(1);
-						break;
-					case "road":
-						GUI.getPlayer().setnbIrrig(GUI.getPlayer().getnbIrrig() + 1);
-						GUI.getPlayer().addAction(2);
-						break;
-					case "panda":
-						BoardView.setAction(3);
-						GUI.getPlayer().addAction(3);
-						break;
-					case "gardener":
-						BoardView.setAction(4);
-						GUI.getPlayer().addAction(4);
-						break;
-					case "goal":
-						GUI.getDrawGoalView().display();
-						GUI.getPlayer().addAction(5);
-						break;
-					default:
-						break;
-				}
-				
-				if(!GameManager.devMode)
-				{
-					if(GUI.getPlayer().getWeather() != 3)
-						this.setVisible(false);
-					else
-					if(GUI.getPlayer().getActions().size() > 1)
-						this.setVisible(false);
-				}
-				
-			}
-			else
-				this.setSelected(false);
-		}
-		
 	}
 
 	/* -----------------------------------------------------

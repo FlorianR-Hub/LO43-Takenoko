@@ -27,7 +27,6 @@ public class Frame extends JFrame {
 
 		this.setTitle("LO43 Projet");
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		//for hexes in the FLAT orientation, the height of a 10x10 grid is 1.1764 * the width. (from h / (s+t))
 		this.setSize( (int)(SCRSIZE/1.23 + 600), SCRSIZE);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);

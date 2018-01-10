@@ -19,8 +19,8 @@ public class Tile {
 	private int bonus;
 	private int size;
 	private boolean isSelected;
-	private boolean isIrrigated;
-	private List<Boolean> irrigations;
+	private boolean isRoaded;
+	private List<Boolean> roads;
 	private boolean isValid;
 	private int owner; //0: no one
 	
@@ -36,11 +36,11 @@ public class Tile {
 		this.setBonus(bonus);
 		this.setSize(0);
 		this.setSelected(false);
-		this.setIrrigated(false);
+		this.setRoaded(false);
 		this.setValid(false);
-		irrigations = new ArrayList<Boolean>();
+		roads = new ArrayList<Boolean>();
 		for(int i=0; i<6; i++) {
-			irrigations.add(false);
+			roads.add(false);
 		}
 		this.owner = 0;
 	}
@@ -48,18 +48,18 @@ public class Tile {
 	/* Constructor with positions: 
 	 * the Tile is placed on the Board.
 	 */
-	public Tile(int x, int y, int type, int bonus, boolean irrigated){
+	public Tile(int x, int y, int type, int bonus, boolean roaded){
 		this.posX = x;
 		this.posY = y;
 		this.setType(type);
 		this.setBonus(bonus);
 		this.setSize(0);
 		this.setSelected(false);
-		this.setIrrigated(irrigated);
+		this.setRoaded(roaded);
 		this.setValid(false);
-		irrigations = new ArrayList<Boolean>();
+		roads = new ArrayList<Boolean>();
 		for(int i=0; i<6; i++) {
-			irrigations.add(false);
+			roads.add(false);
 		}
 		this.owner = 0;
 	}
@@ -89,7 +89,7 @@ public class Tile {
 	}
 	
 	public void increase(){
-		int i = this.getBonus() == 2 ? 2 : 1;
+		int i = this.getBonus() == 1 ? 2 : 1;
 		if(this.getType() != 4){
 			if(this.getSize() + i < 4)
 				this.setSize(this.getSize()+i);
@@ -99,21 +99,25 @@ public class Tile {
 	}
 	
 	public void decrease(){
-		if(this.getSize() - 1 <= 0)
-			this.setSize(0);
-		else
-			this.setSize(this.getSize() - 1);
+		if(this.getBonus() != 2)
+		{
+			if(this.getSize() - 1 <= 0)
+				this.setSize(0);
+			else
+				this.setSize(this.getSize() - 1);
+		}
+		
 	}
 	
 	public void reinitialize(){
 		this.setType(0);
 		this.setBonus(0);
 		this.setSize(0);
-		this.setIrrigated(false);
+		this.setRoaded(false);
 		this.setValid(false);
 		this.setSelected(false);
 		for(int i=0; i<6; i++) {
-			irrigations.set(i, false);
+			roads.set(i, false);
 		}
 		this.owner = 0;
 	}
@@ -227,16 +231,16 @@ public class Tile {
 		return isSelected;
 	}
 	
-	public boolean isIrrigated() {
-		return isIrrigated;
+	public boolean isRoaded() {
+		return isRoaded;
 	}
 	
 	public boolean isValid() {
 		return isValid;
 	}
 	
-	public List<Boolean> getIrrigations() {
-		return irrigations;
+	public List<Boolean> getRoads() {
+		return roads;
 	}
 	
 	public int getX() {
@@ -268,24 +272,24 @@ public class Tile {
 		this.isSelected = isSelected;
 	}
 
-	public void setIrrigated(boolean isIrrigated) {
-		this.isIrrigated = isIrrigated;
+	public void setRoaded(boolean isRoaded) {
+		this.isRoaded = isRoaded;
 	}
 
 	public void setValid(boolean isValid) {
 		this.isValid = isValid;
 	}
 	
-	public void setIrrigations(Tile adj) {
+	public void setRoads(Tile adj) {
 		
-		this.setIrrigated(true);
+		this.setRoaded(true);
 		int position = 0;
 		
 		for(Tile t : this.getAdjacentTiles()) 
 		{
 			if(t.posX == adj.posX && t.posY == adj.posY) 
 			{
-				this.irrigations.set(position, true);
+				this.roads.set(position, true);
 			}
 			position++;
 		}

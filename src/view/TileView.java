@@ -39,14 +39,14 @@ public class TileView
 		return new Polygon(xHex, yHex, 6);
 	}
 	
-	public static void drawIrrigations(int i, int j, Tile p, Graphics2D g2) {
+	public static void drawRoads(int i, int j, Tile p, Graphics2D g2) {
 		int x = i * (s+t) + Frame.BORDERS;
 		int y = j * h + (i%2) * h/2 + Frame.BORDERS;
 		
-		if(p.isIrrigated()) {
+		if(p.isRoaded()) {
 			g2.setStroke(new BasicStroke(4));
-			g2.setColor(Color.BLUE);
-			List<Boolean> irrigations = p.getIrrigations();
+			g2.setColor(Color.darkGray);
+			List<Boolean> irrigations = p.getRoads();
 			
 			for(int a=0; a<irrigations.size(); a++) {
 				if(irrigations.get(a)) {
@@ -100,6 +100,22 @@ public class TileView
 		else
 			g2.drawImage(img, x+Frame.BORDERS, y+Frame.BORDERS, 102, 90, bv);
 		
+		if(p.getBonus() > 0)
+		{
+			try {
+				
+				if(p.getBonus() == 1)
+					img = ImageIO.read(new File(path+"bonusTools.png"));
+				else
+					img = ImageIO.read(new File(path+"bonusDefense.png"));
+			}
+	    	catch (IOException e) {
+	    		e.printStackTrace();
+			}
+			
+			g2.drawImage(img, x+Frame.BORDERS + 25, y+Frame.BORDERS + 3, 20, 20, bv);
+		}
+		
 		
 		for(Tile tile : p.getValidTiles())
 		{
@@ -146,15 +162,12 @@ public class TileView
 		int x = (int) (mx / (s+t)); //this gives a quick value for x. It works only on odd cols and doesn't handle the triangle sections. It assumes that the hexagon is a rectangle with width s+t (=1.5*s).
 		int y = (int) ((my - (x%2)*r)/h); //this gives the row easily. It needs to be offset by h/2 (=r)if it is in an even column
 
-		/******FIX for clicking in the triangle spaces (on the left side only)*******/
 		//dx,dy are the number of pixels from the hex boundary. (ie. relative to the hex clicked in)
 		int dx = mx - x*(s+t);
 		int dy = my - y*h;
 
 		if (my - (x%2)*r < 0) return p; // prevent clicking in the open halfhexes at the top of the screen
 
-		//System.out.println("dx=" + dx + " dy=" + dy + "  > " + dx*r/t + " <");
-		
 		//even columns
 		if (x%2==0) {
 			if (dy > r) {	//bottom half of hexes
@@ -168,7 +181,9 @@ public class TileView
 					y--;
 				}
 			}
-		} else {  // odd columns
+		} 
+		else 
+		{  // odd columns
 			if (dy > h) {	//bottom half of hexes
 				if (dx * r/t < dy - h) {
 					x--;
@@ -176,12 +191,12 @@ public class TileView
 				}
 			}
 			if (dy < h) {	//top half of hexes
-				//System.out.println("" + (t- dx)*r/t +  " " + (dy - r));
 				if ((t - dx)*r/t > dy - r) {
 					x--;
 				}
 			}
 		}
+		
 		p.x=x;
 		p.y=y;
 		return p;

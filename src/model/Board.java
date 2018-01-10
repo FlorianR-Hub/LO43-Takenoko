@@ -18,8 +18,8 @@ public class Board {
 		Tile[] adjTiles = board[3][3].getAdjacentTiles();
 		
 		for(Tile t : adjTiles) {
-			board[5][5].setIrrigations(t);
-			t.setIrrigated(true);
+			board[3][3].setRoads(t);
+			t.setRoaded(true);
 		};
 	}
 	

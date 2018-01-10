@@ -6,14 +6,14 @@ import java.util.List;
 public class Player {
 
 	/**
-	 * nbBamboos: Array with amount of bamboos of each type;
+	 * nbStones: Array with amount of stones of each type;
 	 * nbBonus: Array with amount of bonus of each type;
 	 * weather: 1=sun / 2=rain / 3=wind / 4=storm / 5=cloudy / 6=? / 0=1st round;
 	 */
 	private int score;
-	private int nbBamboos[] = new int[3];
+	private int nbStones[] = new int[3];
 	private int nbBonus[] = new int[3];
-	private int nbIrrig;
+	private int nbRoad;
 	private int weather;
 	private int numPlayer;
 	private List<Integer> actions;	
@@ -25,11 +25,11 @@ public class Player {
 		this.setScore(0);
 		for(int i=0; i<3; i++)
 		{
-			this.setNbBamboos(i, 0);
+			this.setNbStones(i, 0);
 			this.setNbBonus(i, 0);
 		}
 			
-		this.setnbIrrig(0);
+		this.setNbRoad(0);
 		this.setWeather(0);
 		this.setNumPlayer(numPlayer);
 		this.setRoundCompleted(false);
@@ -40,14 +40,14 @@ public class Player {
 		this.tile = new Tile(0,0);
 	}
 	
-	public Player(int score, int bambousVert, int bambousJaune, int bambousRose, int nbIrrig, int effetMeteo, int numPlayer)
+	public Player(int score, int stoneGreen, int stoneBlue, int stoneOrange, int nbRoad, int effetMeteo, int numPlayer)
 	{
 		this.setScore(score);
-		this.nbBamboos[0] = bambousVert;
-		this.nbBamboos[1] = bambousJaune;
-		this.nbBamboos[2] = bambousRose;
+		this.nbStones[0] = stoneGreen;
+		this.nbStones[1] = stoneBlue;
+		this.nbStones[2] = stoneOrange;
 		
-		this.setnbIrrig(nbIrrig);
+		this.setNbRoad(nbRoad);
 		this.setWeather(effetMeteo);
 		this.setNumPlayer(numPlayer);
 		this.setRoundCompleted(false);
@@ -70,12 +70,12 @@ public class Player {
 		this.weather = 1 + (int)(Math.random() * 6);
 	}
 
-	public int getnbIrrig() {
-		return nbIrrig;
+	public int getNbRoad() {
+		return nbRoad;
 	}
 
-	public void setnbIrrig(int nbIrrig) {
-		this.nbIrrig = nbIrrig;
+	public void setNbRoad(int nbRoad) {
+		this.nbRoad = nbRoad;
 	}
 
 	public int getScore() {
@@ -86,12 +86,12 @@ public class Player {
 		this.score = score;
 	}
 
-	public int getNbBamboos(int type) {
-		return nbBamboos[type];
+	public int getNbStones(int type) {
+		return nbStones[type];
 	}
 
-	public void setNbBamboos(int type, int value) {
-		this.nbBamboos[type] = value;
+	public void setNbStones(int type, int value) {
+		this.nbStones[type] = value;
 	}
 	
 	public int getNbBonus(int type) {

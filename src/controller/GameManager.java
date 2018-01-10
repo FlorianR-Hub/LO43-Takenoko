@@ -99,7 +99,7 @@ public class GameManager extends Thread {
 	public void playerTurn(Player p)
 	{
 		p.clearActions();
-		TrayView.deselectAllActions();
+		TrayView.deselectAllButtons();
 		p.setRoundCompleted(false);
 		p.randWeather();
 	}

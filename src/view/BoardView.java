@@ -14,8 +14,8 @@ import javax.swing.JPanel;
 import controller.GUI;
 import controller.GameManager;
 import model.Board;
-import model.Gardener;
-import model.Panda;
+import model.Architect;
+import model.Monster;
 import model.Tile;
 
 public class BoardView extends JPanel implements MouseListener {
@@ -25,8 +25,8 @@ public class BoardView extends JPanel implements MouseListener {
 	private static Vector<Tile> v = new Vector<Tile>(); 
 	private static int action = 0;
 	
-	private static Panda panda = new Panda(3,3,"P");
-	private static Gardener gardener = new Gardener(3,3,"G");
+	private static Monster monster = new Monster(3,3,"P");
+	private static Architect architect = new Architect(3,3,"G");
 
 	public BoardView()
 	{	
@@ -52,10 +52,10 @@ public class BoardView extends JPanel implements MouseListener {
 		for (int i=0;i<Board.BSIZE;i++)
 			for (int j=0;j<Board.BSIZE;j++)
 				if(Board.getBoard()[i][j].getType() > 0)
-					TileView.drawIrrigations(i, j, Board.getBoard()[i][j], g2);
+					TileView.drawRoads(i, j, Board.getBoard()[i][j], g2);
 		
-		TileView.drawCharacter(panda, g2, this);
-		TileView.drawCharacter(gardener, g2, this);
+		TileView.drawCharacter(monster, g2, this);
+		TileView.drawCharacter(architect, g2, this);
 	}
 
 	public void clearVector(Vector<Tile> v) 
@@ -110,7 +110,7 @@ public class BoardView extends JPanel implements MouseListener {
 			case 2: // rain
 				if(e.getButton() == MouseEvent.BUTTON1)
 				{
-					if(t.isValid() && t.isIrrigated() && t.getType() != 0)
+					if(t.isValid() && t.isRoaded() && t.getType() != 0)
 					{
 						t.increase();
 						GUI.getPlayer().setWeather(0);
@@ -120,9 +120,9 @@ public class BoardView extends JPanel implements MouseListener {
 			case 4: // storm
 				if(e.getButton() == MouseEvent.BUTTON1)
 				{
-					if(panda.isMoveAllowed(t))
+					if(monster.isMoveAllowed(t))
 					{
-						panda.move(t);
+						monster.move(t);
 						GUI.getPlayer().setWeather(0);
 					}
 				}
@@ -153,21 +153,21 @@ public class BoardView extends JPanel implements MouseListener {
 					}
 				}
 				break;
-			case 3: // Action Panda
-				if(panda.isMoveAllowed(t))
+			case 3: // Action Monster
+				if(monster.isMoveAllowed(t))
 				{
-					panda.move(t);
+					monster.move(t);
 					action = 0;
 				}
 				break;
-			case 4: // Action Gardener
-				if(gardener.isMoveAllowed(t))
+			case 4: // Action Architect
+				if(architect.isMoveAllowed(t))
 				{
-					gardener.move(t);
+					architect.move(t);
 					action = 0;
 				}
 				break;
-			case 6: // Action Irrigation
+			case 6: // Action Road
 				if(e.getButton() == MouseEvent.BUTTON1) {
 					if(v.size() < 2) {
 						v.add(t);
@@ -175,14 +175,14 @@ public class BoardView extends JPanel implements MouseListener {
 					}
 					
 					if(v.size() == 2) {	
-						if(GUI.getPlayer().getnbIrrig() > 0)
+						if(GUI.getPlayer().getNbRoad() > 0)
 						{
 							if( v.firstElement().isAdjacent(v.lastElement()) ) {
-								v.firstElement().setIrrigations(v.lastElement());
-								v.lastElement().setIrrigations(v.firstElement());
-								GUI.getPlayer().setnbIrrig(GUI.getPlayer().getnbIrrig() - 1);
+								v.firstElement().setRoads(v.lastElement());
+								v.lastElement().setRoads(v.firstElement());
+								GUI.getPlayer().setNbRoad(GUI.getPlayer().getNbRoad() - 1);
 								clearVector(v);
-								TrayView.deselectAction("irrigation");
+								TrayView.deselectAction("roads");
 								action = 0;
 							}
 						}
@@ -193,7 +193,25 @@ public class BoardView extends JPanel implements MouseListener {
 				}
 				else if(e.getButton() == MouseEvent.BUTTON3) {
 					clearVector(v);
-					TrayView.deselectAction("irrigation");
+					TrayView.deselectAction("roads");
+					action = 0;
+				}
+				break;
+			case 7: // Action Bonus Tools
+				if(t.getBonus() == 0 && t.getSize() == 0)
+				{
+					t.setBonus(1);
+					GUI.getPlayer().setNbBonus(0, GUI.getPlayer().getNbBonus(0) - 1);
+					TrayView.deselectAction("bonusTools");
+					action = 0;
+				}
+				break;
+			case 8: // Action Bonus Defense
+				if(t.getBonus() == 0 && t.getSize() == 0)
+				{
+					t.setBonus(2);
+					GUI.getPlayer().setNbBonus(1, GUI.getPlayer().getNbBonus(1) - 1);
+					TrayView.deselectAction("bonusDefense");
 					action = 0;
 				}
 				break;
@@ -224,20 +242,20 @@ public class BoardView extends JPanel implements MouseListener {
 	}
 	
 	
-	public static Panda getPanda() {
-		return panda;
+	public static Monster getMonster() {
+		return monster;
 	}
 
-	public static void setPanda(Panda panda) {
-		BoardView.panda = panda;
+	public static void setMonster(Monster monster) {
+		BoardView.monster = monster;
 	}
 
-	public static Gardener getGardener() {
-		return gardener;
+	public static Architect getArchitect() {
+		return architect;
 	}
 
-	public static void setGardener(Gardener gardener) {
-		BoardView.gardener = gardener;
+	public static void setArchitect(Architect architect) {
+		BoardView.architect = architect;
 	}
 	
 	public static int getAction() {
