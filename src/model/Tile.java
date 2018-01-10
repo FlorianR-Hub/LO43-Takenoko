@@ -22,6 +22,7 @@ public class Tile {
 	private boolean isRoaded;
 	private List<Boolean> roads;
 	private boolean isValid;
+	private boolean isFirstAccessToRoadDone; // a renommer ^^
 	private int owner; //0: no one
 	
 	// CONSTRUCTORS -------------------------
@@ -43,6 +44,7 @@ public class Tile {
 			roads.add(false);
 		}
 		this.owner = 0;
+		this.setFirstAccessToRoadDone(false);
 	}
 	
 	/* Constructor with positions: 
@@ -62,6 +64,7 @@ public class Tile {
 			roads.add(false);
 		}
 		this.owner = 0;
+		this.setFirstAccessToRoadDone(false);
 	}
 	
 	public Color getColor() {
@@ -254,6 +257,10 @@ public class Tile {
 		return owner;
 	}
 	
+	public boolean isFirstAccessToRoadDone() {
+		return isFirstAccessToRoadDone;
+	}
+	
 	// SETTERS ------------------------------
 	
 	public void setType(int type) {
@@ -273,6 +280,11 @@ public class Tile {
 	}
 
 	public void setRoaded(boolean isRoaded) {
+		if(isRoaded && !this.isFirstAccessToRoadDone)
+		{
+			this.increase();
+			this.setFirstAccessToRoadDone(true);
+		}
 		this.isRoaded = isRoaded;
 	}
 
@@ -305,6 +317,10 @@ public class Tile {
 	
 	public void setOwner(int owner) {
 		this.owner = owner;
+	}
+
+	public void setFirstAccessToRoadDone(boolean isFirstAccessToRoadDone) {
+		this.isFirstAccessToRoadDone = isFirstAccessToRoadDone;
 	}
 
 }

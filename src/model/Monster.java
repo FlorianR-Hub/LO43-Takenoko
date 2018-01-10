@@ -17,7 +17,7 @@ public class Monster extends Character {
 	public void eat(Tile t) {
 		int type = t.getType() - 1;
 		
-		if(t.getSize() > 0)
+		if(t.getSize() > 0 && t.getBonus() != 2)
 			GUI.getPlayer().setNbStones(type, GUI.getPlayer().getNbStones(type) + 1);
 		
 		t.decrease();			

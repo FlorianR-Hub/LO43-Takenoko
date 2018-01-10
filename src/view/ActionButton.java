@@ -106,6 +106,7 @@ public class ActionButton extends Button {
 						GUI.getPlayer().setNbBonus(0, GUI.getPlayer().getNbBonus(0) + 1);
 					else
 						GUI.getPlayer().setNbBonus(1, GUI.getPlayer().getNbBonus(1) + 1);
+					
 					GUI.getPlayer().setWeather(0);
 				}
 				else if(GUI.getPlayer().getNbBonus((imgName == "bonusTools") ? 0 : 1) > 0)
