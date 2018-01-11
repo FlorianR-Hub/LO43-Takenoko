@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GoalsTile extends Goal{
 
 	public GoalsTile() {
@@ -12,4 +15,10 @@ public class GoalsTile extends Goal{
 		return isValid;
 	}
 
+	public static List<Goal> initGoals(){
+		List<Goal> goalsTile = new ArrayList<Goal>();
+		
+		return goalsTile;
+	}
+	
 }

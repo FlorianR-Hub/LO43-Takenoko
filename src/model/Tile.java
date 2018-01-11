@@ -10,7 +10,7 @@ public class Tile {
 
 	/**
 	 * type: 1=green / 2=yellow / 3=pink / 4=pond / 0=void
-	 * bonus: 1=enclosure / 2=fertilizer / 3=pool / 0=void
+	 * bonus: 1=tools / 2=defense / 0=void
 	 * size: size of the bamboo placed on the tile
 	 */
 	private int posX;

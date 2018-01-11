@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GoalsPanda extends Goal{
 
 	/**
@@ -17,14 +20,32 @@ public class GoalsPanda extends Goal{
 	}
 
 	public boolean isValid(Player p) {
-		
 		if(this.color < 4)
-			if(p.getNbStones(color) == 2)
+			if(p.getNbStones(color) >= 2) {
+				p.setNbStones(color, p.getNbStones(color)-2);
 				isValid = true;
+			}
 		else
-			if(p.getNbStones(0) == 1 && p.getNbStones(1) == 1 && p.getNbStones(2) == 1)
+			if(p.getNbStones(0) >= 1 && p.getNbStones(1) >= 1 && p.getNbStones(2) >= 1) {
+				p.setNbStones(0, p.getNbStones(0)-1);
+				p.setNbStones(1, p.getNbStones(1)-1);
+				p.setNbStones(2, p.getNbStones(2)-1);
 				isValid = true;
-		
+			}
+
 		return isValid;
+	}
+	
+	public static List<Goal> initGoals(){
+		List<Goal> goalsPanda = new ArrayList<Goal>();
+		for(int i=0; i<5; i++)
+			goalsPanda.add(new GoalsPanda(1,3));
+		for(int i=0; i<4; i++)
+			goalsPanda.add(new GoalsPanda(2,4));
+		for(int i=0; i<3; i++)
+			goalsPanda.add(new GoalsPanda(3,5));
+		for(int i=0; i<3; i++)
+			goalsPanda.add(new GoalsPanda(4,6));
+		return goalsPanda;
 	}
 }

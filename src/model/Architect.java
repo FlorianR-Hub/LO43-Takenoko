@@ -19,11 +19,4 @@ public class Architect extends Character{
 			if(tile.getType() == t.getType())
 				tile.increase();					
 	}
-
-	public boolean isMoveAllowed(Tile t) {		
-		if(t.getType() == 0)
-			return false;
-		
-		return true;
-	}
 }

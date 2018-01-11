@@ -14,7 +14,82 @@ public abstract class Character {
 	
 	public abstract void move(Tile t);
 
-	public abstract boolean isMoveAllowed(Tile t);
+	public boolean isMoveAllowed(Tile t) {
+		
+		if(this.isStraightLine(t)) {
+			int direction = 0;
+			int distance = 0;
+			Tile currentTile = Board.getBoard()[posX][posY];
+			
+			if(posX > t.getX() && posY > t.getY()) {
+				direction = 0;
+				distance = posX - t.getX(); 
+			}
+			else if(posX == t.getX() && posY > t.getY()) {
+				direction = 1;
+				distance = posY - t.getY();
+			}
+			else if(posX < t.getX() && posY > t.getY()) {
+				direction = 2;
+				distance = t.getX() - posX;
+			}
+			else if(posX < t.getX() && posY <= t.getY()) {
+				direction = 3;
+				distance = t.getX() - posX;
+			}
+			else if(posX == t.getX() && posY < t.getY()) {
+				direction = 4;
+				distance = t.getY() - posY;
+			}
+			else if(posX > t.getX() && posY <= t.getY()) {
+				direction = 5;
+				distance = posX - t.getX(); 
+			}
+			
+			for(int i=0; i<distance; i++) {
+				if(currentTile.getAdjacentTiles()[direction].getType() != 0)
+					currentTile = currentTile.getAdjacentTiles()[direction];
+				else
+					return false;
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean isStraightLine(Tile t) {
+		
+		if(posX == t.getX()) {
+			return true;
+		}
+		else if(posX%2 == 0 && t.getX()%2 == 0 || posX%2 == 1 && t.getX()%2 == 1) {
+			if( Math.abs(posY - t.getY()) == Math.abs(posX - t.getX())/2 )
+				return true;	
+		}
+		else if(t.getY() - posY >= 0 && posX%2 == 0 && t.getX()%2 == 1) {
+			//System.out.println("y+ pair > impair");
+			if( Math.abs(posY - t.getY()) == (Math.abs(posX - t.getX())-1)/2 )
+				return true;	
+		}
+		else if(t.getY() - posY > 0 && posX%2 == 1 && t.getX()%2 == 0) {
+			//System.out.println("y+ impair > pair");
+			if( Math.abs(posY - t.getY()) == (Math.abs(posX - t.getX())+1)/2 )
+				return true;		
+		}
+		else if(t.getY() - posY < 0 && posX%2 == 0 && t.getX()%2 == 1) {
+			//System.out.println("y- pair > impair");
+			if( Math.abs(posY - t.getY()) == (Math.abs(posX - t.getX())+1)/2 )
+				return true;	
+		}
+		else if(t.getY() - posY <= 0 && posX%2 == 1 && t.getX()%2 == 0) {
+			//System.out.println("y- impair > pair");
+			if( Math.abs(posY - t.getY()) == (Math.abs(posX - t.getX())-1)/2 )
+				return true;		
+		}
+		return false;
+	}
 	
 	public int getPosX() {
 		return posX;

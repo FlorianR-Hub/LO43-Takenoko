@@ -22,11 +22,4 @@ public class Monster extends Character {
 		
 		t.decrease();			
 	}
-	
-	public boolean isMoveAllowed(Tile t) {
-		if(t.getType() == 0)
-			return false;
-		
-		return true;
-	}
 }

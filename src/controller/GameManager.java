@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 import model.Goal;
+import model.GoalsGardener;
+import model.GoalsPanda;
+import model.GoalsTile;
 //import java.util.Scanner;
 import model.Player;
 import model.Tile;
@@ -44,30 +47,40 @@ public class GameManager extends Thread {
 		this.nbPlayers = keyboard.nextInt();
 		keyboard.close();*/
 		
-		for(int i=0; i<12; i++)
+		for(int i=0; i<8; i++) {
 			draw.add(new Tile(1,0));
+		}
+		draw.add(new Tile(1,1));
+		draw.add(new Tile(1,2));
+		draw.add(new Tile(1,2));
 		
-		for(int i=0; i<10; i++)
+		for(int i=0; i<7; i++) {
 			draw.add(new Tile(2,0));
+		}
+		draw.add(new Tile(2,1));
+		draw.add(new Tile(2,2));
 		
-		for(int i=0; i<8; i++)
+		for(int i=0; i<5; i++) {
 			draw.add(new Tile(3,0));
+		}
+		draw.add(new Tile(3,1));
+		draw.add(new Tile(3,2));
 		
 		Collections.shuffle(draw);
 		
 		// Initialize Goals' Lists
-		goalsPanda.addAll(Goal.initGoalsPanda());
+		goalsPanda.addAll(GoalsPanda.initGoals());
 		Collections.shuffle(goalsPanda);
-		goalsGardener.addAll(Goal.initGoalsGardener());
+		goalsGardener.addAll(GoalsGardener.initGoals());
 		Collections.shuffle(goalsGardener);
-		goalsTile.addAll(Goal.initGoalsTile());
+		goalsTile.addAll(GoalsTile.initGoals());
 		Collections.shuffle(goalsTile);
 		
-		/*
+		
 		System.out.println(goalsGardener.size());
 		System.out.println(goalsPanda.size());
 		System.out.println(goalsTile.size());
-		*/
+		
 		
 		this.setNbPlayers(4);
 		

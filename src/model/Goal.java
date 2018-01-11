@@ -1,7 +1,5 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Goal {
 
@@ -29,45 +27,6 @@ public abstract class Goal {
 	}
 
 	public abstract boolean isValid(Player p);
-
-	public static List<Goal> initGoalsPanda(){
-		List<Goal> goalsPanda = new ArrayList<Goal>();
-		for(int i=0; i<5; i++)
-			goalsPanda.add(new GoalsPanda(1,3));
-		for(int i=0; i<4; i++)
-			goalsPanda.add(new GoalsPanda(2,4));
-		for(int i=0; i<3; i++)
-			goalsPanda.add(new GoalsPanda(3,5));
-		for(int i=0; i<3; i++)
-			goalsPanda.add(new GoalsPanda(4,6));
-		return goalsPanda;
-	}
-	
-	public static List<Goal> initGoalsGardener(){
-		List<Goal> goalsGardener = new ArrayList<Goal>();
-		goalsGardener.add(new GoalsGardener(1,4,1,0,5));
-		goalsGardener.add(new GoalsGardener(1,4,1,1,4));
-		goalsGardener.add(new GoalsGardener(1,4,1,2,3));
-		goalsGardener.add(new GoalsGardener(1,4,1,3,4));
-		goalsGardener.add(new GoalsGardener(1,4,2,0,6));
-		goalsGardener.add(new GoalsGardener(1,4,2,1,5));
-		goalsGardener.add(new GoalsGardener(1,4,2,2,4));
-		goalsGardener.add(new GoalsGardener(1,4,2,3,5));
-		goalsGardener.add(new GoalsGardener(1,4,3,0,7));
-		goalsGardener.add(new GoalsGardener(1,4,3,1,6));
-		goalsGardener.add(new GoalsGardener(1,4,3,2,5));
-		goalsGardener.add(new GoalsGardener(1,4,3,3,6));
-		goalsGardener.add(new GoalsGardener(2,3,1,0,6));
-		goalsGardener.add(new GoalsGardener(3,3,2,0,7));
-		goalsGardener.add(new GoalsGardener(4,3,3,0,8));
-		return goalsGardener;
-	}
-	
-	public static List<Goal> initGoalsTile(){
-		List<Goal> goalsTile = new ArrayList<Goal>();
-		
-		return goalsTile;
-	}
 	
 	public int getPoints() {
 		return points;
@@ -79,5 +38,9 @@ public abstract class Goal {
 
 	public void setOwner(int owner) {
 		this.owner = owner;
+	}
+	
+	public int getOwner() {
+		return this.owner;
 	}
 }
