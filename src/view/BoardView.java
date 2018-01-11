@@ -106,7 +106,7 @@ public class BoardView extends JPanel implements MouseListener {
 			case 2: // rain
 				if(e.getButton() == MouseEvent.BUTTON1)
 				{
-					if(t.isValid() && t.isRoaded() && t.getType() != 0)
+					if(t.getType() != 0)
 					{
 						t.increase();
 						GUI.getPlayer().setWeather(0);

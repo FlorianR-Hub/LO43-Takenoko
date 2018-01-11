@@ -77,7 +77,6 @@ public class ActionButton extends Button {
 	 */
 	public void mousePressed(MouseEvent event) { 
 				
-		
 		switch(imgName)
 		{
 			case "endTurn":
@@ -166,8 +165,8 @@ public class ActionButton extends Button {
 						if(GUI.getPlayer().getWeather() != 3)
 							this.setVisible(false);
 						else
-						if(GUI.getPlayer().getActions().size() > 1)
-							this.setVisible(false);
+							if(GUI.getPlayer().getActions().size() > 1)
+								this.setVisible(false);
 					}
 					
 				}

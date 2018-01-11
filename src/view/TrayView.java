@@ -16,17 +16,17 @@ public class TrayView extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private static List<ActionButton> buttons = new ArrayList<ActionButton>();
+	private List<Picture> bonus = new ArrayList<Picture>();
 	private List<Picture> images = new ArrayList<Picture>();
 	
 	private Picture tray = new Picture("tray.png", 20, 0, 740, 590);
 	private Picture draw = new Picture("draw.png", 50, 660);
 	
-	private Picture sun = new Picture("weather_sun.png", 40, 255);
-	private Picture rain = new Picture("weather_rain.png", 132, 255);
-	private Picture wind = new Picture("weather_wind.png", 224, 255);
-	private Picture storm = new Picture("weather_storm.png", 320, 255);
-	private Picture cloudy = new Picture("weather_cloudy.png", 412, 255);
-	private Picture choice = new Picture("weather_choice.png", 508, 255);
+	private Picture bonus_one_more_action = new Picture("bonus_one_more_action.png", 41, 253, 121, 86);
+	private Picture bonus_upgrade_house = new Picture("bonus_upgrade_house.png", 133, 253, 121, 86);
+	private Picture bonus_same_action = new Picture("bonus_same_action.png", 226, 253, 121, 86);
+	private Picture bonus_move_monster = new Picture("bonus_move_monster.png", 319, 253, 121, 86);
+	private Picture bonus_help = new Picture("bonus_help.png", 412, 253, 121, 86);
 	
 	private ActionButton actionTiles = new ActionButton("tile", 85, 408, 90, 90);
 	private ActionButton actionRoad = new ActionButton("road", 185, 408, 90, 90);
@@ -92,12 +92,12 @@ public class TrayView extends JPanel {
 		this.add(nbBonusDefense);
 		
 		
-		images.add(sun);
-		images.add(rain);
-		images.add(wind);
-		images.add(storm);
-		images.add(cloudy);
-		images.add(choice);
+		bonus.add(bonus_one_more_action);
+		bonus.add(bonus_upgrade_house);
+		bonus.add(bonus_same_action);
+		bonus.add(bonus_move_monster);
+		bonus.add(bonus_help);
+		
 		images.add(stoneGreen);
 		images.add(stoneBlue);
 		images.add(stoneOrange);
@@ -119,8 +119,14 @@ public class TrayView extends JPanel {
 		for(ActionButton button : buttons)
 			this.add(button);
 		
-		for(Picture w : images)
-			this.add(w);
+		for(Picture b : bonus)
+		{
+			this.add(b);
+			b.setVisible(false);
+		}
+			
+		for(Picture i : images)
+			this.add(i);
 		
 		
 		this.setBackground(TileView.COLOURBACK);
@@ -141,37 +147,12 @@ public class TrayView extends JPanel {
 		
 		this.nbBonusTools.setText(""+ p.getNbBonus(0));
 		this.nbBonusDefense.setText(""+ p.getNbBonus(1));
+				
+		for(Picture b : bonus)
+			b.setVisible(false);
 		
-		this.sun.setBounds(40, 255, 80, 111);
-		this.rain.setBounds(132, 255, 80, 111);
-		this.wind.setBounds(224, 255, 80, 111);
-		this.storm.setBounds(320, 255, 80, 111);
-		this.cloudy.setBounds(412, 255, 80, 111);
-		this.choice.setBounds(508, 255, 80, 111);
-		
-		switch(p.getWeather())
-		{
-			case 1:
-				this.sun.setBounds(37, 255, 87, 121);
-				break;
-			case 2:
-				this.rain.setBounds(129, 255, 87, 121);
-				break;
-			case 3:
-				this.wind.setBounds(221, 255, 87, 121);
-				break;
-			case 4:
-				this.storm.setBounds(317, 255, 87, 121);
-				break;
-			case 5:
-				this.cloudy.setBounds(409, 255, 87, 121);
-				break;
-			case 6:
-				this.choice.setBounds(505, 255, 87, 121);
-				break;
-			default:
-				break;
-		}
+		if(p.getWeather() > 0)
+			bonus.get(p.getWeather() - 1).setVisible(true);
 		
 		this.repaint();
 	}

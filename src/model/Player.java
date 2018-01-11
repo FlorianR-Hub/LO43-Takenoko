@@ -67,7 +67,7 @@ public class Player {
 	}
 	
 	public void randWeather() {
-		this.weather = 1 + (int)(Math.random() * 6);
+		this.weather = 1 + (int)(Math.random() * 5);
 	}
 
 	public int getNbRoad() {

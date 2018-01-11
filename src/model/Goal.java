@@ -33,7 +33,7 @@ public abstract class Goal {
 	public static List<Goal> initGoalsPanda(){
 		List<Goal> goalsPanda = new ArrayList<Goal>();
 		for(int i=0; i<5; i++)
-			goalsPanda.add(new GoalsPanda(1, 3));
+			goalsPanda.add(new GoalsPanda(1,3));
 		for(int i=0; i<4; i++)
 			goalsPanda.add(new GoalsPanda(2,4));
 		for(int i=0; i<3; i++)
