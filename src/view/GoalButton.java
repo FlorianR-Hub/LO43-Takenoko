@@ -24,8 +24,8 @@ public class GoalButton extends Button{
 		this.type = type;
 		switch(type) {
 		case 1:
-			//random = (int) ( Math.random() * GameManager.getGoalsTile().size() );
-			//this.goal = GameManager.getGoalsTile().get(random);
+			random = (int) ( Math.random() * GameManager.getGoalsTile().size() );
+			this.goal = GameManager.getGoalsTile().get(random);
 			break;
 		case 2:
 			random = (int) ( Math.random() * GameManager.getGoalsPanda().size() );

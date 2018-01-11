@@ -21,29 +21,57 @@ public abstract class Character {
 			int distance = 0;
 			Tile currentTile = Board.getBoard()[posX][posY];
 			
-			if(posX > t.getX() && posY > t.getY()) {
-				direction = 0;
-				distance = posX - t.getX(); 
+			if(posX%2 == 0) {
+				if(posX > t.getX() && posY > t.getY()) {//b
+					direction = 0;
+					distance = posX - t.getX(); 
+				}
+				else if(posX == t.getX() && posY > t.getY()) {
+					direction = 1;
+					distance = posY - t.getY();
+				}
+				else if(posX < t.getX() && posY > t.getY()) { //a
+					direction = 2;
+					distance = t.getX() - posX;
+				}
+				else if(posX < t.getX() && posY <= t.getY()) { //a
+					direction = 3;
+					distance = t.getX() - posX;
+				}
+				else if(posX == t.getX() && posY < t.getY()) {
+					direction = 4;
+					distance = t.getY() - posY;
+				}
+				else if(posX > t.getX() && posY <= t.getY()) {//b
+					direction = 5;
+					distance = posX - t.getX(); 
+				}
 			}
-			else if(posX == t.getX() && posY > t.getY()) {
-				direction = 1;
-				distance = posY - t.getY();
-			}
-			else if(posX < t.getX() && posY > t.getY()) {
-				direction = 2;
-				distance = t.getX() - posX;
-			}
-			else if(posX < t.getX() && posY <= t.getY()) {
-				direction = 3;
-				distance = t.getX() - posX;
-			}
-			else if(posX == t.getX() && posY < t.getY()) {
-				direction = 4;
-				distance = t.getY() - posY;
-			}
-			else if(posX > t.getX() && posY <= t.getY()) {
-				direction = 5;
-				distance = posX - t.getX(); 
+			else {
+				if(posX > t.getX() && posY >= t.getY()) {//b
+					direction = 0;
+					distance = posX - t.getX(); 
+				}
+				else if(posX == t.getX() && posY > t.getY()) {
+					direction = 1;
+					distance = posY - t.getY();
+				}
+				else if(posX < t.getX() && posY >= t.getY()) { //a
+					direction = 2;
+					distance = t.getX() - posX;
+				}
+				else if(posX < t.getX() && posY < t.getY()) { //a
+					direction = 3;
+					distance = t.getX() - posX;
+				}
+				else if(posX == t.getX() && posY < t.getY()) {
+					direction = 4;
+					distance = t.getY() - posY;
+				}
+				else if(posX > t.getX() && posY < t.getY()) {//b
+					direction = 5;
+					distance = posX - t.getX(); 
+				}
 			}
 			
 			for(int i=0; i<distance; i++) {
