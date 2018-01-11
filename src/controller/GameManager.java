@@ -5,8 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 import model.Goal;
-import model.GoalsGardener;
-import model.GoalsPanda;
+import model.GoalsArchitect;
+import model.GoalsMonster;
 import model.GoalsTile;
 //import java.util.Scanner;
 import model.Player;
@@ -69,9 +69,9 @@ public class GameManager extends Thread {
 		Collections.shuffle(draw);
 		
 		// Initialize Goals' Lists
-		goalsPanda.addAll(GoalsPanda.initGoals());
+		goalsPanda.addAll(GoalsMonster.initGoals());
 		Collections.shuffle(goalsPanda);
-		goalsGardener.addAll(GoalsGardener.initGoals());
+		goalsGardener.addAll(GoalsArchitect.initGoals());
 		Collections.shuffle(goalsGardener);
 		goalsTile.addAll(GoalsTile.initGoals());
 		Collections.shuffle(goalsTile);

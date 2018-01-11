@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoalsPanda extends Goal{
+public class GoalsMonster extends Goal{
 
 	/**
 	 * color : 	1=green / 2=yellow / 3=pink / 4=multicolor
@@ -13,7 +13,7 @@ public class GoalsPanda extends Goal{
 	 */
 	private int color;
 	
-	public GoalsPanda(int c, int p) {
+	public GoalsMonster(int c, int p) {
 		super(2);
 		this.color = c;
 		this.points = p;
@@ -37,15 +37,16 @@ public class GoalsPanda extends Goal{
 	}
 	
 	public static List<Goal> initGoals(){
-		List<Goal> goalsPanda = new ArrayList<Goal>();
+		List<Goal> goals = new ArrayList<Goal>();
 		for(int i=0; i<5; i++)
-			goalsPanda.add(new GoalsPanda(1,3));
+			goals.add(new GoalsMonster(1,3));
 		for(int i=0; i<4; i++)
-			goalsPanda.add(new GoalsPanda(2,4));
+			goals.add(new GoalsMonster(2,4));
 		for(int i=0; i<3; i++)
-			goalsPanda.add(new GoalsPanda(3,5));
+			goals.add(new GoalsMonster(3,5));
 		for(int i=0; i<3; i++)
-			goalsPanda.add(new GoalsPanda(4,6));
-		return goalsPanda;
+			goals.add(new GoalsMonster(4,6));
+		
+		return goals;
 	}
 }
