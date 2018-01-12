@@ -136,7 +136,7 @@ public class GameManager extends Thread {
 		TrayView.deselectAllButtons();
 		p.setRoundCompleted(false);
 		if(getNbTurn() > 0)
-			p.randWeather();
+			p.randDiceBonus();
 	}
 	
 	public static Player getWinner() {

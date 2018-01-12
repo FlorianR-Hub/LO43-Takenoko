@@ -72,7 +72,7 @@ public class Player {
 		this.diceBonus = diceBonus;
 	}
 	
-	public void randWeather() {
+	public void randDiceBonus() {
 		this.diceBonus = 1 + (int)(Math.random() * 5);
 	}
 
