@@ -3,17 +3,19 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import controller.GameManager;
+
 public class Player {
 
 	/**
 	 * nbStones: Array with amount of stones of each type;
 	 * nbBonus: Array with amount of bonus of each type;
-	 * weather: 1=sun / 2=rain / 3=wind / 4=storm / 5=cloudy / 6=? / 0=1st round;
 	 */
 	private int score;
 	private int nbStones[] = new int[3];
 	private int nbBonus[] = new int[3];
 	private int nbRoad;
+	private int nbGoalsCompleted;
 	private int weather;
 	private int numPlayer;
 	private List<Integer> actions;	
@@ -30,32 +32,35 @@ public class Player {
 		}
 			
 		this.setNbRoad(0);
+		this.setNbGoalsCompleted(0);
 		this.setWeather(0);
 		this.setNumPlayer(numPlayer);
 		this.setRoundCompleted(false);
 		
 		this.actions = new ArrayList<Integer>();
 		this.goals = new ArrayList<Goal>();
-		
+				
 		this.tile = new Tile(0,0);
+		
+		this.setHand();
 	}
-	
-	public Player(int score, int stoneGreen, int stoneBlue, int stoneOrange, int nbRoad, int effetMeteo, int numPlayer)
-	{
-		this.setScore(score);
-		this.nbStones[0] = stoneGreen;
-		this.nbStones[1] = stoneBlue;
-		this.nbStones[2] = stoneOrange;
 		
-		this.setNbRoad(nbRoad);
-		this.setWeather(effetMeteo);
-		this.setNumPlayer(numPlayer);
-		this.setRoundCompleted(false);
+	public void setHand() {
 		
-		this.actions = new ArrayList<Integer>();
-		this.goals = new ArrayList<Goal>();
+		int random = (int) ( Math.random() * GameManager.getGoalsTile().size() );
+		Goal goal;
 		
-		this.tile = new Tile(0,0);
+		goal = GameManager.getGoalsTile().get(random);
+		this.goals.add(goal);
+		GameManager.getGoalsTile().remove(goal);
+		
+		goal = GameManager.getGoalsMonster().get(random);
+		this.goals.add(GameManager.getGoalsMonster().get(random));
+		GameManager.getGoalsMonster().remove(goal);
+		
+		goal = GameManager.getGoalsArchitect().get(random);
+		this.goals.add(GameManager.getGoalsArchitect().get(random));
+		GameManager.getGoalsArchitect().remove(goal);
 	}
 
 	public int getWeather() {
@@ -159,5 +164,13 @@ public class Player {
 	
 	public void addGoal(Goal g) {
 		goals.add(g);
+	}
+
+	public int getNbGoalsCompleted() {
+		return nbGoalsCompleted;
+	}
+
+	public void setNbGoalsCompleted(int nbGoalsCompleted) {
+		this.nbGoalsCompleted = nbGoalsCompleted;
 	}
 }

@@ -1,24 +1,26 @@
 package model;
 
+import java.awt.Image;
 
 public abstract class Goal {
 
+	protected static final String path = "img/";
+	
 	/**
 	 * isValid: goal valid or not
-	 * type   : 	1=tile / 2=panda / 3=gardener
+	 * type   : 	1=tile / 2=monster / 3=architect
 	 * points : points given if goal validated  
 	 * owner  : 	player who takes goal
 	 */
 	protected boolean isValid;
 	protected int type;
 	protected int points;
-	protected int owner;
+	protected Image img;
 	
 	public Goal() {
 		this.isValid = false;
 		this.type = 0;
 		this.points = 0;
-		this.owner = 0;
 	}
 	
 	public Goal(int type) {
@@ -35,12 +37,12 @@ public abstract class Goal {
 	public int getType() {
 		return type;
 	}
-
-	public void setOwner(int owner) {
-		this.owner = owner;
-	}
 	
-	public int getOwner() {
-		return this.owner;
+	public Image getImg() {
+		return img;
+	}
+
+	public void setImg(Image img) {
+		this.img = img;
 	}
 }

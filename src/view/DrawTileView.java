@@ -18,15 +18,26 @@ public class DrawTileView extends DrawView {
 	public void display() {	
 		GUI.getFrame().setEnabled(false);
 		
-		tile1 = new TileButton(GameManager.getDraw().get(0), 20, 25, 124, 143);
-		tile2 = new TileButton(GameManager.getDraw().get(1), 180, 25, 124, 143);
-		tile3 = new TileButton(GameManager.getDraw().get(2), 340, 25, 124, 143);
-		
 		content.removeAll();
-		content.add(tile1);
-		content.add(tile2);
-		content.add(tile3);
 		
+		if(GameManager.getDraw().size() > 0)
+		{
+			tile1 = new TileButton(GameManager.getDraw().get(0), 20, 25, 124, 143);
+			content.add(tile1);
+		}
+			
+		if(GameManager.getDraw().size() > 1)
+		{
+			tile2 = new TileButton(GameManager.getDraw().get(1), 180, 25, 124, 143);
+			content.add(tile2);
+		}
+			
+		if(GameManager.getDraw().size() > 2)
+		{
+			tile3 = new TileButton(GameManager.getDraw().get(2), 340, 25, 124, 143);
+			content.add(tile3);
+		}
+	
 		this.setVisible(true);
 	}
 }

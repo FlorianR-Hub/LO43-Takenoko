@@ -9,14 +9,15 @@ public class Architect extends Character{
 	public void move(Tile t) {
 		this.posX = t.getX();
 		this.posY = t.getY();
-		grow(t);
+		upgrade(t);
 	}
 	
-	public void grow(Tile t) {
-		t.increase();
+	public void upgrade(Tile t) {
+		if(t.isRoaded())
+			t.increase();
 		
 		for(Tile tile : t.getAdjacentTiles())
-			if(tile.getType() == t.getType())
+			if(tile.getType() == t.getType() && tile.isRoaded())
 				tile.increase();					
 	}
 }

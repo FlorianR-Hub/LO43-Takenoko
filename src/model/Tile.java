@@ -23,7 +23,6 @@ public class Tile {
 	private List<Boolean> roads;
 	private boolean isValid;
 	private boolean isFirstAccessToRoadDone; // a renommer ^^
-	private int owner; //0: no one
 	
 	// CONSTRUCTORS -------------------------
 	
@@ -43,7 +42,6 @@ public class Tile {
 		for(int i=0; i<6; i++) {
 			roads.add(false);
 		}
-		this.owner = 0;
 		this.setFirstAccessToRoadDone(false);
 	}
 	
@@ -63,7 +61,6 @@ public class Tile {
 		for(int i=0; i<6; i++) {
 			roads.add(false);
 		}
-		this.owner = 0;
 		this.setFirstAccessToRoadDone(false);
 	}
 	
@@ -122,7 +119,6 @@ public class Tile {
 		for(int i=0; i<6; i++) {
 			roads.set(i, false);
 		}
-		this.owner = 0;
 	}
 	
 	public boolean isSelectionable(){
@@ -253,9 +249,6 @@ public class Tile {
 	public int getY() {
 		return posY;
 	}
-	public int getOwner() {
-		return owner;
-	}
 	
 	public boolean isFirstAccessToRoadDone() {
 		return isFirstAccessToRoadDone;
@@ -315,10 +308,6 @@ public class Tile {
 		this.posY = posY;
 	}
 	
-	public void setOwner(int owner) {
-		this.owner = owner;
-	}
-
 	public void setFirstAccessToRoadDone(boolean isFirstAccessToRoadDone) {
 		this.isFirstAccessToRoadDone = isFirstAccessToRoadDone;
 	}

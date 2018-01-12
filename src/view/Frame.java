@@ -39,7 +39,7 @@ public class Frame extends JFrame {
 		content.add(tray);
 		this.setVisible(true);
 	}
-	
+		
 	public TrayView getTray() {
 		return this.tray;
 	}

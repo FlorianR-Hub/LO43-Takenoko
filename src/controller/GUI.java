@@ -2,6 +2,7 @@ package controller;
 
 import model.Player;
 import view.DrawGoalView;
+import view.DrawHandView;
 import view.DrawTileView;
 import view.Frame;
 
@@ -12,11 +13,13 @@ public class GUI extends Thread {
 	private static Frame frame;
 	private static DrawTileView drawTileView;
 	private static DrawGoalView drawGoalView;
+	private static DrawHandView drawHandView;
 
 	public GUI() {
 		this.gameOver = false;
 		drawTileView = new DrawTileView("Draw Tile", 512, 200);
 		drawGoalView = new DrawGoalView("Draw Goal", 680, 360);
+		drawHandView = new DrawHandView("Hand", 1000, 360);
 	}
 	
 	public void run() {
@@ -71,5 +74,13 @@ public class GUI extends Thread {
 
 	public static void setDrawGoalView(DrawGoalView drawGoalView) {
 		GUI.drawGoalView = drawGoalView;
+	}
+
+	public static DrawHandView getDrawHandView() {
+		return drawHandView;
+	}
+
+	public static void setDrawHandView(DrawHandView drawHandView) {
+		GUI.drawHandView = drawHandView;
 	}
 }

@@ -15,20 +15,24 @@ import view.TrayView;
 
 public class GameManager extends Thread {
 	
-	private List<Player> players = new ArrayList<Player>();
+	private static List<Player> players = new ArrayList<Player>();
 	private static List<Tile> draw = new ArrayList<Tile>();
 	private static List<Goal> goalsTile = new ArrayList<Goal>();
-	private static List<Goal> goalsPanda = new ArrayList<Goal>();
-	private static List<Goal> goalsGardener = new ArrayList<Goal>();
+	private static List<Goal> goalsMonster = new ArrayList<Goal>();
+	private static List<Goal> goalsArchitect = new ArrayList<Goal>();
+	private static int nbTurn = 0;
+	private int nbGoalsToEndGame;
 	private int nbPlayers;
 	private static boolean gameOver;
 	private static GUI gui;
 	
+	
 	public static boolean devMode = true;
+	
 
 	public GameManager() {
 		GameManager.setGameOver(false);
-		game();
+		gameStart();
 	}
 	
 	// MAIN METHOD
@@ -41,11 +45,30 @@ public class GameManager extends Thread {
 		
 	}
 	
-	public void game() {
+	public void gameStart() {
 		/*/Scanner keyboard = new Scanner(System.in);
 		System.out.println("Entrez le nombre de joueurs : ");
 		this.nbPlayers = keyboard.nextInt();
 		keyboard.close();*/
+		
+		this.setNbPlayers(4);
+		
+		switch(this.getNbPlayers())
+		{
+			case 2:
+				this.setNbGoalsToEndGame(9);
+				break;
+			case 3:
+				this.setNbGoalsToEndGame(8);
+				break;
+			case 4:
+				this.setNbGoalsToEndGame(7);
+				break;
+			default:
+				this.setNbGoalsToEndGame(7);
+				break;
+		}
+		
 		
 		for(int i=0; i<8; i++) {
 			draw.add(new Tile(1,0));
@@ -69,21 +92,13 @@ public class GameManager extends Thread {
 		Collections.shuffle(draw);
 		
 		// Initialize Goals' Lists
-		goalsPanda.addAll(GoalsMonster.initGoals());
-		Collections.shuffle(goalsPanda);
-		goalsGardener.addAll(GoalsArchitect.initGoals());
-		Collections.shuffle(goalsGardener);
+		goalsMonster.addAll(GoalsMonster.initGoals());
+		Collections.shuffle(goalsMonster);
+		goalsArchitect.addAll(GoalsArchitect.initGoals());
+		Collections.shuffle(goalsArchitect);
 		goalsTile.addAll(GoalsTile.initGoals());
-		Collections.shuffle(goalsTile);
-		
-		
-		System.out.println(goalsGardener.size());
-		System.out.println(goalsPanda.size());
-		System.out.println(goalsTile.size());
-		
-		
-		this.setNbPlayers(4);
-		
+		Collections.shuffle(goalsTile);		
+				
 		for(int i=0; i<this.getNbPlayers(); i++)
 			players.add(new Player(i+1));
 	}
@@ -105,8 +120,15 @@ public class GameManager extends Thread {
 						e.printStackTrace();
 					}
 				}
+				
+				if(p.getNbGoalsCompleted() >= this.getNbGoalsToEndGame())
+					setGameOver(true);
 			}
+			
+			setNbTurn(getNbTurn() + 1);
 		}
+					
+		System.out.println("Le gagnant est le joueur "+ getWinner().getNumPlayer());
 	}
 	
 	public void playerTurn(Player p)
@@ -114,7 +136,18 @@ public class GameManager extends Thread {
 		p.clearActions();
 		TrayView.deselectAllButtons();
 		p.setRoundCompleted(false);
-		p.randWeather();
+		if(getNbTurn() > 0)
+			p.randWeather();
+	}
+	
+	public static Player getWinner() {
+		
+		Player winner = new Player(0);
+		for(Player p : players)
+			if(p.getScore() > winner.getScore())
+				winner = p;
+		
+		return winner;
 	}
 
 	public static boolean isGameOver() {
@@ -138,7 +171,7 @@ public class GameManager extends Thread {
 	}
 
 	public void setPlayers(List<Player> players) {
-		this.players = players;
+		GameManager.players = players;
 	}
 
 	public static List<Tile> getDraw() {
@@ -149,12 +182,12 @@ public class GameManager extends Thread {
 		GameManager.draw = draw;
 	}
 	
-	public static List<Goal> getGoalsPanda(){
-		return goalsPanda;
+	public static List<Goal> getGoalsMonster(){
+		return goalsMonster;
 	}
 	
-	public static List<Goal> getGoalsGardener(){
-		return goalsGardener;
+	public static List<Goal> getGoalsArchitect(){
+		return goalsArchitect;
 	}
 	
 	public static List<Goal> getGoalsTile(){
@@ -165,11 +198,27 @@ public class GameManager extends Thread {
 		GameManager.goalsTile = goals;
 	}
 	
-	public static void setGoalsGardener(List<Goal> goals) {
-		GameManager.goalsGardener = goals;
+	public static void setGoalsArchitect(List<Goal> goals) {
+		GameManager.goalsArchitect = goals;
 	}
 	
-	public static void setGoalsPanda(List<Goal> goals) {
-		GameManager.goalsPanda = goals;
+	public static void setGoalsMonster(List<Goal> goals) {
+		GameManager.goalsMonster = goals;
+	}
+
+	public static int getNbTurn() {
+		return nbTurn;
+	}
+
+	public static void setNbTurn(int nbTurn) {
+		GameManager.nbTurn = nbTurn;
+	}
+
+	public int getNbGoalsToEndGame() {
+		return nbGoalsToEndGame;
+	}
+
+	public void setNbGoalsToEndGame(int nbGoalsToEndGame) {
+		this.nbGoalsToEndGame = nbGoalsToEndGame;
 	}
 }

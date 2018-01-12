@@ -22,5 +22,8 @@ public abstract class Button extends JButton implements MouseListener {
 		this.addMouseListener(this);
 	}
 	
-	public abstract void paintComponent(Graphics g);
+	public void paintComponent(Graphics g) {
+		g.drawImage(this.img, 0, 0, this.getWidth(), this.getHeight(), this);
+	}
+
 }

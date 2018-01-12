@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
@@ -29,10 +28,6 @@ public class TileButton extends Button {
 		}
 	}
 	
-	public void paintComponent(Graphics g) {
-		g.drawImage(this.img, 0, 0, this.getWidth(), this.getHeight(), this);
-	}
-
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		
@@ -63,7 +58,6 @@ public class TileButton extends Button {
 		if(GameManager.getDraw().remove(tile))
 		{
 			GUI.getPlayer().setTile(tile);
-			tile.setOwner(GUI.getPlayer().getNumPlayer());
 			Collections.rotate(GameManager.getDraw(), -1);
 			Collections.rotate(GameManager.getDraw(), -1);
 			GUI.getFrame().setEnabled(true);

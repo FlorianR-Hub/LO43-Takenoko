@@ -125,6 +125,17 @@ public class ActionButton extends Button {
 					}
 				}
 				break;
+			case "hand":
+				if(!this.isSelected) 
+				{
+					this.setSelected(true);	
+					GUI.getDrawHandView().display();
+				}
+				else
+				{
+					this.setSelected(false);	
+				}
+				break;
 			default:
 				if(GUI.getPlayer().getActions().size() >= GUI.getPlayer().getNbActionsAllowed() && !GameManager.devMode)
 					return;

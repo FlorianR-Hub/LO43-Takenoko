@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -45,13 +46,17 @@ public class TrayView extends JPanel {
 	private ActionButton bonusDefense = new ActionButton("bonusDefense", 275, 565, 55, 55);
 	private JLabel nbBonusTools = new JLabel("0");
 	private JLabel nbBonusDefense = new JLabel("0");
-
+	
+	private ActionButton hand = new ActionButton("hand", 422, 550, 125, 125);
 	
 	private ActionButton roads = new ActionButton("roads", 340, 560, 60, 60);
 	
 	private ActionButton endTurn = new ActionButton("endTurn", 220, 670, 54, 194);
 	
 	private JLabel numPlayer = new JLabel("Player ");
+	private JLabel winner = new JLabel("Player 0 wins !");
+	private JLabel nbTurn = new JLabel ("Tour 0");
+	private JLabel score = new JLabel("Score : ");
 	private JLabel nbRoad = new JLabel("0");
 	private JLabel nbCardsLeft = new JLabel(""+GameManager.getDraw().size());
 	
@@ -62,6 +67,19 @@ public class TrayView extends JPanel {
 		numPlayer.setFont(new Font("Arial", Font.BOLD, 20));
 		this.add(numPlayer);
 		
+		winner.setBounds(185, 100, 400, 60);
+		winner.setFont(new Font("Arial", Font.BOLD, 40));
+		winner.setForeground(Color.white);
+		winner.setVisible(false);
+		this.add(winner);
+		
+		nbTurn.setBounds(530, 12, 100, 18);
+		nbTurn.setFont(new Font("Arial", Font.BOLD, 18));
+		this.add(nbTurn);
+		
+		score.setBounds(505, 258, 100, 17);
+		score.setFont(new Font("Arial", Font.BOLD, 17));
+		this.add(score);
 		
 		nbRoad.setBounds(358, 623, 120, 20);
 		nbRoad.setFont(new Font("Arial", Font.BOLD, 16));
@@ -110,6 +128,7 @@ public class TrayView extends JPanel {
 		
 		buttons.add(bonusTools);
 		buttons.add(bonusDefense);
+		buttons.add(hand);
 		buttons.add(roads);
 		buttons.add(endTurn);
 		
@@ -128,7 +147,6 @@ public class TrayView extends JPanel {
 		for(Picture i : images)
 			this.add(i);
 		
-		
 		this.setBackground(TileView.COLOURBACK);
 	}
 	
@@ -138,6 +156,8 @@ public class TrayView extends JPanel {
 	
 	public void updateTray(Player p) {
 		this.numPlayer.setText("Player "+ p.getNumPlayer());
+		this.nbTurn.setText("Turn "+ GameManager.getNbTurn());
+		this.score.setText("Score : "+ p.getScore());
 		this.nbRoad.setText(""+ p.getNbRoad());
 		this.nbCardsLeft.setText(""+GameManager.getDraw().size());
 		
@@ -153,6 +173,12 @@ public class TrayView extends JPanel {
 		
 		if(p.getWeather() > 0)
 			bonus.get(p.getWeather() - 1).setVisible(true);
+		
+		if(GameManager.isGameOver())
+		{
+			this.winner.setText("Player " +  GameManager.getWinner().getNumPlayer()  + " wins !");
+			this.winner.setVisible(true);
+		}
 		
 		this.repaint();
 	}

@@ -11,7 +11,7 @@ import controller.GUI;
 import controller.GameManager;
 import model.Goal;
 
-public class GoalButton extends Button{
+public class GoalButton extends Button {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -22,20 +22,22 @@ public class GoalButton extends Button{
 	public GoalButton(int type, int x, int y, int height, int width) {
 		super(x,y,height,width);
 		this.type = type;
+		
 		switch(type) {
-		case 1:
-			random = (int) ( Math.random() * GameManager.getGoalsTile().size() );
-			this.goal = GameManager.getGoalsTile().get(random);
-			break;
-		case 2:
-			random = (int) ( Math.random() * GameManager.getGoalsPanda().size() );
-			this.goal = GameManager.getGoalsPanda().get(random);
-			break;
-		case 3:
-			random = (int) ( Math.random() * GameManager.getGoalsGardener().size() );
-			this.goal = GameManager.getGoalsGardener().get(random);
-			break;
+			case 1:
+				random = (int) ( Math.random() * GameManager.getGoalsTile().size() );
+				this.goal = GameManager.getGoalsTile().get(random);
+				break;
+			case 2:
+				random = (int) ( Math.random() * GameManager.getGoalsMonster().size() );
+				this.goal = GameManager.getGoalsMonster().get(random);
+				break;
+			case 3:
+				random = (int) ( Math.random() * GameManager.getGoalsArchitect().size() );
+				this.goal = GameManager.getGoalsArchitect().get(random);
+				break;
 		}
+		
 		try {
 			this.img = ImageIO.read(new File(path + "goal" + type + ".png"));
 		}
@@ -72,21 +74,21 @@ public class GoalButton extends Button{
 		boolean condition;
 		
 		switch(this.type) {
-		case 1:
-			condition = GameManager.getGoalsTile().remove(goal);
-			break;
-		case 2:
-			condition = GameManager.getGoalsPanda().remove(goal);
-			break;
-		case 3:
-			condition = GameManager.getGoalsGardener().remove(goal);
-			break;
-		default:
-			condition = false;
+			case 1:
+				condition = GameManager.getGoalsTile().remove(goal);
+				break;
+			case 2:
+				condition = GameManager.getGoalsMonster().remove(goal);
+				break;
+			case 3:
+				condition = GameManager.getGoalsArchitect().remove(goal);
+				break;
+			default:
+				condition = false;
 		}
+		
 		if(condition) {
 			GUI.getPlayer().addGoal(goal);
-			goal.setOwner(GUI.getPlayer().getNumPlayer());
 			GUI.getFrame().setEnabled(true);
 			GUI.getDrawGoalView().setVisible(false);
 		}

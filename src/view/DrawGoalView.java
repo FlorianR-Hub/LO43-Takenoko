@@ -7,8 +7,8 @@ public class DrawGoalView extends DrawView {
 	private static final long serialVersionUID = 1L;
 	
 	private GoalButton goalTile;
-	private GoalButton goalPanda;
-	private GoalButton goalGardener;
+	private GoalButton goalMonster;
+	private GoalButton goalArchitect;
 	
 	public DrawGoalView(String name, int width, int height) {
 		super(name, width, height);
@@ -17,14 +17,16 @@ public class DrawGoalView extends DrawView {
 	public void display() {
 		GUI.getFrame().setEnabled(false);
 		
-		goalTile = new GoalButton(1, 20, 14, 300, 200);
-		goalPanda = new GoalButton(2, 240, 14, 300, 200);
-		goalGardener = new GoalButton(3, 460, 14, 300, 200);
-		
 		content.removeAll();
+		
+		goalTile = new GoalButton(1, 20, 14, 300, 200);
+		goalMonster = new GoalButton(2, 240, 14, 300, 200);
+		goalArchitect = new GoalButton(3, 460, 14, 300, 200);
+		
+		
 		content.add(goalTile);
-		content.add(goalPanda);
-		content.add(goalGardener);
+		content.add(goalMonster);
+		content.add(goalArchitect);
 		
 		this.setVisible(true);
 	}
