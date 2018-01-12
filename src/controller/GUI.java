@@ -26,7 +26,7 @@ public class GUI extends Thread {
 		frame = new Frame();
 		while(!this.gameOver)
 		{
-			frame.getTray().updateTray(player);	
+			frame.getTray().updateTray(player);	 // Mise à jour régulière du plateau de jeu pendant le tour d'un joueur
 			try {
 				sleep(100);
 			} catch (InterruptedException e) {

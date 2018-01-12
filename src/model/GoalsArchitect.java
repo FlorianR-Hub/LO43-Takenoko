@@ -39,6 +39,8 @@ public class GoalsArchitect extends Goal{
 		}
 	}
 	
+	
+	// Vérifie si l'objectif est validable
 	public boolean isValid(Player p) {
 		
 		int nbValid = 0;

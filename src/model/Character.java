@@ -14,6 +14,7 @@ public abstract class Character {
 	
 	public abstract void move(Tile t);
 
+	// permet de savoir si le déplacement A -> B est autorisé
 	public boolean isMoveAllowed(Tile t) {
 		
 		if(this.isStraightLine(t)) {

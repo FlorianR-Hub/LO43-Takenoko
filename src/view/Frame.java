@@ -20,12 +20,14 @@ public class Frame extends JFrame {
 	public final static int BORDERS = 15;  
 	public final static int SCRSIZE = HEXSIZE * (Board.BSIZE + 1) + BORDERS*3; //screen size (vertical dimension).
 	
+	
+	// Création de la fenêtre du jeu
 	private void createAndShowGUI()
 	{
 		board = new BoardView();
 		tray = new TrayView();
 
-		this.setTitle("LO43 Projet");
+		this.setTitle("Kenchiku");
 		this.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		this.setSize( (int)(SCRSIZE/1.23 + 600), SCRSIZE);
 		this.setResizable(false);
@@ -35,8 +37,8 @@ public class Frame extends JFrame {
 		this.setLayout(gl);
 		
 		Container content = this.getContentPane();
-		content.add(board);
-		content.add(tray);
+		content.add(board); // ajout du Board (contenant la grille de tuile)
+		content.add(tray); // ajout du plateau du joueur
 		this.setVisible(true);
 	}
 		

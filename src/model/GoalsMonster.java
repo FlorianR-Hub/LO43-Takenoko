@@ -30,6 +30,7 @@ public class GoalsMonster extends Goal{
 		}
 	}
 
+	// Vérifie si l'objectif est validable
 	public boolean isValid(Player p) {
 		if(this.color < 4)
 		{

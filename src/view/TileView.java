@@ -82,7 +82,7 @@ public class TileView
 		int y = j * h + (i%2) * h/2;
 		
 		Polygon poly = hex(x,y);
-		g2.setColor(p.getColor());
+		g2.setColor(new Color(80,80,80,100));
 		
 		try {
 			

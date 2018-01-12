@@ -26,6 +26,7 @@ public class GoalsTile extends Goal{
 		}
 	}
 	
+	// Vérifie si l'objectif est validable
 	public boolean isValid(Player p) {
 
 		switch(this.form) {

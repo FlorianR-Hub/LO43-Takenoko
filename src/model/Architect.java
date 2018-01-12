@@ -16,7 +16,8 @@ public class Architect extends Character{
 		if(t.isRoaded())
 			t.increase();
 		
-		for(Tile tile : t.getAdjacentTiles())
+		// Pour faire grandir les maisons adjacentes à la tuile t
+		for(Tile tile : t.getAdjacentTiles()) 
 			if(tile.getType() == t.getType() && tile.isRoaded())
 				tile.increase();					
 	}

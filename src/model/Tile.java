@@ -1,10 +1,7 @@
 package model;
 
-import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-
-import view.TileView;
 
 public class Tile {
 
@@ -22,7 +19,7 @@ public class Tile {
 	private boolean isRoaded;
 	private List<Boolean> roads;
 	private boolean isValid;
-	private boolean isFirstAccessToRoadDone; // a renommer ^^
+	private boolean isFirstAccessToRoadDone;
 	
 	// CONSTRUCTORS -------------------------
 	
@@ -63,31 +60,7 @@ public class Tile {
 		}
 		this.setFirstAccessToRoadDone(false);
 	}
-	
-	public Color getColor() {
-		Color c = TileView.COLOURONE;
-		if(this.isSelected){
-			c = new Color(80,80,80,100);
-		}
-		else{
-			switch(this.type){
-				case 1:
-					c = Color.GREEN;
-					break;
-				case 2:
-					c = Color.YELLOW;
-					break;
-				case 3:
-					c = Color.PINK;
-					break;
-				case 4:
-					c = new Color(0,0,125,120);
-					break;
-			}
-		}
-		return c;
-	}
-	
+		
 	public void increase(){
 		int i = this.getBonus() == 1 ? 2 : 1;
 		if(this.getType() != 4){
@@ -125,6 +98,8 @@ public class Tile {
 		return (this.type > 0 && this.type < 4);
 	}
 	
+	
+	// Permet de savoir si une tuile est adjacente à une autre
 	public boolean isAdjacent(Tile adj) {
 		if(this.posX%2 == 0)
 			return (this.posX == adj.posX && Math.abs(this.posY - adj.posY) == 1) 
@@ -134,6 +109,8 @@ public class Tile {
 					|| (Math.abs(this.posX - adj.posX) == 1 && (this.posY - adj.posY == -1 || this.posY - adj.posY == 0));
 	}
 	
+	
+	// Retourne toutes les tuiles adjacentes
 	public Tile[] getAdjacentTiles() {
 		Tile[] adjTiles = new Tile[6];
 		
@@ -191,6 +168,8 @@ public class Tile {
 		return adjTiles;
 	}
 	
+	
+	// Retourne la liste des emplacements où il est possible de poser une tuile
 	public List<Tile> getValidTiles() {
 		List<Tile> validTiles = new ArrayList<Tile>();
 		
@@ -285,6 +264,7 @@ public class Tile {
 		this.isValid = isValid;
 	}
 	
+	// Ajoute une route à une tuile
 	public void setRoads(Tile adj) {
 		
 		this.setRoaded(true);

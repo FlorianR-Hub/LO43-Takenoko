@@ -10,7 +10,6 @@ public abstract class Goal {
 	 * isValid: goal valid or not
 	 * type   : 	1=tile / 2=monster / 3=architect
 	 * points : points given if goal validated  
-	 * owner  : 	player who takes goal
 	 */
 	protected boolean isValid;
 	protected int type;

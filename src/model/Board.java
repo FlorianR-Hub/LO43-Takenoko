@@ -6,6 +6,8 @@ public class Board {
 	
 	private static Tile[][] board = new Tile[BSIZE][BSIZE];
 	
+	
+	// Initialisation de la grille du Board
 	public static void initBoard(){
 
 		for (int i=0;i<BSIZE;i++) {

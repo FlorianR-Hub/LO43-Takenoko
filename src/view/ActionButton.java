@@ -77,7 +77,7 @@ public class ActionButton extends Button {
 	 */
 	public void mousePressed(MouseEvent event) { 
 				
-		switch(imgName)
+		switch(imgName) // Exécute une action différente en fonction du nom du bouton
 		{
 			case "endTurn":
 				GUI.getPlayer().setRoundCompleted(true);

@@ -45,6 +45,7 @@ public class Player {
 		this.setHand();
 	}
 		
+	// Ajout d'un objectif de chaque type à la main du joueur
 	public void setHand() {
 		
 		int random = (int) ( Math.random() * GameManager.getGoalsTile().size() );

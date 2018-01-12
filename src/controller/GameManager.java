@@ -70,6 +70,7 @@ public class GameManager extends Thread {
 		}
 		
 		
+		// Création des Tuiles
 		for(int i=0; i<8; i++) {
 			draw.add(new Tile(1,0));
 		}
@@ -91,7 +92,7 @@ public class GameManager extends Thread {
 		
 		Collections.shuffle(draw);
 		
-		// Initialize Goals' Lists
+		// Initialisation des listes d'objectifs
 		goalsMonster.addAll(GoalsMonster.initGoals());
 		Collections.shuffle(goalsMonster);
 		goalsArchitect.addAll(GoalsArchitect.initGoals());
@@ -112,7 +113,7 @@ public class GameManager extends Thread {
 				playerTurn(p);
 				gui.update(p, gameOver);
 				
-				while(!p.isRoundCompleted())
+				while(!p.isRoundCompleted()) // On boucle tant que le joueur n'a pas terminé son tour
 				{
 					try {
 						sleep(100);
@@ -127,8 +128,6 @@ public class GameManager extends Thread {
 			
 			setNbTurn(getNbTurn() + 1);
 		}
-					
-		System.out.println("Le gagnant est le joueur "+ getWinner().getNumPlayer());
 	}
 	
 	public void playerTurn(Player p)

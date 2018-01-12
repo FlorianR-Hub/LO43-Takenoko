@@ -42,18 +42,21 @@ public class BoardView extends JPanel implements MouseListener {
 		g.setFont(new Font("Arial", Font.PLAIN, 17));
 		super.paintComponent(g2);
 			
-		//draw grid
+		// Peint la grille de tuile
 		for (int i=0;i<Board.BSIZE;i++)
 			for (int j=0;j<Board.BSIZE;j++)
 				if(Board.getBoard()[i][j].getType() > 0)
 					TileView.drawTile(i, j, Board.getBoard()[i][j], g2, this);
 				
 		
+		// Peint les routes
 		for (int i=0;i<Board.BSIZE;i++)
 			for (int j=0;j<Board.BSIZE;j++)
 				if(Board.getBoard()[i][j].getType() > 0)
 					TileView.drawRoads(i, j, Board.getBoard()[i][j], g2);
 		
+		
+		// Peint les personnages
 		TileView.drawCharacter(monster, g2, this);
 		TileView.drawCharacter(architect, g2, this);
 	}
@@ -73,7 +76,7 @@ public class BoardView extends JPanel implements MouseListener {
 		if (p.x < 0 || p.y < 0 || p.x >= Board.BSIZE || p.y >= Board.BSIZE) 
 			return;
 		
-		applyWeather(e, Board.getBoard()[p.x][p.y]);
+		applyDiceBonus(e, Board.getBoard()[p.x][p.y]);
 		
 		applyAction(e, Board.getBoard()[p.x][p.y]);
 	
@@ -100,10 +103,12 @@ public class BoardView extends JPanel implements MouseListener {
 		// TODO Auto-generated method stub	
 	}
 	
-	public void applyWeather(MouseEvent e, Tile t) {
+	
+	// Applique un bonus aléatoire
+	public void applyDiceBonus(MouseEvent e, Tile t) {
 		switch(GUI.getPlayer().getDiceBonus())
 		{
-			case 2: // rain
+			case 2: // Agrandir maison
 				if(e.getButton() == MouseEvent.BUTTON1)
 				{
 					if(t.getType() != 0)
@@ -113,7 +118,7 @@ public class BoardView extends JPanel implements MouseListener {
 					}
 				}
 				break;
-			case 4: // storm
+			case 4: // Monstre apeuré
 				if(e.getButton() == MouseEvent.BUTTON1)
 				{
 					if(monster.isMoveAllowed(t))
@@ -127,6 +132,8 @@ public class BoardView extends JPanel implements MouseListener {
 		}
 	}
 	
+	
+	// Applique l'action selectionnée
 	public void applyAction(MouseEvent e, Tile t) {
 		
 		switch(action)
