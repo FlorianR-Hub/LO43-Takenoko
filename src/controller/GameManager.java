@@ -27,7 +27,7 @@ public class GameManager extends Thread {
 	private static GUI gui;
 	
 	
-	public static boolean devMode = true;
+	public static boolean devMode = false;
 	
 
 	public GameManager() {
@@ -70,7 +70,7 @@ public class GameManager extends Thread {
 		}
 		
 		
-		// Création des Tuiles
+		// Crï¿½ation des Tuiles
 		for(int i=0; i<8; i++) {
 			draw.add(new Tile(1,0));
 		}
@@ -113,7 +113,7 @@ public class GameManager extends Thread {
 				playerTurn(p);
 				gui.update(p, gameOver);
 				
-				while(!p.isRoundCompleted()) // On boucle tant que le joueur n'a pas terminé son tour
+				while(!p.isRoundCompleted()) // On boucle tant que le joueur n'a pas terminï¿½ son tour
 				{
 					try {
 						sleep(100);

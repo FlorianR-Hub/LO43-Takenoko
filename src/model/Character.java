@@ -14,15 +14,15 @@ public abstract class Character {
 	
 	public abstract void move(Tile t);
 
-	// permet de savoir si le déplacement A -> B est autorisé
+	// permet de savoir si le dï¿½placement A -> B est autorisï¿½
 	public boolean isMoveAllowed(Tile t) {
 		
-		if(this.isStraightLine(t)) {
+		if(this.isStraightLine(t)) { // permet de savoir si le deplacement est en ligne droite
 			int direction = 0;
 			int distance = 0;
 			Tile currentTile = Board.getBoard()[posX][posY];
 			
-			if(posX%2 == 0) {
+			if(posX%2 == 0) { // x pair
 				if(posX > t.getX() && posY > t.getY()) {//b
 					direction = 0;
 					distance = posX - t.getX(); 
@@ -48,7 +48,7 @@ public abstract class Character {
 					distance = posX - t.getX(); 
 				}
 			}
-			else {
+			else { // x impair
 				if(posX > t.getX() && posY >= t.getY()) {//b
 					direction = 0;
 					distance = posX - t.getX(); 

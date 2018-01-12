@@ -30,10 +30,12 @@ public class GoalsMonster extends Goal{
 		}
 	}
 
-	// Vérifie si l'objectif est validable
+	// Verifie si l'objectif est validable
 	public boolean isValid(Player p) {
 		if(this.color < 4)
 		{
+			// si la couleur est simple, on check le nombre de briques de cette couleur
+			// on les enleve au joueur et on valide l'objectif
 			if(p.getNbStones(color - 1) >= 2) {
 				p.setNbStones(color - 1, p.getNbStones(color)-2);
 				isValid = true;
@@ -41,6 +43,8 @@ public class GoalsMonster extends Goal{
 		}
 		else
 		{
+			// si la couleur est "multicolore"
+			// on check si le joueur possede une brique de chaque, et si oui...
 			if(p.getNbStones(0) >= 1 && p.getNbStones(1) >= 1 && p.getNbStones(2) >= 1) {
 				p.setNbStones(0, p.getNbStones(0)-1);
 				p.setNbStones(1, p.getNbStones(1)-1);

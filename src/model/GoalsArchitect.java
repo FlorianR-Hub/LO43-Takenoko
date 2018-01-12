@@ -40,7 +40,7 @@ public class GoalsArchitect extends Goal{
 	}
 	
 	
-	// Vérifie si l'objectif est validable
+	// Verifie si l'objectif est validable
 	public boolean isValid(Player p) {
 		
 		int nbValid = 0;
@@ -50,6 +50,7 @@ public class GoalsArchitect extends Goal{
 				if(Board.getBoard()[i][j].getType() == color
 				&& Board.getBoard()[i][j].getSize() == size
 				&& Board.getBoard()[i][j].getBonus() == bonus) {
+					// si la tuile est de la bonne couleur, avec le bon bonus et size.
 					nbValid++;
 				}
 		
@@ -59,6 +60,8 @@ public class GoalsArchitect extends Goal{
 		return isValid;
 	}
 	
+	//initialise la liste des objectifs Architecte 
+	//comme dans le jeu d'origine
 	public static List<Goal> initGoals(){
 		List<Goal> goals = new ArrayList<Goal>();
 		goals.add(new GoalsArchitect(1,4,1,0,5));

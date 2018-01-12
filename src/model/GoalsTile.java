@@ -26,7 +26,7 @@ public class GoalsTile extends Goal{
 		}
 	}
 	
-	// Vérifie si l'objectif est validable
+	// Verifie si l'objectif est validable
 	public boolean isValid(Player p) {
 
 		switch(this.form) {
@@ -34,13 +34,14 @@ public class GoalsTile extends Goal{
 				for (int i=0;i<Board.BSIZE;i++)
 					for (int j=0;j<Board.BSIZE;j++)
 						if(Board.getBoard()[i][j].getType() == color)
+							// 3 cases alignees = case centrale a deux voisins opposes de meme type
 							if(Board.getBoard()[i][j].getAdjacentTiles()[0].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[3].getType() == color
 							|| Board.getBoard()[i][j].getAdjacentTiles()[1].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[4].getType() == color
 							|| Board.getBoard()[i][j].getAdjacentTiles()[2].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[5].getType() == color)
 								this.isValid = true;
 				break;
 			case "diamond":
-				int color1, color2;
+				int color1, color2; //pour les couleurs composees (1er chiffre: color1, 2eme chiffre: color2)
 				switch(color) {
 					case 23:
 						color1 = 2;
@@ -61,6 +62,7 @@ public class GoalsTile extends Goal{
 				for (int i=0;i<Board.BSIZE;i++)
 					for (int j=0;j<Board.BSIZE;j++)
 						if(Board.getBoard()[i][j].getType() == color1)
+							// meme cas que triangle + les deux cases adjacentes doivent avoir une autre case adjacente en commun du meme type
 							if(Board.getBoard()[i][j].getAdjacentTiles()[0].getType() == color1 && Board.getBoard()[i][j].getAdjacentTiles()[1].getType() == color2 && Board.getBoard()[i][j].getAdjacentTiles()[0].getAdjacentTiles()[1].getType() == color2                    
 							|| Board.getBoard()[i][j].getAdjacentTiles()[1].getType() == color1 && Board.getBoard()[i][j].getAdjacentTiles()[2].getType() == color2 && Board.getBoard()[i][j].getAdjacentTiles()[1].getAdjacentTiles()[2].getType() == color2
 							|| Board.getBoard()[i][j].getAdjacentTiles()[2].getType() == color1 && Board.getBoard()[i][j].getAdjacentTiles()[3].getType() == color2 && Board.getBoard()[i][j].getAdjacentTiles()[2].getAdjacentTiles()[3].getType() == color2
@@ -73,6 +75,7 @@ public class GoalsTile extends Goal{
 				for (int i=0;i<Board.BSIZE;i++)
 					for (int j=0;j<Board.BSIZE;j++)
 						if(Board.getBoard()[i][j].getType() == color)
+							// deux cases adjacentes l'une contre l'autre
 							if(Board.getBoard()[i][j].getAdjacentTiles()[0].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[1].getType() == color
 							|| Board.getBoard()[i][j].getAdjacentTiles()[1].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[2].getType() == color
 							|| Board.getBoard()[i][j].getAdjacentTiles()[2].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[3].getType() == color
@@ -85,6 +88,7 @@ public class GoalsTile extends Goal{
 				for (int i=0;i<Board.BSIZE;i++)
 					for (int j=0;j<Board.BSIZE;j++)
 						if(Board.getBoard()[i][j].getType() == color)
+							// test de toutes les configurations possibles
 							if(Board.getBoard()[i][j].getAdjacentTiles()[0].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[2].getType() == color
 							|| Board.getBoard()[i][j].getAdjacentTiles()[2].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[4].getType() == color
 							|| Board.getBoard()[i][j].getAdjacentTiles()[4].getType() == color && Board.getBoard()[i][j].getAdjacentTiles()[0].getType() == color
@@ -97,6 +101,7 @@ public class GoalsTile extends Goal{
 		return isValid;
 	}
 
+	//initilisation des objectifs Tile
 	public static List<Goal> initGoals() {
 		
 		List<Goal> goals = new ArrayList<Goal>();
