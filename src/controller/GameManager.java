@@ -135,6 +135,7 @@ public class GameManager extends Thread {
 		p.clearActions();
 		TrayView.deselectAllButtons();
 		p.setRoundCompleted(false);
+		
 		if(getNbTurn() > 0)
 			p.randDiceBonus();
 	}

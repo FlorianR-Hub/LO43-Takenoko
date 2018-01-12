@@ -39,7 +39,6 @@ public class Player {
 		
 		this.actions = new ArrayList<Integer>();
 		this.goals = new ArrayList<Goal>();
-				
 		this.tile = new Tile(0,0);
 		
 		this.setHand();
