@@ -11,10 +11,10 @@ public class Monster extends Character {
 	public void move(Tile t) {
 		this.posX = t.getX();
 		this.posY = t.getY();
-		this.eat(t);
+		this.destroy(t);
 	}
 	
-	public void eat(Tile t) {
+	public void destroy(Tile t) {
 		int type = t.getType() - 1;
 		
 		if(t.getSize() > 0 && t.getBonus() != 2)

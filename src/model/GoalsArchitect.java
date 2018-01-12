@@ -62,15 +62,15 @@ public class GoalsArchitect extends Goal{
 		goals.add(new GoalsArchitect(1,4,1,0,5));
 		goals.add(new GoalsArchitect(1,4,1,1,4));
 		goals.add(new GoalsArchitect(1,4,1,2,3));
-		goals.add(new GoalsArchitect(1,4,1,1,4)); // 3
+		goals.add(new GoalsArchitect(1,4,1,1,4));
 		goals.add(new GoalsArchitect(1,4,2,0,6));
 		goals.add(new GoalsArchitect(1,4,2,1,5));
 		goals.add(new GoalsArchitect(1,4,2,2,4));
-		goals.add(new GoalsArchitect(1,4,2,1,5)); // 3
+		goals.add(new GoalsArchitect(1,4,2,1,5));
 		goals.add(new GoalsArchitect(1,4,3,0,7));
 		goals.add(new GoalsArchitect(1,4,3,1,6));
 		goals.add(new GoalsArchitect(1,4,3,2,5));
-		goals.add(new GoalsArchitect(1,4,3,2,6)); // 3
+		goals.add(new GoalsArchitect(1,4,3,2,6));
 		goals.add(new GoalsArchitect(2,3,1,0,6));
 		goals.add(new GoalsArchitect(3,3,2,0,7));
 		goals.add(new GoalsArchitect(4,3,3,0,8));

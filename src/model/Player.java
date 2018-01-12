@@ -16,7 +16,7 @@ public class Player {
 	private int nbBonus[] = new int[3];
 	private int nbRoad;
 	private int nbGoalsCompleted;
-	private int weather;
+	private int diceBonus;
 	private int numPlayer;
 	private List<Integer> actions;	
 	private List<Goal> goals;
@@ -33,7 +33,7 @@ public class Player {
 			
 		this.setNbRoad(0);
 		this.setNbGoalsCompleted(0);
-		this.setWeather(0);
+		this.setDiceBonus(0);
 		this.setNumPlayer(numPlayer);
 		this.setRoundCompleted(false);
 		
@@ -63,16 +63,16 @@ public class Player {
 		GameManager.getGoalsArchitect().remove(goal);
 	}
 
-	public int getWeather() {
-		return weather;
+	public int getDiceBonus() {
+		return diceBonus;
 	}
 
-	public void setWeather(int weather) {
-		this.weather = weather;
+	public void setDiceBonus(int diceBonus) {
+		this.diceBonus = diceBonus;
 	}
 	
 	public void randWeather() {
-		this.weather = 1 + (int)(Math.random() * 5);
+		this.diceBonus = 1 + (int)(Math.random() * 5);
 	}
 
 	public int getNbRoad() {
@@ -120,7 +120,7 @@ public class Player {
 	}
 	
 	public int getNbActionsAllowed() {
-		return this.weather == 1 ? 3 : 2;
+		return this.diceBonus == 1 ? 3 : 2;
 	}
 
 	public void applyBonus(Tile t, int type)

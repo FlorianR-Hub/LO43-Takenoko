@@ -101,7 +101,7 @@ public class BoardView extends JPanel implements MouseListener {
 	}
 	
 	public void applyWeather(MouseEvent e, Tile t) {
-		switch(GUI.getPlayer().getWeather())
+		switch(GUI.getPlayer().getDiceBonus())
 		{
 			case 2: // rain
 				if(e.getButton() == MouseEvent.BUTTON1)
@@ -109,7 +109,7 @@ public class BoardView extends JPanel implements MouseListener {
 					if(t.getType() != 0)
 					{
 						t.increase();
-						GUI.getPlayer().setWeather(0);
+						GUI.getPlayer().setDiceBonus(0);
 					}
 				}
 				break;
@@ -119,7 +119,7 @@ public class BoardView extends JPanel implements MouseListener {
 					if(monster.isMoveAllowed(t))
 					{
 						monster.move(t);
-						GUI.getPlayer().setWeather(0);
+						GUI.getPlayer().setDiceBonus(0);
 					}
 				}
 				break;

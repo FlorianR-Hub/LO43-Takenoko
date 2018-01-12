@@ -99,14 +99,14 @@ public class ActionButton extends Button {
 				break;
 			case "bonusTools":
 			case "bonusDefense":
-				if(GUI.getPlayer().getWeather() == 5)
+				if(GUI.getPlayer().getDiceBonus() == 5)
 				{
 					if(imgName == "bonusTools")
 						GUI.getPlayer().setNbBonus(0, GUI.getPlayer().getNbBonus(0) + 1);
 					else
 						GUI.getPlayer().setNbBonus(1, GUI.getPlayer().getNbBonus(1) + 1);
 					
-					GUI.getPlayer().setWeather(0);
+					GUI.getPlayer().setDiceBonus(0);
 				}
 				else if(GUI.getPlayer().getNbBonus((imgName == "bonusTools") ? 0 : 1) > 0)
 				{
@@ -173,7 +173,7 @@ public class ActionButton extends Button {
 					
 					if(!GameManager.devMode)
 					{
-						if(GUI.getPlayer().getWeather() != 3)
+						if(GUI.getPlayer().getDiceBonus() != 3)
 							this.setVisible(false);
 						else
 							if(GUI.getPlayer().getActions().size() > 1)

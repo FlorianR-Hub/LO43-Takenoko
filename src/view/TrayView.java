@@ -171,8 +171,8 @@ public class TrayView extends JPanel {
 		for(Picture b : bonus)
 			b.setVisible(false);
 		
-		if(p.getWeather() > 0)
-			bonus.get(p.getWeather() - 1).setVisible(true);
+		if(p.getDiceBonus() > 0)
+			bonus.get(p.getDiceBonus() - 1).setVisible(true);
 		
 		if(GameManager.isGameOver())
 		{
